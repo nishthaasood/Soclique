@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-
+import './get-started.css';
 // Main App component
 const App = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
