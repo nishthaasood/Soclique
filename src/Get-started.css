@@ -1,0 +1,174 @@
+
+        
+          /* Overall Page Styling */
+          .page-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 1rem;
+            font-family: Georgia, serif;
+            background-color: rgb(244, 231, 167);
+          }
+
+          /* Main Content Styling */
+          .main-content {
+            text-align: center;
+          }
+
+          /* Heading Styling */
+          .main-heading {
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 2.5rem;
+          }
+          @media (min-width: 768px) {
+            .main-heading {
+              font-size: 3rem;
+            }
+          }
+
+          /* Cards Container Styling */
+          .card-container {
+            display: flex;
+            flex-direction: row;
+            gap: 1.5rem;
+            justify-content: center;
+            align-items: stretch; /* This ensures cards have the same height */
+          }
+
+          /* Individual Card Styling */
+          .card {
+            cursor: pointer;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+            transition-property: all;
+            transition-duration: 300ms;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(0);
+            background-color: rgb(248, 239, 216);
+            border: 1px solid #e5e7eb;
+            flex: 1; /* This makes the cards take up equal space */
+            max-width: 20rem; /* Prevents cards from getting too wide on large screens */
+          }
+          .card:hover {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            transform: translateY(-0.5rem);
+          }
+
+          /* Card Icon Styling */
+          .card-icon {
+            width: 4rem;
+            height: 4rem;
+            margin-bottom: 1rem;
+            transition-property: transform;
+            transition-duration: 300ms;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+          }
+          .card:hover .card-icon {
+            transform: scale(1.1);
+          }
+
+          .card-icon.blue {
+            color: #2563eb;
+          }
+
+          .card-icon.emerald {
+            color: #10b981;
+          }
+
+          /* Card Text Styling */
+          .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+          }
+
+          .card-text {
+            color: #6b7280;
+            font-size: 0.875rem;
+            text-align: center;
+          }
+
+          /* Modal Backdrop */
+          .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            padding: 1rem;
+          }
+
+          /* Modal Content */
+          .modal-content {
+            background-color: #fff;
+            border-radius: 1rem;
+            padding: 2rem;
+            width: 100%;
+            max-width: 24rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            transform: scale(1);
+            opacity: 1;
+            transition-property: all;
+            transition-duration: 300ms;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+          }
+
+          /* Modal Close Button */
+          .modal-close-button {
+            color: #9ca3af;
+            transition-property: color;
+            transition-duration: 150ms;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+          }
+          .modal-close-button:hover {
+            color: #4b5563;
+          }
+
+          /* Modal Form */
+          .modal-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+          }
+          
+          /* Modal Input Fields */
+          .form-input {
+            width: 100%;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid #d1d5db;
+            outline: none;
+            transition-property: all;
+            transition-duration: 150ms;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+          }
+          .form-input:focus {
+            box-shadow: 0 0 0 2px #3b82f6;
+          }
+
+          /* Button Styling */
+          .button {
+            width: 100%;
+            background-color: #2563eb;
+            color: #fff;
+            font-weight: 700;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            transition-property: background-color;
+            transition-duration: 150ms;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+          }
+          .button:hover {
+            background-color: #1d4ed8;
+          }
+        
+      
