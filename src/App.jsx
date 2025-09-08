@@ -2,15 +2,17 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import Navbar from './Navbar.jsx'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [currentPage, setCurrentPage] = useState('home')
+  const [accessToken, setAccessToken] = useState(null)
 
   return (
-    <>
-      <h1>yo soclique</h1>
-    </>
-  )
+    <div className="App">
+      <Navbar />
+    </div>
+  );
 }
 
 export default App
