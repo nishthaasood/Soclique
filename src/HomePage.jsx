@@ -1,5 +1,4 @@
-import React from "react";
-import "./HomePage.css"; // make sure this file exists
+import "./HomePage.css";
 
 const HomePage = () => {
   // Data for events

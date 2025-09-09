@@ -17,8 +17,10 @@ function App() {
           <div>
             <h1>Home Page</h1>
             <p>Welcome to the home page!</p>
+            <HomePage />
           </div>
         );
+      
       case 'about':
         return (
           <div>
