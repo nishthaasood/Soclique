@@ -259,7 +259,7 @@ const ExplorerPage = () => {
         </div>
       )}
     </div>
-  );
+  ); 
 };
 
-export default ExplorerPage;
+export default ExplorerPage; 
