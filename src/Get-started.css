@@ -1,15 +1,56 @@
 
-        
-          /* Overall Page Styling */
-          .page-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 1rem;
-            font-family: Georgia, serif;
-            background-color: #f9f9f9;
-          }
+:root {
+  --cream: #fefdf8;
+  --light-cream: #fdfcf4;
+  --light-green: #b7c656;
+  --medium-green: #8bb847;
+  --dark-green: #91a53a;
+  --darker-green: #8ea748;
+  
+  --text-primary: #2d4a1e;
+  --text-secondary: #4a6b35;
+  --text-muted: #6b7f5b;
+  --text-light: #8a9978;
+  
+  --border-light: #e8eee0;
+  --border-medium: #d4dcc8;
+  --border-dark: #b8c7a6;
+  
+  --shadow-light: 0 1px 3px rgba(45, 74, 30, 0.06), 0 1px 2px rgba(45, 74, 30, 0.03);
+  --shadow-medium: 0 4px 6px rgba(45, 74, 30, 0.08), 0 2px 4px rgba(45, 74, 30, 0.04);
+  --shadow-large: 0 15px 35px rgba(45, 74, 30, 0.12), 0 5px 15px rgba(45, 74, 30, 0.06);
+  --shadow-green: 0 0 25px rgba(139, 184, 71, 0.15);
+  
+  --transition-quick: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Reset and Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #ffffff;
+  color: var(--text-primary);
+}
+
+/* Overall Page Styling */
+.page-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 32px 16px;
+  background-color: var(--light-cream);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
 
 /* Main Content Styling */
 .main-content {
@@ -374,21 +415,117 @@
   transform: translateY(-1px);
 }
 
-          /* Button Styling */
-          .button {
-            width: 100%;
-            background-color: #2563eb;
-            color: #fff;
-            font-weight: 700;
-            padding: 0.75rem 1rem;
-            border-radius: 0.5rem;
-            transition-property: background-color;
-            transition-duration: 150ms;
-            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
-          }
-          .button:hover {
-            background-color: #1d4ed8;
-          }
-        
-      
+/* Button Styling */
+.button {
+  width: 100%;
+  background: linear-gradient(135deg, var(--medium-green) 0%, var(--dark-green) 100%);
+  color: white;
+  font-weight: 600;
+  padding: 20px 32px;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  box-shadow: var(--shadow-medium);
+  font-size: 17.6px;
+  font-family: inherit;
+  position: relative;
+  overflow: hidden;
+}
+
+.button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s;
+}
+
+.button:hover::before {
+  left: 100%;
+}
+
+.button:hover {
+  background: linear-gradient(135deg, var(--dark-green) 0%, var(--darker-green) 100%);
+  box-shadow: var(--shadow-large), 0 0 20px rgba(139, 184, 71, 0.2);
+  transform: translateY(-3px) scale(1.02);
+}
+
+.button:active {
+  transform: translateY(-1px) scale(1.01);
+  transition: var(--transition-quick);
+}
+
+/* Responsive Design Enhancements */
+@media (max-width: 640px) {
+  .page-container {
+    padding: 16px;
+  }
+  
+  .main-heading {
+    margin-bottom: 32px;
+  }
+  
+  .card {
+    min-height: 320px;
+    padding: 40px 24px;
+    
+  }
+  
+  .card-icon {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 24px;
+  }
+  
+  .card-title {
+    font-size: 24px;
+  }
+  
+  .card-text {
+    font-size: 16px;
+  }
+  
+  .modal-content {
+    padding: 32px;
+    margin: 16px;
+  }
+}
+
+/* Focus states for accessibility */
+.card:focus-visible,
+.button:focus-visible,
+.form-input:focus-visible {
+  outline: 3px solid var(--light-green);
+  outline-offset: 2px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Loading state */
+.card.loading {
+  animation: cardPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes cardPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(0.98);
+  }
+}
