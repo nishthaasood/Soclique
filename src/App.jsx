@@ -3,8 +3,8 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Navbar from './Navbar.jsx'
-import GetStarted from './Get-started.jsx' 
-import HomePage from './HomePage.jsx'
+import GetStarted from './Get-started.jsx'
+import ExplorerPage from './Explorer-page.jsx'
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home')
@@ -27,7 +27,9 @@ function App() {
           </div>
         );
       case 'get-started':
-        return <GetStarted />;
+        return <GetStarted setCurrentPage={setCurrentPage} />;
+      case 'explorer':
+        return <ExplorerPage />;
       default:
         return (
           <div>
