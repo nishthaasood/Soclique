@@ -5,6 +5,7 @@ import './App.css'
 import Navbar from './Navbar.jsx'
 import GetStarted from './Get-started.jsx'
 import ExplorerPage from './Explorer-page.jsx'
+import HomePage from './HomePage.jsx'
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home')
