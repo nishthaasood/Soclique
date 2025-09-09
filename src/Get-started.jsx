@@ -49,8 +49,7 @@ const GetStarted = ({ setCurrentPage }) => {
   return (
     <div className="page-container">
       <div className="main-content">
-        <h1 className="main-heading">Enter as...</h1>
-
+        <h1 className="main-heading">Welcome to Soclique</h1>
         <div className="card-container">
           {/* Explorer Card */}
           <div onClick={() => openModal('explorer')} className="card">
