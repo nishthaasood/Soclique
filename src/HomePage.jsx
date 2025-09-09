@@ -308,7 +308,7 @@ const HomePage = () => {
         /* Why Choose Us Styles */
         .why-choose-us {
           padding: 4rem 2rem;
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          background: linear-gradient(135deg, #FFD700 0%, #D4AF37 100%);
           position: relative;
           overflow: hidden;
         }
