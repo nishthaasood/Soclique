@@ -1,22 +1,28 @@
 /* Explorer Page Styles */
 .explorer-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: white;   /* or gradient, your choice */
   padding: 2rem;
+  margin-top: 80px;    /* pushes the whole section down */
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
 }
+
+
 
 .explorer-header {
   text-align: center;
   margin-bottom: 3rem;
+  padding-top: 4rem;   /* increase top space */
 }
 
-.explorer-title {
-  font-size: 3rem;
-  font-weight: 800;
-  color: white;
-  margin-bottom: 1rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+
+.navbar {
+  display: flex;
+  justify-content: flex-end;  /* align to right */
+  gap: 2rem;                  /* spacing between items */
+  font-weight: 600;
+  font-size: 1rem;
+  color: #1e293b;
 }
 
 .explorer-subtitle {
