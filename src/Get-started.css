@@ -1,6 +1,5 @@
 
-        
-          /* Overall Page Styling */
+        /* Overall Page Styling */
           .page-container {
             display: flex;
             align-items: center;
@@ -170,5 +169,3 @@
           .button:hover {
             background-color: #1d4ed8;
           }
-        
-      
