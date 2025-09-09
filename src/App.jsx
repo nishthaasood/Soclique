@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import Navbar from './Navbar.jsx'
 import GetStarted from './Get-started.jsx' 
+import HomePage from './HomePage.jsx'
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home')

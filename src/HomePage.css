@@ -1,0 +1,64 @@
+/* Upcoming Events */
+.upcoming-events {
+  margin: 50px auto;
+  max-width: 1000px;
+  text-align: center;
+}
+
+.events-list {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.event-card {
+  flex: 1;
+  min-width: 250px;
+  max-width: 300px;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.event-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Why Choose Us */
+.why-choose-us {
+  margin: 60px auto;
+  max-width: 1000px;
+  text-align: center;
+}
+
+.reasons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.reason-card {
+  flex: 1;
+  min-width: 250px;
+  max-width: 300px;
+  padding: 20px;
+  background: #f0f8ff;
+  border-radius: 12px;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.reason-card:hover {
+  transform: scale(1.05);
+  background: #e6f0ff;
+}
+
+.icon {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 10px;
+}
