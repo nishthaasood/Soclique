@@ -39,7 +39,7 @@ const GetStarted = ({ setCurrentPage }) => {
   return (
     <div className="page-container">
       <div className="main-content">
-        <h1 className="main-heading">Welcome to Soclique</h1>
+        <h1 className="main-heading">Select One</h1>
         <div className="card-container">
           {/* Explorer Card */}
           <div
