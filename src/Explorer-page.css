@@ -1,13 +1,11 @@
 /* Explorer Page Styles */
 .explorer-page {
   min-height: 100vh;
-  background: #f9f9f9;
+  background: linear-gradient(135deg, #FDFCF3 0%, #FDFCF5 100%);
   padding: 2rem;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-  color: #111; /* global text color */
 }
 
-/* Header */
 .explorer-header {
   text-align: center;
   margin-bottom: 3rem;
@@ -16,17 +14,18 @@
 .explorer-title {
   font-size: 3rem;
   font-weight: 800;
-  color: #111;
+  color: #95af52;
   margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .explorer-subtitle {
   font-size: 1.2rem;
-  color: #444;
+  color: rgba(255, 255, 255, 0.9);
   margin-bottom: 0;
 }
 
-/* Society Cards Grid */
+/* Society Cards Container */
 .societies-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -37,35 +36,116 @@
 
 /* Society Card */
 .society-card {
-  background: #fff;
-  border-radius: 16px;
+  background: white;
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-  transition: all 0.3s ease;
+  box-shadow: 0 10px 25px #8D9093;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
+  position: relative;
 }
 
 .society-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  transform: translateY(-8px);
+  background-color: #F9F9F9;
+  box-shadow: 0 20px 40px #8D9093;
 }
 
-/* Photo Gallery */
+/* ✅ Active Glow Effect */
+.society-card.active:hover {
+  background: #f0fdf4; /* soft green */
+  box-shadow: 0 0 25px #8D9093;
+  border: 2px solid #8D9093;
+  transform: scale(1.02);
+}
+
+/* Photo Gallery Section */
 .photo-gallery {
   position: relative;
-  height: 220px;
+  height: 250px;
   overflow: hidden;
+}
+
+.gallery-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 .gallery-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.4s ease;
+  transition: opacity 0.5s ease-in-out;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
-.society-card:hover .gallery-image {
-  transform: scale(1.05);
+.gallery-image.active {
+  opacity: 1;
+}
+
+.gallery-image:not(.active) {
+  opacity: 0;
+}
+
+/* Navigation Arrows */
+.nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+  font-size: 1.2rem;
+}
+
+.nav-arrow:hover {
+  background: rgba(0, 0, 0, 0.8);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.nav-arrow.prev {
+  left: 10px;
+}
+
+.nav-arrow.next {
+  right: 10px;
+}
+
+/* Photo Dots Indicator */
+.photo-dots {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dot.active {
+  background: white;
+  transform: scale(1.2);
 }
 
 /* Card Content */
@@ -76,22 +156,23 @@
 .society-name {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #111;
+  color: #1e293b;
   margin-bottom: 0.5rem;
 }
 
 .society-description {
-  color: #555;
+  color: #64748b;
   line-height: 1.6;
-  margin-bottom: 1.2rem;
+  margin-bottom: 1.5rem;
   font-size: 0.95rem;
 }
 
-/* Actions */
+/* Action Buttons */
 .card-actions {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 1rem;
 }
 
 .like-button {
@@ -101,9 +182,9 @@
   background: none;
   border: none;
   cursor: pointer;
-  color: #666;
+  color: #64748b;
+  transition: all 0.3s ease;
   font-size: 0.9rem;
-  transition: color 0.2s ease;
 }
 
 .like-button:hover {
@@ -114,89 +195,167 @@
   color: #e11d48;
 }
 
+.like-icon {
+  font-size: 1.2rem;
+  transition: transform 0.2s ease;
+}
+
+.like-button:hover .like-icon {
+  transform: scale(1.1);
+}
+
 .know-more-btn {
-  background: #111;
-  color: #fff;
+  background-color: #e6dd9c;
+  background: linear-gradient(135deg);
+  color: white;
   border: none;
-  padding: 0.6rem 1.2rem;
+  padding: 0.75rem 1.5rem;
   border-radius: 25px;
   font-weight: 600;
   cursor: pointer;
-  font-size: 0.9rem;
   transition: all 0.3s ease;
+  font-size: 0.9rem;
 }
 
 .know-more-btn:hover {
-  background: #333;
   transform: translateY(-2px);
+  box-shadow: 0 5px 15px #8D9093;
 }
 
-/* Modal */
+/* Modal Styles */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  backdrop-filter: blur(5px);
 }
 
 .modal-content {
-  background: #fff;
+  background: white;
   padding: 2rem;
-  border-radius: 16px;
+  border-radius: 20px;
   max-width: 600px;
   width: 90%;
   max-height: 80vh;
   overflow-y: auto;
   position: relative;
+  animation: modalSlideIn 0.3s ease-out;
 }
 
-.modal-title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #111;
-  margin-bottom: 1rem;
-}
-
-.modal-description {
-  font-size: 1.05rem;
-  color: #444;
-  line-height: 1.7;
-  margin-bottom: 1.5rem;
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .modal-close {
   position: absolute;
   top: 1rem;
   right: 1rem;
-  background: #f2f2f2;
+  background: #f1f5f9;
   border: none;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  font-size: 1rem;
-  color: #444;
-  transition: background 0.2s ease;
+  font-size: 1.2rem;
+  color: #64748b;
+  transition: all 0.3s ease;
 }
 
 .modal-close:hover {
-  background: #e2e2e2;
-  color: #000;
+  background: #e2e8f0;
+  color: #1e293b;
 }
 
-/* Responsive */
+.modal-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 1rem 0;
+}
+
+.modal-description {
+  font-size: 1.1rem;
+  color: #475569;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+.modal-gallery {
+  margin-bottom: 1.5rem;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
+  .explorer-page {
+    padding: 1rem;
+  }
+  
   .explorer-title {
     font-size: 2rem;
   }
+  
   .societies-grid {
     grid-template-columns: 1fr;
   }
+  
+  .society-card {
+    margin-bottom: 1rem;
+  }
+  
+  .photo-gallery {
+    height: 200px;
+  }
+  
+  .nav-arrow {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+  }
+  
+  .card-actions {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .know-more-btn {
+    width: 100%;
+  }
 }
 
+@media (max-width: 480px) {
+  .modal-content {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+  
+  .modal-title {
+    font-size: 1.5rem;
+  }
+  
+  .explorer-title {
+    font-size: 1.5rem;
+  }
+  
+  .card-content {
+    padding: 1rem;
+  }
+}
