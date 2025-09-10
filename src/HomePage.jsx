@@ -74,19 +74,19 @@ const HomePage = () => {
   const reasons = [
     {
       icon: "🌟",
-      title: "Expert Mentors",
-      description: "Learn from industry professionals and experienced seniors.",
+      title: "Discover Societies Easily",
+      description: "Find all the socities from your college in one place.",
       color: "#8bb847",
-      details: "1:5 mentor-student ratio",
-      benefits: ["Industry Insights", "Career Guidance", "Technical Support"]
+      details: "50+ socities",
+      benefits: ["connect Easily", "Latest Events", "Explore Interest"]
     },
     {
       icon: "🚀",
-      title: "Hands-on Projects",
-      description: "Work on real-world problems and build your portfolio.",
+      title: "Stay Updated",
+      description: "Get instant updates about fests, events and activities happening.",
       color: "#b7c656",
-      details: "50+ projects completed",
-      benefits: ["Real Experience", "Portfolio Building", "Skill Development"]
+      details: "10+ Colleges Covered",
+      benefits: ["Hot Updates", "Event Alerts", "Fresh Feed"]
     },
     {
       icon: "🤝",
