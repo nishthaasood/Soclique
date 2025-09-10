@@ -21,9 +21,10 @@ body {
 
 /* App Container */
 .app {
-  width: 100%;
+  width: 100lvw;
   min-height: 100vh;
   background-color: #f9f9f9;
+  overflow-x: hidden;
 }
 
 /* Navbar Styles - Improved */
@@ -38,6 +39,7 @@ body {
   z-index: 1000;
   width: 100%;
   transition: all 0.3s ease;
+  margin-bottom:0px;
 }
 
 .nav-container {

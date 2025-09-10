@@ -1,4 +1,3 @@
-
 :root {
   --cream: #fefdf8;
   --light-cream: #fdfcf4;
@@ -47,6 +46,7 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  width:99lvw;
   padding: 32px 16px;
   background-color: var(--light-cream);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
@@ -459,6 +459,140 @@ body {
   transition: var(--transition-quick);
 }
 
+/* Enhanced Select Dropdown Styling */
+select.form-input {
+  cursor: pointer;
+  background-color: var(--cream);
+  color: var(--text-primary);
+  position: relative;
+  z-index: 1;
+}
+
+select.form-input:hover {
+  border-color: var(--border-medium);
+  background-color: var(--light-cream);
+  transform: translateY(-1px);
+}
+
+select.form-input:focus {
+  border-color: var(--light-green);
+  box-shadow: 0 0 0 4px rgba(199, 217, 87, 0.1);
+  transform: translateY(-2px);
+  background-color: white;
+  outline: none;
+}
+
+/* Option styling for better visibility */
+select.form-input option {
+  background-color: var(--cream);
+  color: var(--text-primary);
+  padding: 12px;
+}
+
+select.form-input option:hover {
+  background-color: var(--light-green);
+  color: white;
+}
+
+/* Enhanced Button States */
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: linear-gradient(135deg, var(--text-muted) 0%, var(--border-dark) 100%);
+  transform: none;
+  box-shadow: var(--shadow-light);
+}
+
+.button:disabled:hover {
+  background: linear-gradient(135deg, var(--text-muted) 0%, var(--border-dark) 100%);
+  transform: none;
+  box-shadow: var(--shadow-light);
+}
+
+.button:disabled::before {
+  display: none;
+}
+
+/* Ensure proper interaction states */
+.button:not(:disabled):hover {
+  background: linear-gradient(135deg, var(--dark-green) 0%, var(--darker-green) 100%);
+  box-shadow: var(--shadow-large), 0 0 20px rgba(139, 184, 71, 0.2);
+  transform: translateY(-3px) scale(1.02);
+}
+
+.button:not(:disabled):active {
+  transform: translateY(-1px) scale(1.01);
+  transition: var(--transition-quick);
+}
+
+/* Auth links styling for modal */
+.auth-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  font-size: 14px;
+}
+
+.auth-link {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: var(--transition-quick);
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.auth-link:hover {
+  color: var(--dark-green);
+  background-color: var(--cream);
+  text-decoration: underline;
+}
+
+.auth-separator {
+  color: var(--text-muted);
+  font-weight: bold;
+}
+
+/* Modal title styling */
+.modal-title {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 32px;
+  text-align: center;
+  background: linear-gradient(135deg, var(--dark-green) 0%, var(--medium-green) 50%, var(--light-green) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Card icon styling */
+.card-icon {
+  color: var(--medium-green);
+  transition: var(--transition-smooth);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card:hover .card-icon {
+  color: var(--dark-green);
+  transform: translateY(-3px) scale(1.1);
+}
+
+/* Focus visible states for better accessibility */
+select.form-input:focus-visible {
+  outline: 3px solid var(--light-green);
+  outline-offset: 2px;
+}
+
+.button:focus-visible {
+  outline: 3px solid var(--light-green);
+  outline-offset: 2px;
+}
+
 /* Responsive Design Enhancements */
 @media (max-width: 640px) {
   .page-container {
@@ -492,6 +626,20 @@ body {
   .modal-content {
     padding: 32px;
     margin: 16px;
+  }
+  
+  select.form-input {
+    font-size: 16px; /* Prevents zoom on iOS */
+    padding: 18px 48px 18px 20px;
+  }
+  
+  .auth-links {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .auth-separator {
+    display: none;
   }
 }
 

@@ -1,11 +1,27 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Search, Users, Crown } from 'lucide-react';
+import { Search, Users, Crown, GraduationCap } from 'lucide-react';
 import './Get-started.css';
 
 const GetStarted = ({ setCurrentPage }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState('');
+  const [showLanding, setShowLanding] = useState(true);
+  const [selectedCollege, setSelectedCollege] = useState('');
   const modalRef = useRef(null);
+
+  const colleges = [
+    { value: '', label: 'Select your college' },
+    { value: 'mait', label: 'Maharaja Agrasen Institute of Technology (MAIT)' },
+    { value: 'bpit', label: 'Bhagwan Parshuram Institute of Technology (BPIT)' },
+    { value: 'msit', label: 'Maharaja Surajmal Institute of Technology (MSIT)' },
+  ];
+
+  // Handle college selection and proceed
+  const handleCollegeSelect = () => {
+    if (selectedCollege) {
+      setShowLanding(false);
+    }
+  };
 
   // Open modal
   const openModal = (type) => {
@@ -49,35 +65,140 @@ const GetStarted = ({ setCurrentPage }) => {
   return (
     <div className="page-container">
       <div className="main-content">
-        <h1 className="main-heading">Welcome to Soclique</h1>
-        <div className="card-container">
-          {/* Explorer Card */}
-          <div onClick={() => openModal('explorer')} className="card">
-            <div className="card-icon">
-              <Search size={48} strokeWidth={1.5} />
-            </div>
-            <h2 className="card-title">Visit as an Explorer</h2>
-            <p className="card-text">Explore the platform and its features.</p>
-          </div>
+        {showLanding ? (
+          // Landing Page - College Selection
+          <>
+            <h1 className="main-heading">Welcome to Soclique</h1>
+            <div style={{ 
+              display: 'flex', 
+              flexDirection: 'column', 
+              alignItems: 'center', 
+              gap: '32px',
+              maxWidth: '600px',
+              margin: '0 auto'
+            }}>
+              <div className="card" style={{ 
+                maxWidth: '500px', 
+                width: '100%',
+                minHeight: '350px',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '32px'
+              }}>
+                <div className="card-icon">
+                  <GraduationCap size={64} strokeWidth={1.5} />
+                </div>
+                <h2 className="card-title">Choose Your College</h2>
+                <p className="card-text" style={{ marginBottom: '24px' }}>
+                  Select your college to connect with your campus community
+                </p>
+                
+                <select 
+                  value={selectedCollege}
+                  onChange={(e) => setSelectedCollege(e.target.value)}
+                  className="form-input"
+                  style={{
+                    width: '100%',
+                    maxWidth: '400px',
+                    appearance: 'none',
+                    backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234a6b35' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e")`,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'right 16px center',
+                    backgroundSize: '20px',
+                    paddingRight: '48px'
+                  }}
+                >
+                  {colleges.map((college) => (
+                    <option key={college.value} value={college.value}>
+                      {college.label}
+                    </option>
+                  ))}
+                </select>
 
-          {/* Society Member Card */}
-          <div onClick={() => openModal('member')} className="card">
-            <div className="card-icon">
-              <Users size={48} strokeWidth={1.5} />
+                <button
+                  onClick={handleCollegeSelect}
+                  disabled={!selectedCollege}
+                  className="button"
+                  style={{
+                    maxWidth: '400px',
+                    width: '100%'
+                  }}
+                >
+                  Continue
+                </button>
+              </div>
             </div>
-            <h2 className="card-title">Visit as a Society Member</h2>
-            <p className="card-text">Stay updated with your society's events and announcements.</p>
-          </div>
+          </>
+        ) : (
+          // Main User Type Selection Page
+          <>
+            <div style={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center',
+              gap: '16px',
+              marginBottom: '32px'
+            }}>
+              <button
+                onClick={() => setShowLanding(true)}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  color: 'var(--text-muted)',
+                  cursor: 'pointer',
+                  padding: '8px',
+                  borderRadius: '8px',
+                  transition: 'var(--transition-quick)',
+                  fontSize: '24px'
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.color = 'var(--text-primary)';
+                  e.target.style.backgroundColor = 'var(--cream)';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.color = 'var(--text-muted)';
+                  e.target.style.backgroundColor = 'transparent';
+                }}
+              >
+                ← 
+              </button>
+              <h1 className="main-heading" style={{ marginBottom: '0' }}>
+                {colleges.find(c => c.value === selectedCollege)?.label.split('(')[0].trim()}
+              </h1>
+            </div>
+            
+            <div className="card-container">
+              {/* Explorer Card */}
+              <div onClick={() => openModal('explorer')} className="card">
+                <div className="card-icon">
+                  <Search size={48} strokeWidth={1.5} />
+                </div>
+                <h2 className="card-title">Visit as an Explorer</h2>
+                <p className="card-text">Explore the platform and its features.</p>
+              </div>
 
-          {/* Society Head Card */}
-          <div onClick={() => openModal('head')} className="card">
-            <div className="card-icon">
-              <Crown size={48} strokeWidth={1.5} />
+              {/* Society Member Card */}
+              <div onClick={() => openModal('member')} className="card">
+                <div className="card-icon">
+                  <Users size={48} strokeWidth={1.5} />
+                </div>
+                <h2 className="card-title">Visit as a Society Member</h2>
+                <p className="card-text">Stay updated with your society's events and announcements.</p>
+              </div>
+
+              {/* Society Head Card */}
+              <div onClick={() => openModal('head')} className="card">
+                <div className="card-icon">
+                  <Crown size={48} strokeWidth={1.5} />
+                </div>
+                <h2 className="card-title">Visit as a Society Head</h2>
+                <p className="card-text">Manage your society, create events, and share highlights.</p>
+              </div>
             </div>
-            <h2 className="card-title">Visit as a Society Head</h2>
-            <p className="card-text">Manage your society, create events, and share highlights.</p>
-          </div>
-        </div>
+          </>
+        )}
       </div>
 
       {/* Modal */}
@@ -143,6 +264,7 @@ const GetStarted = ({ setCurrentPage }) => {
                       ? 'Find Your Society'
                       : 'Login to Dashboard'}
                   </button>
+                  
                   {/* Auth links */}
                   <div className="auth-links">
                     <a
