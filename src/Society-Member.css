@@ -219,7 +219,7 @@
 
 /* Dashboard Content */
 .soc-dashboard-content {
-  space-y: 2rem;
+  display: 2rem;
 }
 
 .soc-stats-grid {
@@ -395,7 +395,7 @@
 
 /* Activities List */
 .soc-activities-list {
-  space-y: 1rem;
+  display: 1rem;
 }
 
 .soc-activity-item {
@@ -453,7 +453,7 @@
 
 /* Events List */
 .soc-events-list {
-  space-y: 1rem;
+  display: 1rem;
 }
 
 .soc-event-item {
@@ -802,7 +802,7 @@
 }
 
 .soc-event-details {
-  space-y: 0.5rem;
+  display: 0.5rem;
   margin-bottom: 1.5rem;
 }
 
@@ -826,7 +826,7 @@
 
 /* Timeline */
 .soc-activities-timeline {
-  space-y: 1.5rem;
+  display: 1.5rem;
 }
 
 .soc-timeline-item {

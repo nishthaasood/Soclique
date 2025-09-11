@@ -13,7 +13,10 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
     { value: '', label: 'Select your college' },
     { value: 'mait', label: 'Maharaja Agrasen Institute of Technology (MAIT)' },
     { value: 'bpit', label: 'Bhagwan Parshuram Institute of Technology (BPIT)' },
+    { value: 'vips', label: 'Vivekanand Institute of Professional Studies (VIPS)' },
+    { value: 'bvcoe', label: 'Bhartiya Vidyapeeth College of Engineering (BVCOE)' },
     { value: 'msit', label: 'Maharaja Surajmal Institute of Technology (MSIT)' },
+    { value: 'adgips', label: 'Akhilesh Das Gupta Institute of Professional Studies (ADGIPS)' }
   ];
 
   // Handle college selection and proceed
