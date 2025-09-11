@@ -669,6 +669,7 @@
   background: rgba(241, 196, 15, 0.1);
   color: var(--soc-warning);
 }
+
 .soc-role-badge.junior-council {
   background: rgba(231, 76, 60, 0.1);
   color: var(--soc-danger);
