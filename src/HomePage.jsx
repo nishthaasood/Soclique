@@ -82,7 +82,7 @@ const HomePage = () => {
       date: "20th Oct, 2025",
       description: "Explore AI, ML and build intelligent projects. From basics to advanced applications with industry experts.",
       gradient: "linear-gradient(135deg, #b7c656 0%, #91a53a 100%)",
-      tags: ["AI", "ML", "Projects", "Industry"],
+      tags: ["AI", "Machine Learning", "Projects", "Prototyping"],
       registrations: "300+",
       icon: "🤖",
       details: {
@@ -572,7 +572,7 @@ const HomePage = () => {
           title="AI Chat Assistant"
           aria-label="Toggle AI Chat Assistant"
         >
-          {chatOpen ? '✕' : '🤖'}
+          {chatOpen ? '+' : '🤖'}
         </button>
         
         <div className={`chat-box ${chatOpen ? 'open' : ''}`}>
