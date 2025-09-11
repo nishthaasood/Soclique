@@ -15,10 +15,9 @@ const ExplorerPage = () => {
       description: "Anveshan is a technology society dedicated to fostering innovation and technical skills. We host coding workshops, hackathons, and seminars on emerging technologies to prepare our members for a future in the tech industry.",
       fullDescription: "Anveshan stands at the forefront of technological innovation in our institution. Our society organizes regular coding bootcamps, AI/ML workshops, web development sessions, and competitive programming contests. We collaborate with industry professionals to provide real-world exposure and internship opportunities. Our members have successfully launched several tech startups and won national-level hackathons.",
       images: [
-        "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400&h=250&fit=crop&crop=center",
-        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&h=250&fit=crop&crop=center",
-        "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=400&h=250&fit=crop&crop=center"
-      ],
+        "Anveshan.png",
+        "Anveshan1.png",
+        "Anveshan2.png"],
       likes: 42
     },
     {
@@ -27,10 +26,10 @@ const ExplorerPage = () => {
       description: "Drishti is a charity society committed to making a positive impact in our community. We organize donation drives, volunteer for local shelters, and run fundraising events to support various humanitarian causes.",
       fullDescription: "Drishti believes in the power of collective action to create meaningful change. Our initiatives include monthly food distribution drives, educational support for underprivileged children, environmental cleanup campaigns, and health awareness programs. We have partnered with over 15 NGOs and have impacted more than 5000 lives through our various social welfare projects.",
       images: [
-        "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=400&h=250&fit=crop&crop=center",
-        "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=400&h=250&fit=crop&crop=center",
-        "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=400&h=250&fit=crop&crop=center"
-      ],
+        "Drishti.png",
+        "Drishti1.png",
+        "Drishti2.png"],
+    
       likes: 38
     },
     {
@@ -39,10 +38,9 @@ const ExplorerPage = () => {
       description: "The NCC (National Cadet Corps) is an organization focused on discipline, leadership, and patriotism. We provide military training, adventure activities, and community service opportunities to develop character and a sense of duty.",
       fullDescription: "The National Cadet Corps shapes future leaders through disciplined training and character building activities. Our cadets participate in annual training camps, adventure sports, disaster management drills, and national integration programs. We instill values of unity, discipline, and selfless service while preparing young minds for leadership roles in society and the armed forces.",
       images: [
-        "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=250&fit=crop&crop=center",
-        "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=250&fit=crop&crop=center",
-        "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=250&fit=crop&crop=center"
-      ],
+        "NCC.png",
+        "NCC1.png",
+        "NCC2.png"],
       likes: 35
     },
   ];
