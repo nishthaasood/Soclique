@@ -2,11 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Search, Users, Crown, GraduationCap } from 'lucide-react';
 import './Get-started.css';
 
-const GetStarted = ({ setCurrentPage }) => {
+const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState('');
   const [showLanding, setShowLanding] = useState(true);
-  const [selectedCollege, setSelectedCollege] = useState('');
+  const [selectedCollegeLocal, setSelectedCollegeLocal] = useState('');
   const modalRef = useRef(null);
 
   const colleges = [
@@ -18,7 +18,9 @@ const GetStarted = ({ setCurrentPage }) => {
 
   // Handle college selection and proceed
   const handleCollegeSelect = () => {
-    if (selectedCollege) {
+    if (selectedCollegeLocal) {
+      // Pass the selected college to the parent component
+      setSelectedCollege && setSelectedCollege(selectedCollegeLocal);
       setShowLanding(false);
     }
   };
@@ -31,15 +33,17 @@ const GetStarted = ({ setCurrentPage }) => {
 
   // Navigation handler
   const handleNavigation = (userType) => {
+    // Pass the selected college when navigating
     switch (userType) {
       case 'explorer':
         setCurrentPage('explorer');
         break;
       case 'member':
-        setCurrentPage('societies');
+        setCurrentPage('societyMember');
         break;
       case 'head':
-        setCurrentPage('dashboard');
+        // Navigate to Society Head dashboard with college info
+        setCurrentPage('societyHead');
         break;
       default:
         break;
@@ -96,8 +100,8 @@ const GetStarted = ({ setCurrentPage }) => {
                 </p>
                 
                 <select 
-                  value={selectedCollege}
-                  onChange={(e) => setSelectedCollege(e.target.value)}
+                  value={selectedCollegeLocal}
+                  onChange={(e) => setSelectedCollegeLocal(e.target.value)}
                   className="form-input"
                   style={{
                     width: '100%',
@@ -119,7 +123,7 @@ const GetStarted = ({ setCurrentPage }) => {
 
                 <button
                   onClick={handleCollegeSelect}
-                  disabled={!selectedCollege}
+                  disabled={!selectedCollegeLocal}
                   className="button"
                   style={{
                     maxWidth: '400px',
@@ -165,7 +169,7 @@ const GetStarted = ({ setCurrentPage }) => {
                 ← 
               </button>
               <h1 className="main-heading" style={{ marginBottom: '0' }}>
-                {colleges.find(c => c.value === selectedCollege)?.label.split('(')[0].trim()}
+                {colleges.find(c => c.value === selectedCollegeLocal)?.label.split('(')[0].trim()}
               </h1>
             </div>
             
@@ -262,7 +266,7 @@ const GetStarted = ({ setCurrentPage }) => {
                   >
                     {modalType === 'member'
                       ? 'Find Your Society'
-                      : 'Login to Dashboard'}
+                      : 'Access Dashboard'}
                   </button>
                   
                   {/* Auth links */}
