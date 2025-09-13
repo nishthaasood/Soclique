@@ -14,8 +14,8 @@ html, body, #root {
 
 body {
   font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
-  background-color: #f9f9f9;
-  color: #333;
+  background: linear-gradient(135deg, #0A1125 0%, #1a2340 50%, #2a3548 100%);
+  color: #FFFFFF;
   line-height: 1.6;
 }
 
@@ -23,23 +23,23 @@ body {
 .app {
   width: 100lvw;
   min-height: 100vh;
-  background-color: #f9f9f9;
+  background: linear-gradient(135deg, #0A1125 0%, #1a2340 50%, #2a3548 100%);
   overflow-x: hidden;
 }
 
-/* Navbar Styles - Improved */
+/* Navbar Styles - Updated with Homepage Colors */
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  background-color: rgba(255, 255, 255, 0.95);
+  background: rgba(10, 17, 37, 0.95);
   backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid rgba(216, 220, 232, 0.15);
   z-index: 1000;
   width: 100%;
   transition: all 0.3s ease;
-  margin-bottom:0px;
+  margin-bottom: 0px;
 }
 
 .nav-container {
@@ -52,11 +52,11 @@ body {
   box-sizing: border-box;
 }
 
-/* Logo - Improved */
+/* Logo - Updated Colors */
 .logo {
   font-size: 26px;
   font-weight: 700;
-  color: #1a1a1a;
+  color: #FFFFFF;
   text-decoration: none;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   cursor: pointer;
@@ -65,11 +65,14 @@ body {
 }
 
 .logo:hover {
-  color: #b8860b;
+  background: linear-gradient(135deg, #B8C2A5 0%, #D8DCE8 50%, #A5B1CC 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   transform: translateY(-1px);
 }
 
-/* Navigation Links - Much Improved */
+/* Navigation Links - Updated Colors */
 .nav-links {
   display: flex;
   list-style: none;
@@ -80,7 +83,7 @@ body {
 }
 
 .nav-link {
-  color: #4b5563;
+  color: #E8EAF0;
   text-decoration: none;
   font-size: 17px;
   font-weight: 500;
@@ -94,20 +97,20 @@ body {
 }
 
 .nav-link:hover {
-  color: #374151;
-  background-color: #f9f7e8;
+  color: #FFFFFF;
+  background: rgba(216, 220, 232, 0.15);
   transform: translateY(-1px);
 }
 
 .nav-link.active {
-  color: #374151;
-  background-color: #e6dd9c;
+  color: #FFFFFF;
+  background: linear-gradient(135deg, #B8C2A5 0%, #A5B1CC 100%);
   font-weight: 600;
-  box-shadow: 0 4px 12px rgba(230, 221, 156, 0.35);
+  box-shadow: 0 4px 12px rgba(184, 194, 165, 0.35);
   transform: translateY(-1px);
 }
 
-/* Mobile Menu Button - Improved */
+/* Mobile Menu Button - Updated Colors */
 .mobile-menu-btn {
   display: none;
   background: none;
@@ -120,32 +123,32 @@ body {
 }
 
 .mobile-menu-btn:hover {
-  background-color: rgba(0, 0, 0, 0.05);
+  background: rgba(216, 220, 232, 0.15);
 }
 
 .mobile-menu-btn span {
   width: 20px;
   height: 2px;
-  background-color: #374151;
+  background-color: #E8EAF0;
   margin: 2px 0;
   transition: all 0.3s ease;
   border-radius: 1px;
 }
 
 .mobile-menu-btn:hover span {
-  background-color: #e6dd9c;
+  background-color: #B8C2A5;
 }
 
-/* Mobile Menu - Improved */
+/* Mobile Menu - Updated Colors */
 .mobile-menu {
   display: none;
   position: absolute;
   top: 100%;
   left: 0;
   right: 0;
-  background-color: rgba(255, 255, 255, 0.98);
+  background: rgba(10, 17, 37, 0.98);
   backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid rgba(216, 220, 232, 0.15);
   padding: 16px 24px 24px;
   z-index: 1000;
 }
@@ -168,7 +171,7 @@ body {
 
 .mobile-nav-link {
   display: block;
-  color: #4b5563;
+  color: #E8EAF0;
   text-decoration: none;
   padding: 12px 16px;
   font-size: 16px;
@@ -181,16 +184,16 @@ body {
 }
 
 .mobile-nav-link:hover {
-  color: #374151;
-  background-color: #f9f7e8;
+  color: #FFFFFF;
+  background: rgba(216, 220, 232, 0.15);
   transform: translateX(4px);
 }
 
 .mobile-nav-link.active {
-  color: #374151;
-  background-color: #e6dd9c;
+  color: #FFFFFF;
+  background: linear-gradient(135deg, #B8C2A5 0%, #A5B1CC 100%);
   font-weight: 600;
-  box-shadow: 0 4px 12px rgba(230, 221, 156, 0.35);
+  box-shadow: 0 4px 12px rgba(184, 194, 165, 0.35);
   transform: translateY(-1px);
 }
 
@@ -205,17 +208,18 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 40px 30px;
-  background-color: #ffffff;
+  background: rgba(216, 220, 232, 0.08);
+  backdrop-filter: blur(20px);
   margin-top: 20px;
   margin-bottom: 20px;
   border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  
+  border: 1px solid rgba(216, 220, 232, 0.15);
+  box-shadow: 0 4px 20px rgba(10, 17, 37, 0.3);
 }
 
 .page-content h1 {
   font-size: 2.5rem;
-  color: #1a1a1a;
+  color: #FFFFFF;
   margin-bottom: 20px;
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -223,12 +227,12 @@ body {
 
 .page-content p {
   font-size: 1.1rem;
-  color: #6b7280;
+  color: #C2CAD8;
   line-height: 1.7;
   max-width: 600px;
 }
 
-/* Responsive Design - Improved */
+/* Responsive Design */
 @media (max-width: 768px) {
   .nav-links {
     display: none;
