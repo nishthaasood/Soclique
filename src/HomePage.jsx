@@ -16,6 +16,7 @@ const HomePage = () => {
   const observerRef = useRef(null);
   const chatMessagesRef = useRef(null);
   const chatInputRef = useRef(null);
+  const chatContainerRef = useRef(null);
 
   // Enhanced AI responses with more context
   const getAIResponse = useCallback((message) => {
@@ -277,6 +278,21 @@ const HomePage = () => {
     };
   }, []);
 
+  useEffect(() => {
+const handleClickOutside = (event) => {
+if (chatContainerRef.current && !chatContainerRef.current.contains(event.target)) {
+setChatOpen(false);
+}
+};
+if (chatOpen) {
+document.addEventListener('mousedown', handleClickOutside);
+} else {
+document.removeEventListener('mousedown', handleClickOutside);
+}
+return () => {
+document.removeEventListener('mousedown', handleClickOutside);
+};
+}, [chatOpen]);
   // Auto-scroll chat messages
   useEffect(() => {
     if (chatMessagesRef.current) {
@@ -565,7 +581,7 @@ const HomePage = () => {
       </div>
 
       {/* Enhanced AI Chat Box */}
-      <div className="ai-chat-container">
+      <div className="ai-chat-container" ref={chatContainerRef}>
         <button 
           className={`chat-toggle ${chatOpen ? 'active' : ''}`}
           onClick={handleChatToggle}
