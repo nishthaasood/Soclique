@@ -8,39 +8,53 @@ const HomePage = () => {
   const [isVisible, setIsVisible] = useState({});
   const [chatOpen, setChatOpen] = useState(false);
   const [chatMessages, setChatMessages] = useState([
-    { type: 'ai', text: 'Hi! I\'m your Soclique assistant. Ask me about events, societies, or anything else!' }
+    { 
+      type: 'ai', 
+      text: 'Hi! I\'m your Soclique AI assistant. I can help you discover events, find societies, get registration info, and answer any questions about our platform. What would you like to explore?' 
+    }
   ]);
   const [currentMessage, setCurrentMessage] = useState('');
   const [isTyping, setIsTyping] = useState(false);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [showPrompts, setShowPrompts] = useState(true);
+  
   const observerRef = useRef(null);
   const chatMessagesRef = useRef(null);
   const chatInputRef = useRef(null);
   const chatContainerRef = useRef(null);
 
-  // Enhanced AI responses with more context
+  // AI Chat Prompts
+  const chatPrompts = [
+    "What events are happening this week?",
+    "Help me find societies for my interests",
+    "How do I register for events?",
+    "Show me tech-related events",
+    "What's the difference between events?",
+    "Connect me with like-minded people"
+  ];
+
+  // Enhanced AI responses with more personality and context
   const getAIResponse = useCallback((message) => {
     const responses = {
-      'events': 'We have exciting events coming up! Check out our Hackathon 2025 on Sept 15th, Tech Workshop on Oct 1st, and AI Bootcamp on Oct 20th. Which one interests you most?',
-      'societies': 'We cover 50+ societies across 25+ colleges! You can discover tech clubs, cultural societies, sports teams, and academic groups all in one place. Want to explore by category?',
-      'hackathon': 'Our Hackathon 2025 is a 24-hour coding marathon on September 15th! Over 200+ participants are already registered. It\'s perfect for innovation and networking. Ready to register?',
-      'registration': 'You can register for events directly through our platform. Just click the "Register Now" button on any event card! Registration is quick and secure.',
-      'colleges': 'We currently cover 10+ colleges with plans to expand further. You can browse events and societies by your specific college. Which college are you from?',
-      'help': 'I can help you with:\n• Finding events and societies\n• Registration information\n• College-specific content\n• Platform features\n• Networking opportunities\nWhat would you like to know more about?',
-      'contact': 'You can reach out to us through the contact section on our website, or continue chatting with me for immediate assistance! I\'m here 24/7.',
-      'tech': 'Our Tech Workshop on October 1st covers React, GitHub, and Netlify deployment. It\'s hands-on learning with 150+ registered participants! Perfect for building your portfolio.',
-      'ai': 'The AI Bootcamp on October 20th explores AI, ML, and helps you build intelligent projects. Over 300+ people are registered - it\'s going to be incredible!',
-      'networking': 'Soclique is all about building meaningful connections! Join our events to meet like-minded peers, collaborate on projects, and grow your professional network.',
-      'cultural': 'Our Cultural Fest 2025 in April will be amazing with 1000+ participants! It showcases talent from across colleges with music, dance, art, and much more.',
-      'sports': 'The Sports Championship in February brings together 800+ athletes from different colleges. It\'s not just competition, but celebration of sportsmanship!',
-      'innovation': 'Innovation Expo in January features 600+ participants showcasing groundbreaking projects. It\'s where creativity meets technology!',
-      'default': 'That\'s a great question! I\'d recommend checking out our events section or browsing societies by your college. Is there something specific you\'re looking for? I\'m here to help!'
+      'events': 'Great question! We have some amazing events lined up:\n\n💻 Hackathon 2025 (Sept 15) - 24 hours of pure innovation\n⚛️ Tech Workshop (Oct 1) - Master React, GitHub & deployment\n🤖 AI Bootcamp (Oct 20) - Dive deep into AI and ML\n\nWhich one catches your interest? I can provide more details!',
+      'societies': 'We\'re connected with 50+ societies across 25+ colleges! From tech clubs to cultural groups, sports teams to academic societies - there\'s something for everyone. Want to explore by your college or by interest category?',
+      'hackathon': 'The Hackathon 2025 is going to be epic! 🚀\n\n📅 Sept 15th, 9 AM - Sept 16th, 9 AM\n📍 Tech Campus Main Hall\n💰 $10,000 Prize Pool\n👥 200+ developers already registered\n\nIt\'s 24 hours of coding, innovation, and networking. Perfect for building something amazing and meeting talented developers. Ready to join the coding marathon?',
+      'tech workshop': 'The Tech Workshop is perfect for hands-on learning! 💻\n\n📅 Oct 1st, 10 AM - 4 PM\n📍 Computer Science Lab\n🎯 Learn React, GitHub, Netlify\n✅ Beginner-friendly\n👥 150+ participants registered\n\nYou\'ll build and deploy your first full-stack app. Great for your portfolio!',
+      'ai bootcamp': 'The AI Bootcamp is our most popular event! 🤖\n\n📅 Oct 20th, 9 AM - 5 PM\n📍 Innovation Center\n🧠 AI, ML, and intelligent projects\n🏆 Certificate included\n👥 300+ registered participants\n\nFrom basics to advanced applications with industry experts. Perfect for diving into the future of tech!',
+      'registration': 'Registration is super easy! Just click the "Register Now" button on any event card. The process is:\n\n1️⃣ Fill out basic info\n2️⃣ Select your preferences\n3️⃣ Confirm attendance\n4️⃣ Get confirmation email\n\nSecure, quick, and you\'ll get all event updates. Need help with a specific event?',
+      'colleges': 'We currently partner with 10+ colleges and expanding rapidly! You can filter events and societies by:\n\n🏛️ Your specific college\n📚 Academic departments\n🎯 Interest categories\n📍 Location preferences\n\nWhich college are you from? I can show you what\'s happening there!',
+      'help': 'I\'m here to help with everything Soclique! 🌟\n\n✨ Find perfect events for you\n🏛️ Discover college societies\n📝 Registration assistance\n💡 Platform features\n🤝 Networking opportunities\n📊 Event recommendations\n\nJust ask me anything - from "What events are this weekend?" to "How do I join the robotics club?"',
+      'contact': 'You can reach our team through:\n\n💬 This chat (I\'m available 24/7!)\n📧 Contact form on our website\n📱 Social media @Soclique\n🎫 Support tickets for technical issues\n\nFor immediate help, keep chatting with me. For complex issues, our human team responds within 24 hours!',
+      'networking': 'Networking is what Soclique is all about! 🤝\n\nOur platform helps you:\n• Meet like-minded peers at events\n• Join collaborative projects\n• Connect with industry professionals\n• Build lasting friendships\n• Grow your professional network\n\nEvery event is designed for meaningful connections. Ready to expand your circle?',
+      'default': 'That\'s an interesting question! 🤔 I\'m here to help with:\n\n🎪 Event discovery and info\n🏛️ Society connections\n📝 Registration support\n💡 Platform guidance\n🤝 Networking advice\n\nTry asking about specific events, colleges, or what type of activities interest you. I love helping students find their perfect community!'
     };
 
     const lowercaseMessage = message.toLowerCase();
     
+    // Enhanced matching with multiple keywords
     for (const [key, response] of Object.entries(responses)) {
-      if (lowercaseMessage.includes(key)) {
+      if (lowercaseMessage.includes(key) || 
+          (key === 'tech workshop' && (lowercaseMessage.includes('workshop') || lowercaseMessage.includes('react'))) ||
+          (key === 'ai bootcamp' && (lowercaseMessage.includes('bootcamp') || lowercaseMessage.includes('machine learning') || lowercaseMessage.includes('ml')))) {
         return response;
       }
     }
@@ -48,48 +62,48 @@ const HomePage = () => {
     return responses.default;
   }, []);
 
-  // Enhanced events data with more details
+  // Enhanced events data with consistent structure for better alignment
   const events = [
     {
       title: "Hackathon 2025",
       date: "15th Sept, 2025",
-      description: "Join us for 24 hours of coding and innovation! Build amazing projects, win prizes, and network with top developers.",
-      gradient: "linear-gradient(135deg, #8bb847 0%, #b7c656 100%)",
+      description: "Join us for 24 hours of coding innovation! Build groundbreaking projects, compete for prizes, and network with top developers from across all colleges.",
+      gradient: "linear-gradient(135deg, #3A3E5C 0%, #8A94AC 100%)",
       tags: ["Coding", "Innovation", "24hrs", "Prizes"],
       registrations: "200+",
       icon: "💻",
       details: {
-        time: "9:00 AM - 9:00 AM",
+        time: "9:00 AM - 9:00 AM (Next Day)",
         venue: "Tech Campus Main Hall",
-        prizes: "$10,000 Prize Pool"
+        special: "$10,000 Prize Pool"
       }
     },
     {
       title: "Tech Workshop",
       date: "1st Oct, 2025", 
-      description: "Learn React, GitHub, and Netlify deployment hands-on. Build and deploy your first full-stack application.",
-      gradient: "linear-gradient(135deg, #91a53a 0%, #8bb847 100%)",
+      description: "Master modern web development! Learn React fundamentals, GitHub workflows, and deploy your first full-stack application with expert guidance.",
+      gradient: "linear-gradient(135deg, #959B85 0%, #B3B7C8 100%)",
       tags: ["React", "GitHub", "Netlify", "Deployment"],
       registrations: "150+",
       icon: "⚛️",
       details: {
         time: "10:00 AM - 4:00 PM",
         venue: "Computer Science Lab",
-        level: "Beginner Friendly"
+        special: "Beginner Friendly"
       }
     },
     {
       title: "AI Bootcamp",
       date: "20th Oct, 2025",
-      description: "Explore AI, ML and build intelligent projects. From basics to advanced applications with industry experts.",
-      gradient: "linear-gradient(135deg, #b7c656 0%, #91a53a 100%)",
-      tags: ["AI", "Machine Learning", "Projects", "Prototyping"],
+      description: "Dive deep into Artificial Intelligence and Machine Learning. Build intelligent projects from scratch with hands-on guidance from industry experts.",
+      gradient: "linear-gradient(135deg, #8A94AC 0%, #3A3E5C 100%)",
+      tags: ["AI", "Machine Learning", "Projects", "Industry Experts"],
       registrations: "300+",
       icon: "🤖",
       details: {
         time: "9:00 AM - 5:00 PM",
         venue: "Innovation Center",
-        certification: "Certificate Included"
+        special: "Professional Certificate"
       }
     }
   ];
@@ -102,7 +116,7 @@ const HomePage = () => {
       image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
       category: "Cultural",
       participants: "1000+",
-      description: "A celebration of diversity, creativity, and talent from across all colleges."
+      description: "A spectacular celebration of diversity, creativity, and talent showcasing the rich cultural heritage from across all participating colleges."
     },
     {
       title: "Tech Summit 2025",
@@ -110,7 +124,7 @@ const HomePage = () => {
       image: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
       category: "Technology",
       participants: "500+",
-      description: "Leading tech innovators sharing insights on future technologies and trends."
+      description: "Industry leaders and tech innovators sharing cutting-edge insights on emerging technologies, future trends, and career opportunities."
     },
     {
       title: "Sports Championship",
@@ -118,7 +132,7 @@ const HomePage = () => {
       image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
       category: "Sports",
       participants: "800+",
-      description: "Inter-college sports competition promoting fitness, teamwork, and sportsmanship."
+      description: "Inter-college sports competition promoting fitness, teamwork, and sportsmanship across multiple sporting disciplines."
     },
     {
       title: "Innovation Expo",
@@ -126,7 +140,7 @@ const HomePage = () => {
       image: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
       category: "Innovation",
       participants: "600+",
-      description: "Showcasing breakthrough projects and innovative solutions from student developers."
+      description: "Showcasing breakthrough projects and innovative solutions from talented student developers and entrepreneurs."
     }
   ];
 
@@ -134,37 +148,35 @@ const HomePage = () => {
   const reasons = [
     {
       icon: "🌟",
-      title: "Discover Societies Easily",
-      description: "Find all the societies from your college in one place. Connect with clubs that match your interests and passions.",
-      color: "#8bb847",
+      title: "Discover Societies Effortlessly",
+      description: "Find all the societies from your college in one unified platform. Connect with clubs that match your interests, passions, and career goals seamlessly.",
+      color: "#959B85",
       details: "50+ societies across 25+ colleges",
-      benefits: ["Connect Easily", "Latest Events", "Explore Interests", "Join Communities"],
-      stats: "500+ active members"
+      benefits: ["Easy Discovery", "Interest Matching", "College-Specific", "Career Focused"],
+      stats: "500+ active connections"
     },
     {
       icon: "🚀",
-      title: "Stay Updated",
-      description: "Get instant updates about fests, events and activities happening across your campus and beyond.",
-      color: "#b7c656", 
-      details: "10+ Colleges Covered",
-      benefits: ["Hot Updates", "Event Alerts", "Fresh Feed", "Never Miss Out"],
+      title: "Stay Always Updated",
+      description: "Get real-time notifications about fests, events, workshops, and activities happening across your campus and beyond. Never miss an opportunity again.",
+      color: "#3A3E5C", 
+      details: "10+ colleges covered",
+      benefits: ["Real-time Updates", "Smart Alerts", "Cross-Campus", "Personalized Feed"],
       stats: "50+ events monthly"
     },
     {
       icon: "🤝",
-      title: "Strong Community",
-      description: "Collaborate with like-minded peers and grow together. Build lasting friendships and professional networks.",
-      color: "#91a53a",
-      details: "Growing network of students",
-      benefits: ["Networking", "Collaboration", "Peer Learning", "Mentorship"],
-      stats: "1000+ connections made"
+      title: "Build Lasting Connections",
+      description: "Collaborate with like-minded peers, join meaningful projects, and grow together. Create friendships and professional networks that last beyond college.",
+      color: "#8A94AC",
+      details: "Growing student network",
+      benefits: ["Peer Collaboration", "Project Teams", "Mentorship", "Professional Growth"],
+      stats: "1000+ meaningful connections"
     }
   ];
 
   // Enhanced button interaction handler
   const handleBrowseCollege = () => {
-    console.log('Browse by College clicked');
-    // Smooth scroll to events section
     const eventsSection = document.querySelector('.upcoming-events');
     if (eventsSection) {
       eventsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -179,24 +191,29 @@ const HomePage = () => {
     }
   };
 
+  const handlePromptClick = (prompt) => {
+    setCurrentMessage(prompt);
+    setShowPrompts(false);
+    setTimeout(() => {
+      handleSendMessage();
+    }, 100);
+  };
+
   const handleSendMessage = async () => {
     if (!currentMessage.trim()) return;
     
     const userMessage = currentMessage;
     setCurrentMessage('');
+    setShowPrompts(false);
     
-    // Add user message
     setChatMessages(prev => [...prev, { type: 'user', text: userMessage }]);
-    
-    // Show typing indicator
     setIsTyping(true);
     
-    // Simulate AI response delay for realism
     setTimeout(() => {
       const aiResponse = getAIResponse(userMessage);
       setChatMessages(prev => [...prev, { type: 'ai', text: aiResponse }]);
       setIsTyping(false);
-    }, 1000 + Math.random() * 1500);
+    }, 1200 + Math.random() * 1000);
   };
 
   const handleKeyPress = (e) => {
@@ -206,49 +223,13 @@ const HomePage = () => {
     }
   };
 
-  // Auto-resize textarea
   const handleInputChange = (e) => {
     setCurrentMessage(e.target.value);
     e.target.style.height = 'auto';
-    e.target.style.height = Math.min(e.target.scrollHeight, 100) + 'px';
+    e.target.style.height = Math.min(e.target.scrollHeight, 120) + 'px';
   };
 
-  // Mouse tracking for interactive effects
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-      
-      // Enhanced button interactions
-      const buttons = document.querySelectorAll('.interactive-btn');
-      buttons.forEach(button => {
-        const rect = button.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        button.style.setProperty('--mouse-x', `${x}px`);
-        button.style.setProperty('--mouse-y', `${y}px`);
-      });
-
-      // Card hover effects
-      const cards = document.querySelectorAll('.event-card, .highlight-card, .reason-card');
-      cards.forEach(card => {
-        const rect = card.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-        
-        card.style.setProperty('--mouse-x', `${x}%`);
-        card.style.setProperty('--mouse-y', `${y}%`);
-      });
-    };
-
-    document.addEventListener('mousemove', handleMouseMove);
-    
-    return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-    };
-  }, []);
-
-  // Enhanced scroll animations
+  // Enhanced scroll animations with intersection observer
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
       (entries) => {
@@ -261,7 +242,7 @@ const HomePage = () => {
           }
         });
       },
-      { threshold: 0.1, rootMargin: '-50px' }
+      { threshold: 0.1, rootMargin: '-80px' }
     );
 
     const sections = document.querySelectorAll('[data-section]');
@@ -278,21 +259,23 @@ const HomePage = () => {
     };
   }, []);
 
+  // Click outside to close chat
   useEffect(() => {
-const handleClickOutside = (event) => {
-if (chatContainerRef.current && !chatContainerRef.current.contains(event.target)) {
-setChatOpen(false);
-}
-};
-if (chatOpen) {
-document.addEventListener('mousedown', handleClickOutside);
-} else {
-document.removeEventListener('mousedown', handleClickOutside);
-}
-return () => {
-document.removeEventListener('mousedown', handleClickOutside);
-};
-}, [chatOpen]);
+    const handleClickOutside = (event) => {
+      if (chatContainerRef.current && !chatContainerRef.current.contains(event.target)) {
+        setChatOpen(false);
+      }
+    };
+
+    if (chatOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [chatOpen]);
+
   // Auto-scroll chat messages
   useEffect(() => {
     if (chatMessagesRef.current) {
@@ -305,89 +288,77 @@ document.removeEventListener('mousedown', handleClickOutside);
 
   // Enhanced event registration handler
   const handleEventRegistration = (eventTitle) => {
-    console.log(`Registering for ${eventTitle}`);
-    // Add registration logic here
     setChatMessages(prev => [...prev, 
-      { type: 'ai', text: `Great choice! I can help you register for ${eventTitle}. Would you like me to guide you through the registration process?` }
+      { type: 'ai', text: `Excellent choice! ${eventTitle} is going to be amazing! 🎉\n\nI can help you with the registration process. Would you like me to:\n\n1️⃣ Guide you through registration steps\n2️⃣ Send you event details\n3️⃣ Add it to your calendar\n4️⃣ Connect you with other participants\n\nWhat would be most helpful?` }
     ]);
     setChatOpen(true);
   };
+
+  // Set initial visibility for hero section
+  useEffect(() => {
+    setIsVisible(prev => ({ ...prev, hero: true }));
+  }, []);
 
   return (
     <div className="homepage">
       {/* Enhanced Hero Section */}
       <section className="hero" data-section="hero">
         <div className="hero-content">
-          <div className={`hero-text ${isVisible.hero ? 'animate-in' : ''}`}>
-            <div className="hero-badge">
-              <span className="badge-text">✨ Welcome to Soclique</span>
-            </div>
-            <h1 className="hero-headline">
-              <span className="gradient-text">Discover Events.</span>
-              <span className="gradient-text">Join Societies.</span>
-              <span className="gradient-text">Connect Together.</span>
-            </h1>
-            <p className="hero-subheading">
-              One hub for all clubs and events across your campus. Build connections that matter and create memories that last forever.
-            </p>
+          <div className="hero-badge">
+            <div className="badge-icon">✨</div>
+            <span>Welcome to the Future of Campus Connection</span>
           </div>
           
-          <div className={`hero-buttons ${isVisible.hero ? 'animate-in' : ''}`}>
-            <button className="hero-btn btn-primary interactive-btn" onClick={handleBrowseCollege}>
-              <span className="btn-content">
-                <i className="fas fa-university"></i>
-                <span>Browse by College</span>
-                <i className="fas fa-arrow-right"></i>
-              </span>
-              <div className="btn-shine"></div>
+          <h1 className="hero-headline">
+            <span className="gradient-text">Discover Events.</span>
+            <span className="gradient-text">Join Societies.</span>
+            <span className="gradient-text">Connect Together.</span>
+          </h1>
+          
+          <p className="hero-subheading">
+            Your ultimate platform for campus life. One hub for all clubs, events, and meaningful connections across your college community.
+          </p>
+          
+          <div className="hero-buttons">
+            <button className="hero-btn btn-primary" onClick={handleBrowseCollege}>
+              <i className="fas fa-university"></i>
+              <span>Explore by College</span>
+              <i className="fas fa-arrow-right"></i>
             </button>
           </div>
           
-          {/* Enhanced stats with animations */}
-          <div className={`hero-stats ${isVisible.hero ? 'animate-in' : ''}`}>
+          <div className="hero-stats">
             <div className="stat-item">
               <span className="stat-number">500+</span>
               <span className="stat-label">Active Members</span>
             </div>
             <div className="stat-item">
               <span className="stat-number">50+</span>
-              <span className="stat-label">Events Monthly</span>
+              <span className="stat-label">Monthly Events</span>
             </div>
             <div className="stat-item">
               <span className="stat-number">25+</span>
-              <span className="stat-label">Colleges</span>
+              <span className="stat-label">Partner Colleges</span>
             </div>
           </div>
         </div>
         
-        {/* Enhanced background elements */}
-        <div className="bg-decoration decoration-1">
-          <div className="decoration-inner"></div>
-        </div>
-        <div className="bg-decoration decoration-2">
-          <div className="decoration-inner"></div>
-        </div>
-        <div className="bg-decoration decoration-3">
-          <div className="decoration-inner"></div>
-        </div>
-        
-        {/* Enhanced floating particles */}
-        <div className="particles">
-          {[...Array(20)].map((_, i) => (
-            <div key={i} className={`particle particle-${(i % 5) + 1}`}></div>
-          ))}
-        </div>
+        {/* Improved mesh background animation */}
+        <div className="floating-elements"></div>
       </section>
 
       {/* Enhanced Upcoming Events Section */}
-      <div className="upcoming-events" data-section="events">
+      <section className="content-section upcoming-events" data-section="events">
         <div className="section-header">
-          <h2 className={isVisible.events ? 'animate-in' : ''}>Upcoming Events</h2>
-          <p className={isVisible.events ? 'animate-in' : ''}>
-            Join our exciting events and expand your network with like-minded peers
+          <h2 className={`section-title ${isVisible.events ? 'animate-in' : ''}`}>
+            Upcoming Events
+          </h2>
+          <p className={`section-description ${isVisible.events ? 'animate-in' : ''}`}>
+            Join our exciting events and expand your network with like-minded peers from across the campus community
           </p>
         </div>
-        <div className="events-list">
+        
+        <div className="events-grid">
           {events.map((event, index) => (
             <div 
               key={index} 
@@ -399,76 +370,70 @@ document.removeEventListener('mousedown', handleClickOutside);
                 '--delay': `${index * 0.2}s`
               }}
             >
-              <div className="card-background"></div>
               <div className="event-icon">{event.icon}</div>
-              <div className="card-content">
-                <div className="event-header">
-                  <h3>{event.title}</h3>
-                  <div className="registrations">{event.registrations} registered</div>
-                </div>
-                <div className="event-date">
-                  <span className="date-icon">📅</span>
-                  {event.date}
-                </div>
-                <p className="event-description">{event.description}</p>
-                
-                {/* Enhanced event details */}
-                <div className="event-details" style={{ 
-                  margin: '1rem 0',
-                  padding: '0.75rem',
-                  background: 'rgba(230, 221, 156, 0.1)',
-                  borderRadius: '12px',
-                  fontSize: '0.9rem'
-                }}>
-                  {event.details.time && (
-                    <div style={{ marginBottom: '0.25rem' }}>
-                      <i className="fas fa-clock" style={{ marginRight: '0.5rem', color: '#8bb847' }}></i>
-                      <strong>Time:</strong> {event.details.time}
-                    </div>
-                  )}
-                  {event.details.venue && (
-                    <div style={{ marginBottom: '0.25rem' }}>
-                      <i className="fas fa-map-marker-alt" style={{ marginRight: '0.5rem', color: '#8bb847' }}></i>
-                      <strong>Venue:</strong> {event.details.venue}
-                    </div>
-                  )}
-                  {(event.details.prizes || event.details.level || event.details.certification) && (
-                    <div>
-                      <i className="fas fa-star" style={{ marginRight: '0.5rem', color: '#8bb847' }}></i>
-                      <strong>Special:</strong> {event.details.prizes || event.details.level || event.details.certification}
-                    </div>
-                  )}
-                </div>
-
-                <div className="event-tags">
-                  {event.tags.map((tag, tagIndex) => (
-                    <span key={tagIndex} className="tag">{tag}</span>
-                  ))}
-                </div>
-                <button 
-                  className="register-btn interactive-btn"
-                  onClick={() => handleEventRegistration(event.title)}
-                >
-                  <span className="btn-content">
-                    Register Now
-                    <span className="btn-arrow">→</span>
-                  </span>
-                  <div className="btn-shine"></div>
-                </button>
+              
+              <div className="event-header">
+                <h3 className="event-title">{event.title}</h3>
+                <div className="event-badge">{event.registrations} registered</div>
               </div>
+              
+              <div className="event-date">
+                <i className="fas fa-calendar date-icon"></i>
+                <span>{event.date}</span>
+              </div>
+              
+              <p className="event-description">{event.description}</p>
+              
+              <div className="event-details">
+                {event.details.time && (
+                  <div className="detail-item">
+                    <i className="fas fa-clock detail-icon"></i>
+                    <span><strong>Time:</strong> {event.details.time}</span>
+                  </div>
+                )}
+                {event.details.venue && (
+                  <div className="detail-item">
+                    <i className="fas fa-map-marker-alt detail-icon"></i>
+                    <span><strong>Venue:</strong> {event.details.venue}</span>
+                  </div>
+                )}
+                {event.details.special && (
+                  <div className="detail-item">
+                    <i className="fas fa-star detail-icon"></i>
+                    <span><strong>Special:</strong> {event.details.special}</span>
+                  </div>
+                )}
+              </div>
+
+              <div className="event-tags">
+                {event.tags.map((tag, tagIndex) => (
+                  <span key={tagIndex} className="event-tag">{tag}</span>
+                ))}
+              </div>
+              
+              <button 
+                className="register-btn"
+                onClick={() => handleEventRegistration(event.title)}
+              >
+                <span className="btn-text">Register Now</span>
+                <span className="btn-arrow">→</span>
+              </button>
             </div>
           ))}
         </div>
-      </div>
+      </section>
 
       {/* Enhanced Event Highlights Section */}
-      <div className="event-highlights" data-section="highlights">
+      <section className="content-section event-highlights" data-section="highlights">
         <div className="section-header">
-          <h2 className={isVisible.highlights ? 'animate-in' : ''}>Event Highlights</h2>
-          <p className={isVisible.highlights ? 'animate-in' : ''}>
-            Relive the moments from our most exciting events and get inspired for what's coming next
+          <h2 className={`section-title ${isVisible.highlights ? 'animate-in' : ''}`}>
+            Event Highlights
+          </h2>
+          <p className={`section-description ${isVisible.highlights ? 'animate-in' : ''}`}>
+            Relive the magic of our most spectacular events and get inspired for what's coming next
           </p>
         </div>
+        
         <div className="highlights-grid">
           {highlights.map((highlight, index) => (
             <div 
@@ -488,47 +453,43 @@ document.removeEventListener('mousedown', handleClickOutside);
                 </div>
                 <div className="highlight-badge">{highlight.category}</div>
               </div>
+              
               <div className="highlight-content">
                 <h3 className="highlight-title">{highlight.title}</h3>
-                <p style={{ 
-                  color: 'var(--light-text)', 
-                  fontSize: '0.9rem', 
-                  marginBottom: '1rem',
-                  lineHeight: '1.5'
-                }}>
-                  {highlight.description}
-                </p>
+                <p className="highlight-description">{highlight.description}</p>
+                
                 <div className="highlight-meta">
-                  <p className="highlight-date">
-                    <i className="fas fa-calendar" style={{ marginRight: '0.5rem', color: '#8bb847' }}></i>
-                    {highlight.date}
-                  </p>
-                  <span className="participants">{highlight.participants} participants</span>
+                  <div className="highlight-date">
+                    <i className="fas fa-calendar"></i>
+                    <span>{highlight.date}</span>
+                  </div>
+                  <span className="participants-badge">{highlight.participants} participants</span>
                 </div>
               </div>
             </div>
           ))}
         </div>
-        <div className="highlights-footer">
-          <button className="view-more-btn interactive-btn">
-            <span className="btn-content">
-              <span>View More Highlights</span>
-              <i className="fas fa-arrow-right"></i>
-            </span>
-            <div className="btn-shine"></div>
+        
+        <div style={{ textAlign: 'center', marginTop: '3rem' }}>
+          <button className="view-more-btn">
+            <span>View More Highlights</span>
+            <i className="fas fa-arrow-right"></i>
           </button>
         </div>
-      </div>
+      </section>
 
       {/* Enhanced Why Choose Us Section */}
-      <div className="why-choose-us" data-section="reasons">
+      <section className="content-section why-choose-us" data-section="reasons">
         <div className="section-header">
-          <h2 className={isVisible.reasons ? 'animate-in' : ''}>Why Choose Soclique?</h2>
-          <p className={isVisible.reasons ? 'animate-in' : ''}>
+          <h2 className={`section-title ${isVisible.reasons ? 'animate-in' : ''}`}>
+            Why Choose Soclique?
+          </h2>
+          <p className={`section-description ${isVisible.reasons ? 'animate-in' : ''}`}>
             Discover what makes our community special and how we're revolutionizing campus connections
           </p>
         </div>
-        <div className="reasons">
+        
+        <div className="reasons-grid">
           {reasons.map((reason, index) => (
             <div 
               key={index} 
@@ -540,32 +501,18 @@ document.removeEventListener('mousedown', handleClickOutside);
                 '--delay': `${index * 0.2}s`
               }}
             >
-              <div className="card-glow"></div>
-              <div className="icon-container">
-                <span className="icon">{reason.icon}</span>
-                <div className="icon-bg"></div>
+              <div className="reason-icon-container">
+                <span className="reason-icon">{reason.icon}</span>
+                <div className="reason-icon-bg"></div>
               </div>
+              
               <div className="reason-content">
-                <h3>{reason.title}</h3>
-                <p>{reason.description}</p>
+                <h3 className="reason-title">{reason.title}</h3>
+                <p className="reason-description">{reason.description}</p>
                 
-                {/* Enhanced stats display */}
-                <div style={{ 
-                  display: 'flex', 
-                  justifyContent: 'space-between', 
-                  alignItems: 'center',
-                  marginBottom: '1.5rem',
-                  flexWrap: 'wrap',
-                  gap: '1rem'
-                }}>
+                <div className="reason-stats-container">
                   <div className="reason-details">{reason.details}</div>
-                  <div style={{ 
-                    color: reason.color,
-                    fontWeight: '600',
-                    fontSize: '0.9rem'
-                  }}>
-                    {reason.stats}
-                  </div>
+                  <div className="reason-stats">{reason.stats}</div>
                 </div>
 
                 <div className="benefits-list">
@@ -574,11 +521,10 @@ document.removeEventListener('mousedown', handleClickOutside);
                   ))}
                 </div>
               </div>
-              <div className="card-pattern"></div>
             </div>
           ))}
         </div>
-      </div>
+      </section>
 
       {/* Enhanced AI Chat Box */}
       <div className="ai-chat-container" ref={chatContainerRef}>
@@ -588,17 +534,31 @@ document.removeEventListener('mousedown', handleClickOutside);
           title="AI Chat Assistant"
           aria-label="Toggle AI Chat Assistant"
         >
-          {chatOpen ? '+' : '🤖'}
+          {chatOpen ? '×' : '🤖'}
         </button>
         
         <div className={`chat-box ${chatOpen ? 'open' : ''}`}>
           <div className="chat-header">
-            <div className="ai-icon">🤖</div>
-            <div>
-              <div className="chat-title">AI Assistant</div>
-              <div className="chat-subtitle">Ask me anything!</div>
+            <div className="chat-ai-icon">🤖</div>
+            <div className="chat-header-content">
+              <div className="chat-title">Soclique AI Assistant</div>
+              <div className="chat-subtitle">Here to help you explore!</div>
             </div>
           </div>
+          
+          {showPrompts && chatMessages.length === 1 && (
+            <div className="chat-prompts">
+              {chatPrompts.map((prompt, index) => (
+                <div
+                  key={index}
+                  className="prompt-chip"
+                  onClick={() => handlePromptClick(prompt)}
+                >
+                  {prompt}
+                </div>
+              ))}
+            </div>
+          )}
           
           <div className="chat-messages" ref={chatMessagesRef}>
             {chatMessages.map((message, index) => (
@@ -614,7 +574,7 @@ document.removeEventListener('mousedown', handleClickOutside);
             
             {isTyping && (
               <div className="typing-indicator">
-                <span>AI is typing</span>
+                <span className="typing-text">AI is typing</span>
                 <div className="typing-dots">
                   <div className="typing-dot"></div>
                   <div className="typing-dot"></div>
