@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Search, Users, Crown, GraduationCap } from 'lucide-react';
+import { Search, Users, Crown, GraduationCap, Plus } from 'lucide-react';
 import './Get-started.css';
 
 const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
@@ -47,6 +47,10 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
       case 'head':
         // Navigate to Society Head dashboard with college info
         setCurrentPage('societyHead');
+        break;
+      case 'addSociety':
+        // Navigate to Add Society page
+        setCurrentPage('addSociety');
         break;
       default:
         break;
@@ -141,39 +145,71 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
         ) : (
           // Main User Type Selection Page
           <>
+            {/* Add Society button - positioned at top */}
+            <div style={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+              width: '100%',
+              maxWidth: '1200px',
+              margin: '0 auto',
+              marginBottom: '16px',
+              padding: '0 24px'
+            }}>
+              <button
+                onClick={() => openModal('addSociety')}
+                className="add-society-btn"
+              >
+                <Plus size={20} strokeWidth={2} />
+                <span>Add Society</span>
+              </button>
+            </div>
+
             <div style={{ 
               display: 'flex', 
               alignItems: 'center', 
-              justifyContent: 'center',
-              gap: '16px',
-              marginBottom: '32px'
+              justifyContent: 'flex-start',
+              width: '100%',
+              maxWidth: '1200px',
+              margin: '0 auto',
+              marginBottom: '32px',
+              padding: '0 24px'
             }}>
-              <button
-                onClick={() => setShowLanding(true)}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  color: 'var(--text-muted)',
-                  cursor: 'pointer',
-                  padding: '8px',
-                  borderRadius: '8px',
-                  transition: 'var(--transition-quick)',
-                  fontSize: '24px'
-                }}
-                onMouseEnter={(e) => {
-                  e.target.style.color = 'var(--text-primary)';
-                  e.target.style.backgroundColor = 'var(--cream)';
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.color = 'var(--text-muted)';
-                  e.target.style.backgroundColor = 'transparent';
-                }}
-              >
-                ← 
-              </button>
-              <h1 className="main-heading" style={{ marginBottom: '0' }}>
-                {colleges.find(c => c.value === selectedCollegeLocal)?.label.split('(')[0].trim()}
-              </h1>
+              {/* Back button and college name */}
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '16px'
+              }}>
+                <button
+                  onClick={() => setShowLanding(true)}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    color: 'var(--text-muted)',
+                    cursor: 'pointer',
+                    padding: '8px',
+                    borderRadius: '8px',
+                    transition: 'var(--transition-quick)',
+                    fontSize: '24px'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.target.style.color = 'var(--text-primary)';
+                    e.target.style.backgroundColor = 'var(--cream)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.color = 'var(--text-muted)';
+                    e.target.style.backgroundColor = 'transparent';
+                  }}
+                >
+                  ← 
+                </button>
+                <h1 className="main-heading" style={{ 
+                  marginBottom: '0',
+                  fontSize: 'clamp(1.5rem, 4vw, 2.5rem)'
+                }}>
+                  {colleges.find(c => c.value === selectedCollegeLocal)?.label.split('(')[0].trim()}
+                </h1>
+              </div>
             </div>
             
             <div className="card-container">
@@ -227,7 +263,9 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
                 ? 'Continue as Explorer'
                 : modalType === 'member'
                 ? 'Society Member Login'
-                : 'Society Head Dashboard'}
+                : modalType === 'head'
+                ? 'Society Head Dashboard'
+                : 'Add New Society'}
             </h2>
 
             <form className="modal-form" onSubmit={(e) => e.preventDefault()}>
@@ -239,6 +277,40 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
                 >
                   Explore Societies
                 </button>
+              ) : modalType === 'addSociety' ? (
+                <>
+                  <input
+                    type="text"
+                    placeholder="Society Name"
+                    className="form-input"
+                    required
+                  />
+                  <input
+                    type="email"
+                    placeholder="Your Email Address"
+                    className="form-input"
+                    required
+                  />
+                  <input
+                    type="password"
+                    placeholder="Create Password"
+                    className="form-input"
+                    required
+                  />
+                  <textarea
+                    placeholder="Society Description"
+                    className="form-input"
+                    rows="3"
+                    style={{ resize: 'vertical', minHeight: '80px' }}
+                  />
+                  <button
+                    onClick={() => handleNavigation('addSociety')}
+                    type="button"
+                    className="button"
+                  >
+                    Create Society
+                  </button>
+                </>
               ) : (
                 <>
                   <input
@@ -272,32 +344,22 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
                       : 'Access Dashboard'}
                   </button>
                   
-                  {/* Auth links */}
-                  <div className="auth-links">
-                    <a
-                      href="#"
-                      className="auth-link"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        // Handle forgot password logic
-                        console.log('Forgot password clicked');
-                      }}
-                    >
-                      Forgot password?
-                    </a>
-                    <span className="auth-separator">•</span>
-                    <a
-                      href="#"
-                      className="auth-link"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        // Handle create account logic
-                        console.log('Create account clicked');
-                      }}
-                    >
-                      Create account
-                    </a>
-                  </div>
+                  {/* Auth links - only forgot password for member login */}
+                  {modalType === 'member' && (
+                    <div className="auth-links">
+                      <a
+                        href="#"
+                        className="auth-link"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          // Handle forgot password logic
+                          console.log('Forgot password clicked');
+                        }}
+                      >
+                        Forgot password?
+                      </a>
+                    </div>
+                  )}
                 </>
               )}
             </form>
