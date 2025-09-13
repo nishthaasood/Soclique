@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Search, Users, Crown, GraduationCap, Plus } from 'lucide-react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { Search, Users, Crown, GraduationCap } from 'lucide-react';
 import './Get-started.css';
 
 const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
@@ -7,7 +7,44 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
   const [modalType, setModalType] = useState('');
   const [showLanding, setShowLanding] = useState(true);
   const [selectedCollegeLocal, setSelectedCollegeLocal] = useState('');
+  const [chatOpen, setChatOpen] = useState(false);
+  const [chatMessages, setChatMessages] = useState([
+    { type: 'ai', text: 'Hi! I\'m your Soclique assistant. I can help you choose the right option or answer any questions about our platform!' }
+  ]);
+  const [currentMessage, setCurrentMessage] = useState('');
+  const [isTyping, setIsTyping] = useState(false);
   const modalRef = useRef(null);
+  const chatMessagesRef = useRef(null);
+  const chatInputRef = useRef(null);
+  const chatContainerRef = useRef(null);
+
+  // Enhanced AI responses for Get Started page
+  const getAIResponse = useCallback((message) => {
+    const responses = {
+      'explorer': 'Great choice! As an Explorer, you can browse all societies and events without needing to log in. You\'ll have access to discover amazing opportunities across your college!',
+      'society member': 'Perfect! Society members can stay updated with their specific societies, get event notifications, and connect with fellow members. You\'ll need to log in to access personalized features.',
+      'society head': 'Excellent! Society Heads have access to powerful management tools - create events, post announcements, manage members, and track engagement. This role requires authentication.',
+      'college': 'We currently support 6 colleges including MAIT, BPIT, VIPS, BVCOE, MSIT, and ADGIPS. More colleges are being added regularly! Which college are you from?',
+      'registration': 'Registration is quick and secure! Just fill in your basic details and college information. Society members and heads need email verification for security.',
+      'features': 'Soclique offers event discovery, society management, member networking, event creation tools, announcement systems, and real-time updates. What specific feature interests you?',
+      'help': 'I can help you with:\n• Choosing the right user type\n• College selection\n• Registration process\n• Platform features\n• Getting started tips\nWhat would you like to know?',
+      'difference': 'Explorers can browse freely, Society Members get personalized updates from their societies, and Society Heads can manage societies and create events. Choose based on your needs!',
+      'login': 'Society Members and Heads need to log in for security and personalized features. Explorers can use the platform without logging in. This ensures your data stays secure!',
+      'events': 'You can find hackathons, workshops, cultural events, sports competitions, and more! Each college has different events happening throughout the year.',
+      'societies': 'We have tech clubs, cultural societies, sports teams, academic groups, and special interest societies. There\'s something for everyone!',
+      'default': 'That\'s a great question! I\'m here to help you get started with Soclique. Feel free to ask about user types, colleges, or any features you\'d like to know more about!'
+    };
+
+    const lowercaseMessage = message.toLowerCase();
+    
+    for (const [key, response] of Object.entries(responses)) {
+      if (lowercaseMessage.includes(key)) {
+        return response;
+      }
+    }
+    
+    return responses.default;
+  }, []);
 
   const colleges = [
     { value: '', label: 'Select your college' },
@@ -16,8 +53,50 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
     { value: 'vips', label: 'Vivekanand Institute of Professional Studies (VIPS)' },
     { value: 'bvcoe', label: 'Bhartiya Vidyapeeth College of Engineering (BVCOE)' },
     { value: 'msit', label: 'Maharaja Surajmal Institute of Technology (MSIT)' },
-    { value: 'adgips', label: 'Akhilesh Das Gupta Institute of Professional Studies (ADGIPS)' }
+    { value: 'adgips', label:'Akhilesh Das Gupta Institute of Professional Studies (ADGIPS)' }
   ];
+
+  // Enhanced chat functionality
+  const handleChatToggle = () => {
+    setChatOpen(!chatOpen);
+    if (!chatOpen && chatInputRef.current) {
+      setTimeout(() => chatInputRef.current.focus(), 300);
+    }
+  };
+
+  const handleSendMessage = async () => {
+    if (!currentMessage.trim()) return;
+    
+    const userMessage = currentMessage;
+    setCurrentMessage('');
+    
+    // Add user message
+    setChatMessages(prev => [...prev, { type: 'user', text: userMessage }]);
+    
+    // Show typing indicator
+    setIsTyping(true);
+    
+    // Simulate AI response delay for realism
+    setTimeout(() => {
+      const aiResponse = getAIResponse(userMessage);
+      setChatMessages(prev => [...prev, { type: 'ai', text: aiResponse }]);
+      setIsTyping(false);
+    }, 1000 + Math.random() * 1500);
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSendMessage();
+    }
+  };
+
+  // Auto-resize textarea
+  const handleInputChange = (e) => {
+    setCurrentMessage(e.target.value);
+    e.target.style.height = 'auto';
+    e.target.style.height = Math.min(e.target.scrollHeight, 100) + 'px';
+  };
 
   // Handle college selection and proceed
   const handleCollegeSelect = () => {
@@ -72,6 +151,32 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [isModalOpen]);
+
+  
+    useEffect(() => {
+  const handleClickOutside = (event) => {
+  if (chatContainerRef.current && !chatContainerRef.current.contains(event.target)) {
+  setChatOpen(false);
+  }
+  };
+  if (chatOpen) {
+  document.addEventListener('mousedown', handleClickOutside);
+  } else {
+  document.removeEventListener('mousedown', handleClickOutside);
+  }
+  return () => {
+  document.removeEventListener('mousedown', handleClickOutside);
+  };
+  }, [chatOpen]);
+  // Auto-scroll chat messages
+  useEffect(() => {
+    if (chatMessagesRef.current) {
+      const scrollHeight = chatMessagesRef.current.scrollHeight;
+      const height = chatMessagesRef.current.clientHeight;
+      const maxScrollTop = scrollHeight - height;
+      chatMessagesRef.current.scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
+    }
+  }, [chatMessages, isTyping]);
 
   return (
     <div className="page-container">
@@ -227,7 +332,7 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
                 <div className="card-icon">
                   <Users size={48} strokeWidth={1.5} />
                 </div>
-                <h2 className="card-title">Visit as a Society Member</h2>
+                <h2 className="card-title">Visit as Society Member</h2>
                 <p className="card-text">Stay updated with your society's events and announcements.</p>
               </div>
 
@@ -366,6 +471,75 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
           </div>
         </div>
       )}
+
+      {/* Enhanced AI Chat Box */}
+      <div className="ai-chat-container" ref={chatContainerRef}>
+        <button 
+          className={`chat-toggle ${chatOpen ? 'active' : ''}`}
+          onClick={handleChatToggle}
+          title="AI Chat Assistant"
+          aria-label="Toggle AI Chat Assistant"
+        >
+          {chatOpen ? '+' : '🤖'}
+        </button>
+        
+        <div className={`chat-box ${chatOpen ? 'open' : ''}`}>
+          <div className="chat-header">
+            <div className="ai-icon">🤖</div>
+            <div>
+              <div className="chat-title">AI Assistant</div>
+              <div className="chat-subtitle">Need help getting started?</div>
+            </div>
+          </div>
+          
+          <div className="chat-messages" ref={chatMessagesRef}>
+            {chatMessages.map((message, index) => (
+              <div key={index} className={`message ${message.type}`}>
+                {message.text.split('\n').map((line, lineIndex) => (
+                  <div key={lineIndex}>
+                    {line}
+                    {lineIndex < message.text.split('\n').length - 1 && <br />}
+                  </div>
+                ))}
+              </div>
+            ))}
+            
+            {isTyping && (
+              <div className="typing-indicator">
+                <span>AI is typing</span>
+                <div className="typing-dots">
+                  <div className="typing-dot"></div>
+                  <div className="typing-dot"></div>
+                </div>
+              </div>
+            )}
+          </div>
+          
+          <div className="chat-input-container">
+            <div className="chat-input-wrapper">
+              <textarea
+                ref={chatInputRef}
+                className="chat-input"
+                placeholder="Ask about user types, colleges, or features..."
+                value={currentMessage}
+                onChange={handleInputChange}
+                onKeyPress={handleKeyPress}
+                rows={1}
+                aria-label="Chat message input"
+              />
+              <button 
+                className="chat-send-btn"
+                onClick={handleSendMessage}
+                disabled={!currentMessage.trim() || isTyping}
+                title="Send message"
+                aria-label="Send message"
+              >
+                <i className="fas fa-paper-plane"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

@@ -1,6 +1,6 @@
-/* Footer Styles - Modern & Beautiful Design */
+/* Footer Styles - Updated with Homepage Colors */
 .footer {
-  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  background: linear-gradient(135deg, #0A1125 0%, #1a2340 100%);
   margin-top: auto;
   position: relative;
   overflow: hidden;
@@ -15,9 +15,9 @@
   height: 1px;
   background: linear-gradient(90deg, 
     transparent 0%,
-    rgba(230, 221, 156, 0.3) 20%, 
-    rgba(230, 221, 156, 0.8) 50%, 
-    rgba(230, 221, 156, 0.3) 80%,
+    rgba(184, 194, 165, 0.3) 20%, 
+    rgba(184, 194, 165, 0.8) 50%, 
+    rgba(184, 194, 165, 0.3) 80%,
     transparent 100%
   );
 }
@@ -35,17 +35,17 @@
   padding: 80px 0 60px;
   align-items: start;
 }
+
 .footer-bottom-content {
   display: flex;
-  flex-direction: column; /* ek ke niche ek */
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 16px;
   text-align: center;
 }
 
-
-/* Brand Section - Enhanced */
+/* Brand Section - Updated Colors */
 .footer-left {
   display: flex;
   flex-direction: column;
@@ -57,7 +57,7 @@
   font-size: 36px;
   font-weight: 900;
   margin-bottom: 12px;
-  background: linear-gradient(135deg, #1f2937 0%, #4b5563 50%, #1f2937 100%);
+  background: linear-gradient(135deg, #FFFFFF 0%, #E8EAF0 50%, #C2CAD8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -74,7 +74,7 @@
   left: 0;
   width: 60px;
   height: 3px;
-  background: linear-gradient(90deg, #e6dd9c, #d4c875);
+  background: linear-gradient(90deg, #B8C2A5, #A5B1CC);
   border-radius: 2px;
   transition: width 0.4s ease;
 }
@@ -86,13 +86,13 @@
 .footer-description {
   font-size: 17px;
   line-height: 1.7;
-  color: #64748b;
+  color: #C2CAD8;
   max-width: 320px;
   margin-bottom: 32px;
   font-weight: 400;
 }
 
-/* Social Links - Premium Design */
+/* Social Links - Updated Colors */
 .footer-social {
   display: flex;
   gap: 16px;
@@ -105,13 +105,13 @@
   justify-content: center;
   width: 52px;
   height: 52px;
-  background: linear-gradient(135deg, #ffffff, #f1f5f9);
-  border: 1px solid #e2e8f0;
+  background: rgba(216, 220, 232, 0.08);
+  border: 1px solid rgba(216, 220, 232, 0.15);
   border-radius: 16px;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 2px 8px rgba(10, 17, 37, 0.4);
 }
 
 .social-link::before {
@@ -122,9 +122,9 @@
   width: 100%;
   height: 100%;
   background: linear-gradient(45deg, 
-    rgba(230, 221, 156, 0.1), 
-    rgba(230, 221, 156, 0.4),
-    rgba(230, 221, 156, 0.1)
+    rgba(184, 194, 165, 0.1), 
+    rgba(184, 194, 165, 0.4),
+    rgba(184, 194, 165, 0.1)
   );
   transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -134,27 +134,27 @@
 }
 
 .social-link:hover {
-  background: linear-gradient(135deg, rgba(230, 221, 156, 0.15), rgba(230, 221, 156, 0.25));
-  border-color: #e6dd9c;
+  background: rgba(184, 194, 165, 0.15);
+  border-color: #B8C2A5;
   transform: translateY(-4px) scale(1.05);
-  box-shadow: 0 12px 32px rgba(230, 221, 156, 0.3);
+  box-shadow: 0 12px 32px rgba(184, 194, 165, 0.3);
 }
 
 .social-icon {
   width: 22px;
   height: 22px;
-  fill: #475569;
+  fill: #E8EAF0;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   z-index: 1;
 }
 
 .social-link:hover .social-icon {
-  fill: #1e293b;
+  fill: #FFFFFF;
   transform: scale(1.1);
 }
 
-/* Quick Links Section*/
+/* Quick Links Section - Updated Colors */
 .footer-links {
   display: flex;
   flex-direction: column;
@@ -169,10 +169,10 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  color: #1e293b;
+  color: #FFFFFF;
   margin-bottom: 28px;
   padding-bottom: 12px;
-  border-bottom: 3px solid #e6dd9c;
+  border-bottom: 3px solid #B8C2A5;
   display: block;
   position: relative;
 }
@@ -184,7 +184,7 @@
   left: 0;
   width: 24px;
   height: 3px;
-  background: linear-gradient(90deg, #d4c875, #e6dd9c);
+  background: linear-gradient(90deg, #A5B1CC, #B8C2A5);
   border-radius: 2px;
 }
 
@@ -194,7 +194,7 @@
 
 .footer-link {
   display: block;
-  color: #64748b;
+  color: #C2CAD8;
   text-decoration: none;
   font-size: 16px;
   font-weight: 500;
@@ -213,30 +213,30 @@
   transform: translateY(-50%);
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, #e6dd9c, #d4c875);
+  background: linear-gradient(90deg, #B8C2A5, #A5B1CC);
   transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   border-radius: 1px;
 }
 
 .footer-link:hover {
-  color: #1e293b;
+  color: #FFFFFF;
   padding-left: 16px;
-  background: linear-gradient(90deg, rgba(230, 221, 156, 0.05), transparent);
+  background: linear-gradient(90deg, rgba(184, 194, 165, 0.05), transparent);
 }
 
 .footer-link:hover::before {
   width: 8px;
 }
 
-/* Newsletter Section - Premium Redesign */
+/* Newsletter Section - Updated Colors */
 .footer-newsletter {
   display: flex;
   flex-direction: column;
   gap: 24px;
-  background: linear-gradient(135deg, rgba(230, 221, 156, 0.05), rgba(230, 221, 156, 0.1));
+  background: rgba(216, 220, 232, 0.08);
   padding: 32px 28px;
   border-radius: 20px;
-  border: 1px solid rgba(230, 221, 156, 0.2);
+  border: 1px solid rgba(216, 220, 232, 0.15);
   position: relative;
   overflow: hidden;
 }
@@ -248,21 +248,21 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, #e6dd9c, #d4c875, #e6dd9c);
+  background: linear-gradient(90deg, #B8C2A5, #A5B1CC, #B8C2A5);
   border-radius: 20px 20px 0 0;
 }
 
 .newsletter-title {
   font-size: 18px;
   font-weight: 700;
-  color: #1e293b;
+  color: #FFFFFF;
   margin-bottom: 8px;
   letter-spacing: -0.02em;
 }
 
 .newsletter-text {
   font-size: 15px;
-  color: #64748b;
+  color: #C2CAD8;
   line-height: 1.6;
   margin-bottom: 24px;
 }
@@ -275,34 +275,34 @@
 
 .newsletter-input {
   padding: 16px 20px;
-  border: 2px solid #e2e8f0;
+  border: 2px solid rgba(216, 220, 232, 0.15);
   border-radius: 12px;
   font-size: 15px;
-  background: #ffffff;
+  background: rgba(10, 17, 37, 0.8);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   outline: none;
   font-weight: 500;
-  color: #1e293b;
+  color: #FFFFFF;
 }
 
 .newsletter-input:focus {
-  border-color: #e6dd9c;
-  background: #ffffff;
-  box-shadow: 0 0 0 4px rgba(230, 221, 156, 0.15);
+  border-color: #B8C2A5;
+  background: rgba(10, 17, 37, 0.9);
+  box-shadow: 0 0 0 4px rgba(184, 194, 165, 0.15);
   transform: translateY(-1px);
 }
 
 .newsletter-input::placeholder {
-  color: #94a3b8;
+  color: #C2CAD8;
   font-weight: 400;
 }
 
 .newsletter-button {
   padding: 16px 24px;
-  background: linear-gradient(135deg, #e6dd9c 0%, #d4c875 50%, #c4b565 100%);
+  background: linear-gradient(135deg, #B8C2A5 0%, #A5B1CC 50%, #959B85 100%);
   border: none;
   border-radius: 12px;
-  color: #1e293b;
+  color: #0A1125;
   font-weight: 700;
   font-size: 15px;
   cursor: pointer;
@@ -329,16 +329,16 @@
 }
 
 .newsletter-button:hover {
-  background: linear-gradient(135deg, #d4c875 0%, #c4b565 50%, #b4a555 100%);
+  background: linear-gradient(135deg, #A5B1CC 0%, #959B85 50%, #8A94AC 100%);
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(230, 221, 156, 0.4);
+  box-shadow: 0 8px 25px rgba(184, 194, 165, 0.4);
 }
 
-/* Footer Bottom - Enhanced */
+/* Footer Bottom - Updated Colors */
 .footer-bottom {
-  border-top: 1px solid #e2e8f0;
+  border-top: 1px solid rgba(216, 220, 232, 0.15);
   padding: 32px 0;
-  background: linear-gradient(135deg, rgba(248, 250, 252, 0.8), rgba(241, 245, 249, 0.8));
+  background: rgba(10, 17, 37, 0.8);
   backdrop-filter: blur(10px);
 }
 
@@ -351,7 +351,7 @@
 }
 
 .copyright {
-  color: #64748b;
+  color: #C2CAD8;
   font-size: 15px;
   font-weight: 500;
   display: flex;
@@ -370,9 +370,7 @@
   50% { transform: scale(1.1); }
 }
 
-
-
-/* Responsive Design - Mobile First */
+/* Responsive Design */
 @media (max-width: 768px) {
   .footer-content {
     grid-template-columns: 1fr;
@@ -463,5 +461,4 @@
   .newsletter-button {
     padding: 14px 18px;
   }
-
 }

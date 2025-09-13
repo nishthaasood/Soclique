@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-import './Explorer-page.css';
+import React, { useState, useEffect } from "react";
+import "./Explorer-page.css";
 
-// ExplorerPage component with photo gallery and interactive features
 const ExplorerPage = () => {
   const [selectedSociety, setSelectedSociety] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState({});
@@ -12,43 +11,39 @@ const ExplorerPage = () => {
     {
       id: 1,
       name: "Anveshan",
-      description: "Anveshan is a technology society dedicated to fostering innovation and technical skills. We host coding workshops, hackathons, and seminars on emerging technologies to prepare our members for a future in the tech industry.",
-      fullDescription: "Anveshan stands at the forefront of technological innovation in our institution. Our society organizes regular coding bootcamps, AI/ML workshops, web development sessions, and competitive programming contests. We collaborate with industry professionals to provide real-world exposure and internship opportunities. Our members have successfully launched several tech startups and won national-level hackathons.",
-      images: [
-        "Anveshan.png",
-        "Anveshan1.png",
-        "Anveshan2.png"],
-      likes: 42
+      description:
+        "Anveshan is a technology society dedicated to fostering innovation and technical skills. We host coding workshops, hackathons, and seminars on emerging technologies to prepare our members for a future in the tech industry.",
+      fullDescription:
+        "Anveshan stands at the forefront of technological innovation in our institution. Our society organizes regular coding bootcamps, AI/ML workshops, web development sessions, and competitive programming contests. We collaborate with industry professionals to provide real-world exposure and internship opportunities. Our members have successfully launched several tech startups and won national-level hackathons.",
+      images: ["Anveshan.png", "Anveshan1.png", "Anveshan2.png"],
+      likes: 42,
     },
     {
       id: 2,
       name: "Drishti",
-      description: "Drishti is a charity society committed to making a positive impact in our community. We organize donation drives, volunteer for local shelters, and run fundraising events to support various humanitarian causes.",
-      fullDescription: "Drishti believes in the power of collective action to create meaningful change. Our initiatives include monthly food distribution drives, educational support for underprivileged children, environmental cleanup campaigns, and health awareness programs. We have partnered with over 15 NGOs and have impacted more than 5000 lives through our various social welfare projects.",
-      images: [
-        "Drishti.png",
-        "Drishti1.png",
-        "Drishti2.png"],
-    
-      likes: 38
+      description:
+        "Drishti is a charity society committed to making a positive impact in our community. We organize donation drives, volunteer for local shelters, and run fundraising events to support various humanitarian causes.",
+      fullDescription:
+        "Drishti believes in the power of collective action to create meaningful change. Our initiatives include monthly food distribution drives, educational support for underprivileged children, environmental cleanup campaigns, and health awareness programs. We have partnered with over 15 NGOs and have impacted more than 5000 lives through our various social welfare projects.",
+      images: ["Drishti.png", "Drishti1.png", "Drishti2.png"],
+      likes: 38,
     },
     {
       id: 3,
-      name: "NCC",
-      description: "The NCC (National Cadet Corps) is an organization focused on discipline, leadership, and patriotism. We provide military training, adventure activities, and community service opportunities to develop character and a sense of duty.",
-      fullDescription: "The National Cadet Corps shapes future leaders through disciplined training and character building activities. Our cadets participate in annual training camps, adventure sports, disaster management drills, and national integration programs. We instill values of unity, discipline, and selfless service while preparing young minds for leadership roles in society and the armed forces.",
-      images: [
-        "NCC.png",
-        "NCC1.png",
-        "NCC2.png"],
-      likes: 35
+      name: "Avaran",
+      description:
+        "Avaran is the drama society of our college that celebrates the art of theatre and performance. We organize stage plays, street theatre, and creative workshops to inspire expression, storytelling, and social awareness.",
+      fullDescription:
+        "Avaran believes in the power of theatre to entertain, educate, and inspire change. Our productions range from classical plays to thought-provoking street performances that address social issues. We conduct workshops on acting, direction, and scriptwriting to nurture talent and creativity.",
+      images: ["Avaran1.png", "Avaran2.png", "Avaran3.png"],
+      likes: 35,
     },
   ];
 
   // Initialize current image index for each society
-  React.useEffect(() => {
+  useEffect(() => {
     const initialIndexes = {};
-    societies.forEach(society => {
+    societies.forEach((society) => {
       initialIndexes[society.id] = 0;
     });
     setCurrentImageIndex(initialIndexes);
@@ -57,38 +52,41 @@ const ExplorerPage = () => {
   // Navigate to previous image
   const previousImage = (societyId, e) => {
     e.stopPropagation();
-    const society = societies.find(s => s.id === societyId);
-    setCurrentImageIndex(prev => ({
+    const society = societies.find((s) => s.id === societyId);
+    setCurrentImageIndex((prev) => ({
       ...prev,
-      [societyId]: prev[societyId] === 0 ? society.images.length - 1 : prev[societyId] - 1
+      [societyId]:
+        prev[societyId] === 0
+          ? society.images.length - 1
+          : prev[societyId] - 1,
     }));
   };
 
   // Navigate to next image
   const nextImage = (societyId, e) => {
     e.stopPropagation();
-    const society = societies.find(s => s.id === societyId);
-    setCurrentImageIndex(prev => ({
+    const society = societies.find((s) => s.id === societyId);
+    setCurrentImageIndex((prev) => ({
       ...prev,
-      [societyId]: (prev[societyId] + 1) % society.images.length
+      [societyId]: (prev[societyId] + 1) % society.images.length,
     }));
   };
 
   // Go to specific image
   const goToImage = (societyId, imageIndex, e) => {
     e.stopPropagation();
-    setCurrentImageIndex(prev => ({
+    setCurrentImageIndex((prev) => ({
       ...prev,
-      [societyId]: imageIndex
+      [societyId]: imageIndex,
     }));
   };
 
   // Toggle like for society
   const toggleLike = (societyId, e) => {
     e.stopPropagation();
-    setLikedSocieties(prev => ({
+    setLikedSocieties((prev) => ({
       ...prev,
-      [societyId]: !prev[societyId]
+      [societyId]: !prev[societyId],
     }));
   };
 
@@ -106,13 +104,15 @@ const ExplorerPage = () => {
     <div className="explorer-page">
       <div className="explorer-header">
         <h1 className="explorer-title">Discover Our Societies</h1>
-        <p className="explorer-subtitle">Explore, engage, and find your perfect community</p>
+        <p className="explorer-subtitle">
+          Explore, engage, and find your perfect community
+        </p>
       </div>
-      
+
       <div className="societies-grid">
         {societies.map((society) => (
-          <div 
-            key={society.id} 
+          <div
+            key={society.id}
             className="society-card"
             onClick={() => openModal(society)}
           >
@@ -124,32 +124,36 @@ const ExplorerPage = () => {
                     key={index}
                     src={image}
                     alt={`${society.name} ${index + 1}`}
-                    className={`gallery-image ${currentImageIndex[society.id] === index ? 'active' : ''}`}
+                    className={`gallery-image ${
+                      currentImageIndex[society.id] === index ? "active" : ""
+                    }`}
                   />
                 ))}
-                
+
                 {/* Navigation Arrows */}
-                <button 
+                <button
                   className="nav-arrow prev"
                   onClick={(e) => previousImage(society.id, e)}
                   aria-label="Previous image"
                 >
                   ‹
                 </button>
-                <button 
+                <button
                   className="nav-arrow next"
                   onClick={(e) => nextImage(society.id, e)}
                   aria-label="Next image"
                 >
                   ›
                 </button>
-                
+
                 {/* Photo Dots Indicator */}
                 <div className="photo-dots">
                   {society.images.map((_, index) => (
                     <span
                       key={index}
-                      className={`dot ${currentImageIndex[society.id] === index ? 'active' : ''}`}
+                      className={`dot ${
+                        currentImageIndex[society.id] === index ? "active" : ""
+                      }`}
                       onClick={(e) => goToImage(society.id, index, e)}
                     />
                   ))}
@@ -161,24 +165,26 @@ const ExplorerPage = () => {
             <div className="card-content">
               <h2 className="society-name">{society.name}</h2>
               <p className="society-description">{society.description}</p>
-              
+
               {/* Action Buttons */}
               <div className="card-actions">
-                <button 
-                  className={`like-button ${likedSocieties[society.id] ? 'liked' : ''}`}
+                <button
+                  className={`like-button ${
+                    likedSocieties[society.id] ? "liked" : ""
+                  }`}
                   onClick={(e) => toggleLike(society.id, e)}
                 >
                   <span className="like-icon">
-                    {likedSocieties[society.id] ? '❤️' : '🤍'}
+                    {likedSocieties[society.id] ? "❤️" : "🤍"}
                   </span>
                   <span>
-                    {society.likes + (likedSocieties[society.id] ? 1 : 0)} likes
+                    {society.likes +
+                      (likedSocieties[society.id] ? 1 : 0)}{" "}
+                    likes
                   </span>
                 </button>
-                
-                <button className="know-more-btn">
-                  Know More
-                </button>
+
+                <button className="know-more-btn">Know More</button>
               </div>
             </div>
           </div>
@@ -188,68 +194,84 @@ const ExplorerPage = () => {
       {/* Modal for detailed society information */}
       {selectedSociety && (
         <div className="modal-overlay" onClick={closeModal}>
-          <div 
+          <div
             className="modal-content"
             onClick={(e) => e.stopPropagation()}
           >
             <button className="modal-close" onClick={closeModal}>
               ×
             </button>
-            
+
             {/* Modal Gallery */}
             <div className="modal-gallery">
-              <div className="photo-gallery" style={{height: '300px'}}>
+              <div className="photo-gallery" style={{ height: "300px" }}>
                 <div className="gallery-container">
                   {selectedSociety.images.map((image, index) => (
                     <img
                       key={index}
                       src={image}
                       alt={`${selectedSociety.name} ${index + 1}`}
-                      className={`gallery-image ${currentImageIndex[selectedSociety.id] === index ? 'active' : ''}`}
+                      className={`gallery-image ${
+                        currentImageIndex[selectedSociety.id] === index
+                          ? "active"
+                          : ""
+                      }`}
                     />
                   ))}
-                  
-                  <button 
+
+                  <button
                     className="nav-arrow prev"
                     onClick={(e) => previousImage(selectedSociety.id, e)}
                     aria-label="Previous image"
                   >
                     ‹
                   </button>
-                  <button 
+                  <button
                     className="nav-arrow next"
                     onClick={(e) => nextImage(selectedSociety.id, e)}
                     aria-label="Next image"
                   >
                     ›
                   </button>
-                  
+
                   <div className="photo-dots">
                     {selectedSociety.images.map((_, index) => (
                       <span
                         key={index}
-                        className={`dot ${currentImageIndex[selectedSociety.id] === index ? 'active' : ''}`}
-                        onClick={(e) => goToImage(selectedSociety.id, index, e)}
+                        className={`dot ${
+                          currentImageIndex[selectedSociety.id] === index
+                            ? "active"
+                            : ""
+                        }`}
+                        onClick={(e) =>
+                          goToImage(selectedSociety.id, index, e)
+                        }
                       />
                     ))}
                   </div>
                 </div>
               </div>
             </div>
-            
+
             <h2 className="modal-title">{selectedSociety.name}</h2>
-            <p className="modal-description">{selectedSociety.fullDescription}</p>
-            
+            <p className="modal-description">
+              {selectedSociety.fullDescription}
+            </p>
+
             <div className="card-actions">
-              <button 
-                className={`like-button ${likedSocieties[selectedSociety.id] ? 'liked' : ''}`}
+              <button
+                className={`like-button ${
+                  likedSocieties[selectedSociety.id] ? "liked" : ""
+                }`}
                 onClick={(e) => toggleLike(selectedSociety.id, e)}
               >
                 <span className="like-icon">
-                  {likedSocieties[selectedSociety.id] ? '❤️' : '🤍'}
+                  {likedSocieties[selectedSociety.id] ? "❤️" : "🤍"}
                 </span>
                 <span>
-                  {selectedSociety.likes + (likedSocieties[selectedSociety.id] ? 1 : 0)} likes
+                  {selectedSociety.likes +
+                    (likedSocieties[selectedSociety.id] ? 1 : 0)}{" "}
+                  likes
                 </span>
               </button>
             </div>
@@ -257,7 +279,7 @@ const ExplorerPage = () => {
         </div>
       )}
     </div>
-  ); 
+  );
 };
 
-export default ExplorerPage; 
+export default ExplorerPage;
