@@ -57,6 +57,7 @@
   min-height: 100vh;
   position: relative;
   overflow-x: hidden;
+  width: 100lvw;
 }
 
 .soc-society-head-container::before {
@@ -64,7 +65,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100lvw;
   height: 100%;
   background:
     radial-gradient(circle at 20% 80%, rgba(184, 194, 165, 0.1) 0%, transparent 50%),

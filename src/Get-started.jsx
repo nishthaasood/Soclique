@@ -296,7 +296,7 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
                 <div className="card-icon">
                   <Users size={48} strokeWidth={1.5} />
                 </div>
-                <h2 className="card-title">Visit as a Society Member</h2>
+                <h2 className="card-title">Visit as Society Member</h2>
                 <p className="card-text">Stay updated with your society's events and announcements.</p>
               </div>
 
