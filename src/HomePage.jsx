@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import './HomePage.css';
+import AIChat from './AIChat';
 
 const HomePage = () => {
   const [hoveredEvent, setHoveredEvent] = useState(null);
@@ -304,10 +305,6 @@ const HomePage = () => {
       {/* Enhanced Hero Section */}
       <section className="hero" data-section="hero">
         <div className="hero-content">
-          <div className="hero-badge">
-            <div className="badge-icon">✨</div>
-            <span>Welcome to the Future of Campus Connection</span>
-          </div>
           
           <h1 className="hero-headline">
             <span className="gradient-text">Discover Events.</span>
@@ -525,90 +522,7 @@ const HomePage = () => {
           ))}
         </div>
       </section>
-
-      {/* Enhanced AI Chat Box */}
-      <div className="ai-chat-container" ref={chatContainerRef}>
-        <button 
-          className={`chat-toggle ${chatOpen ? 'active' : ''}`}
-          onClick={handleChatToggle}
-          title="AI Chat Assistant"
-          aria-label="Toggle AI Chat Assistant"
-        >
-          {chatOpen ? '×' : '🤖'}
-        </button>
-        
-        <div className={`chat-box ${chatOpen ? 'open' : ''}`}>
-          <div className="chat-header">
-            <div className="chat-ai-icon">🤖</div>
-            <div className="chat-header-content">
-              <div className="chat-title">Soclique AI Assistant</div>
-              <div className="chat-subtitle">Here to help you explore!</div>
-            </div>
-          </div>
-          
-          {showPrompts && chatMessages.length === 1 && (
-            <div className="chat-prompts">
-              {chatPrompts.map((prompt, index) => (
-                <div
-                  key={index}
-                  className="prompt-chip"
-                  onClick={() => handlePromptClick(prompt)}
-                >
-                  {prompt}
-                </div>
-              ))}
-            </div>
-          )}
-          
-          <div className="chat-messages" ref={chatMessagesRef}>
-            {chatMessages.map((message, index) => (
-              <div key={index} className={`message ${message.type}`}>
-                {message.text.split('\n').map((line, lineIndex) => (
-                  <div key={lineIndex}>
-                    {line}
-                    {lineIndex < message.text.split('\n').length - 1 && <br />}
-                  </div>
-                ))}
-              </div>
-            ))}
-            
-            {isTyping && (
-              <div className="typing-indicator">
-                <span className="typing-text">AI is typing</span>
-                <div className="typing-dots">
-                  <div className="typing-dot"></div>
-                  <div className="typing-dot"></div>
-                  <div className="typing-dot"></div>
-                </div>
-              </div>
-            )}
-          </div>
-          
-          <div className="chat-input-container">
-            <div className="chat-input-wrapper">
-              <textarea
-                ref={chatInputRef}
-                className="chat-input"
-                placeholder="Ask about events, societies, or anything..."
-                value={currentMessage}
-                onChange={handleInputChange}
-                onKeyPress={handleKeyPress}
-                rows={1}
-                aria-label="Chat message input"
-              />
-              <button 
-                className="chat-send-btn"
-                onClick={handleSendMessage}
-                disabled={!currentMessage.trim() || isTyping}
-                title="Send message"
-                aria-label="Send message"
-              >
-                <i className="fas fa-paper-plane"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <AIChat />
     </div>
   );
 };
