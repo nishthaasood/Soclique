@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './App.css';
+import './App.css'; // Import the updated CSS
 
 const Navbar = ({ setCurrentPage, currentPage }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
