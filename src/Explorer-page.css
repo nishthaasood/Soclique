@@ -3,6 +3,7 @@
   min-height: 100vh;
   background: linear-gradient(135deg, #FDFCF3 0%, #FDFCF5 100%);
   padding: 2rem;
+  width: 100vw;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
 }
 
