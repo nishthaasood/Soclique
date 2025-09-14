@@ -47,7 +47,7 @@ const HomePage = () => {
     const responses = {
       'events': `🎉 Exciting events coming up!\n\n💻 **Hackathon 2025** (Sept 15)\n24 hours of pure innovation with $10,000 prize pool!\n\n⚛️ **Tech Workshop** (Oct 1)\nMaster React, GitHub & deployment - perfect for beginners!\n\n🤖 **AI Bootcamp** (Oct 20)\nDive deep into AI and ML with industry experts!\n\nWhich one sparks your interest? I can share more details!`,
       
-      'societies': `🛛 We're connected with **50+ societies** across **25+ colleges**!\n\nFrom cutting-edge tech clubs to vibrant cultural groups, competitive sports teams to academic societies - there's truly something for everyone.\n\n🎯 Want to explore by:\n• Your specific college?\n• Interest categories?\n• Activity types?\n\nJust let me know what excites you most!`,
+      'societies': `🏛️ We're connected with **50+ societies** across **25+ colleges**!\n\nFrom cutting-edge tech clubs to vibrant cultural groups, competitive sports teams to academic societies - there's truly something for everyone.\n\n🎯 Want to explore by:\n• Your specific college?\n• Interest categories?\n• Activity types?\n\nJust let me know what excites you most!`,
       
       'hackathon': `🚀 **Hackathon 2025** is going to be absolutely epic!\n\n📅 **Sept 15th, 9 AM - Sept 16th, 9 AM**\n📍 Tech Campus Main Hall\n💰 **$10,000 Prize Pool**\n👥 **200+ developers** already registered\n\n✨ It's 24 hours of non-stop coding, innovation, and networking. Perfect for building something amazing and meeting talented developers from across campuses.\n\nReady to join the coding marathon?`,
       
@@ -57,19 +57,19 @@ const HomePage = () => {
       
       'registration': `📝 Registration is super streamlined!\n\n**Quick 4-step process:**\n1️⃣ Click "Register Now" on any event\n2️⃣ Fill out your basic info\n3️⃣ Select preferences & requirements\n4️⃣ Confirm attendance\n\n✅ Secure, lightning-fast, and you'll get all event updates plus networking opportunities.\n\nNeed help with a specific event registration?`,
       
-      'colleges': `🏫 We currently partner with **10+ colleges** and expanding rapidly!\n\n**Filter by:**\n🛛 Your specific college campus\n📚 Academic departments\n🎯 Interest categories\n📍 Location preferences\n🎨 Activity types\n\nWhich college are you from? I can show you exactly what's happening there!`,
+      'colleges': `🏫 We currently partner with **10+ colleges** and expanding rapidly!\n\n**Filter by:**\n🏛️ Your specific college campus\n📚 Academic departments\n🎯 Interest categories\n📍 Location preferences\n🎨 Activity types\n\nWhich college are you from? I can show you exactly what's happening there!`,
       
-      'help': `🌟 I'm here to help with everything Soclique!\n\n**I can assist with:**\n✨ Finding perfect events for your interests\n🛛 Discovering college societies\n📝 Registration guidance & support\n💡 Platform features & navigation\n🤝 Networking opportunities\n📊 Personalized event recommendations\n\nJust ask me anything - from "What events are this weekend?" to "How do I join the robotics club?" I'm here 24/7!`,
+      'help': `🌟 I'm here to help with everything Soclique!\n\n**I can assist with:**\n✨ Finding perfect events for your interests\n🏛️ Discovering college societies\n📝 Registration guidance & support\n💡 Platform features & navigation\n🤝 Networking opportunities\n📊 Personalized event recommendations\n\nJust ask me anything - from "What events are this weekend?" to "How do I join the robotics club?" I'm here 24/7!`,
       
       'contact': `📞 Multiple ways to reach our amazing team:\n\n💬 **This chat** (I'm available 24/7!)\n📧 **Contact form** on our website\n📱 **Social media** @Soclique\n🎫 **Support tickets** for technical issues\n\nFor immediate help, keep chatting with me. For complex technical issues, our human team responds within 24 hours!`,
       
       'networking': `🤝 Networking is the heart of Soclique!\n\n**Our platform helps you:**\n• Meet like-minded peers at events\n• Join collaborative projects & teams\n• Connect with industry professionals\n• Build lasting friendships\n• Grow your professional network\n• Find mentorship opportunities\n\nEvery single event is designed for meaningful connections. Ready to expand your circle and build your community?`,
       
-      'filter': `🔍 **Smart Filtering Options:**\n\n📅 **By Date**: This week, month, upcoming\n🏷️ **By Category**: Tech, Cultural, Sports, Academic\n🛛 **By College**: Your campus or nearby\n👥 **By Size**: Intimate workshops to large events\n💰 **By Cost**: Free, paid, premium\n⏰ **By Duration**: Quick sessions to multi-day\n\nWhat type of events interest you most?`,
+      'filter': `🔍 **Smart Filtering Options:**\n\n📅 **By Date**: This week, month, upcoming\n🏷️ **By Category**: Tech, Cultural, Sports, Academic\n🏛️ **By College**: Your campus or nearby\n👥 **By Size**: Intimate workshops to large events\n💰 **By Cost**: Free, paid, premium\n⏰ **By Duration**: Quick sessions to multi-day\n\nWhat type of events interest you most?`,
       
       'search': `🔍 **Enhanced Search Features:**\n\n🎯 **Smart matching** based on your interests\n📍 **Location-based** recommendations\n⏰ **Time-sensitive** results\n🏷️ **Tag-based** filtering\n👥 **Popularity** insights\n\nTry searching for specific topics, skills, or activities you're passionate about!`,
       
-      'default': `🤔 Interesting question! I'm your dedicated Soclique assistant.\n\n**I specialize in:**\n🎪 Event discovery & detailed information\n🛛 Society connections & recommendations\n📝 Registration support & guidance\n💡 Platform navigation & tips\n🤝 Networking advice & strategies\n\nTry asking about specific events, your college, or what activities spark your interest. I love helping students find their perfect community! What would you like to explore?`
+      'default': `🤔 Interesting question! I'm your dedicated Soclique assistant.\n\n**I specialize in:**\n🎪 Event discovery & detailed information\n🏛️ Society connections & recommendations\n📝 Registration support & guidance\n💡 Platform navigation & tips\n🤝 Networking advice & strategies\n\nTry asking about specific events, your college, or what activities spark your interest. I love helping students find their perfect community! What would you like to explore?`
     };
 
     const lowercaseMessage = message.toLowerCase();
@@ -200,7 +200,7 @@ const HomePage = () => {
     }
   ];
 
-  // Enhanced reasons data with your exact color palette
+  // Enhanced reasons data with your exact color palette - REMOVED "Build Lasting Connections"
   const reasons = [
     {
       icon: "🌟",
@@ -219,15 +219,6 @@ const HomePage = () => {
       details: "10+ colleges covered",
       benefits: ["Real-time Updates", "Smart Alerts", "Cross-Campus", "Personalized Feed"],
       stats: "50+ events monthly"
-    },
-    {
-      icon: "🤝",
-      title: "Build Lasting Connections",
-      description: "Collaborate with like-minded peers, join meaningful projects, and grow together. Create friendships and professional networks that last beyond college through our community-driven approach.",
-      color: "#1A3D63",
-      details: "Growing student network",
-      benefits: ["Peer Collaboration", "Project Teams", "Mentorship", "Professional Growth"],
-      stats: "1000+ meaningful connections"
     },
     {
       icon: "🎯",
