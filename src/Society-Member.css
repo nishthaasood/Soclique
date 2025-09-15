@@ -58,6 +58,7 @@
   position: relative;
   overflow-x: hidden;
   width: 100lvw;
+  padding-top: 20px;
 }
 
 .soc-society-head-container::before {
