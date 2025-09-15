@@ -1,24 +1,12 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import './HomePage.css';
-import AIChat from './AIChat';
 
 const HomePage = () => {
   const [hoveredEvent, setHoveredEvent] = useState(null);
   const [hoveredReason, setHoveredReason] = useState(null);
   const [hoveredHighlight, setHoveredHighlight] = useState(null);
   const [isVisible, setIsVisible] = useState({});
-  const [chatOpen, setChatOpen] = useState(false);
   const [currentFilter, setCurrentFilter] = useState('all');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [chatMessages, setChatMessages] = useState([
-    { 
-      type: 'ai', 
-      text: 'Hi! I\'m your Soclique AI assistant. I can help you discover events, find societies, get registration info, and answer any questions about our platform. What would you like to explore?' 
-    }
-  ]);
-  const [currentMessage, setCurrentMessage] = useState('');
-  const [isTyping, setIsTyping] = useState(false);
-  const [showPrompts, setShowPrompts] = useState(true);
   const [heroStats, setHeroStats] = useState({
     members: 0,
     events: 0,
@@ -26,67 +14,6 @@ const HomePage = () => {
   });
   
   const observerRef = useRef(null);
-  const chatMessagesRef = useRef(null);
-  const chatInputRef = useRef(null);
-  const chatContainerRef = useRef(null);
-
-  // Enhanced AI Chat Prompts with more variety
-  const chatPrompts = [
-    "What events are happening this week?",
-    "Help me find societies for my interests",
-    "How do I register for events?",
-    "Show me tech-related events",
-    "What's the difference between events?",
-    "Connect me with like-minded people",
-    "Find events at my college",
-    "What are the most popular societies?"
-  ];
-
-  // Enhanced AI responses with your color palette theme
-  const getAIResponse = useCallback((message) => {
-    const responses = {
-      'events': `🎉 Exciting events coming up!\n\n💻 **Hackathon 2025** (Sept 15)\n24 hours of pure innovation with $10,000 prize pool!\n\n⚛️ **Tech Workshop** (Oct 1)\nMaster React, GitHub & deployment - perfect for beginners!\n\n🤖 **AI Bootcamp** (Oct 20)\nDive deep into AI and ML with industry experts!\n\nWhich one sparks your interest? I can share more details!`,
-      
-      'societies': `🏛️ We're connected with **50+ societies** across **25+ colleges**!\n\nFrom cutting-edge tech clubs to vibrant cultural groups, competitive sports teams to academic societies - there's truly something for everyone.\n\n🎯 Want to explore by:\n• Your specific college?\n• Interest categories?\n• Activity types?\n\nJust let me know what excites you most!`,
-      
-      'hackathon': `🚀 **Hackathon 2025** is going to be absolutely epic!\n\n📅 **Sept 15th, 9 AM - Sept 16th, 9 AM**\n📍 Tech Campus Main Hall\n💰 **$10,000 Prize Pool**\n👥 **200+ developers** already registered\n\n✨ It's 24 hours of non-stop coding, innovation, and networking. Perfect for building something amazing and meeting talented developers from across campuses.\n\nReady to join the coding marathon?`,
-      
-      'tech workshop': `💻 **Tech Workshop** - perfect for hands-on learning!\n\n📅 **Oct 1st, 10 AM - 4 PM**\n📍 Computer Science Lab\n🎯 **Learn**: React, GitHub, Netlify deployment\n✅ **Beginner-friendly** approach\n👥 **150+ participants** registered\n\nYou'll build and deploy your first full-stack app - amazing for your portfolio! The workshop covers everything from basics to deployment.`,
-      
-      'ai bootcamp': `🤖 **AI Bootcamp** - our most popular event!\n\n📅 **Oct 20th, 9 AM - 5 PM**\n📍 Innovation Center\n🧠 **Focus**: AI, ML, and intelligent projects\n🏆 **Professional Certificate** included\n👥 **300+ registered** participants\n\n🎓 From fundamentals to advanced applications with industry experts. Perfect gateway into the future of technology!`,
-      
-      'registration': `📝 Registration is super streamlined!\n\n**Quick 4-step process:**\n1️⃣ Click "Register Now" on any event\n2️⃣ Fill out your basic info\n3️⃣ Select preferences & requirements\n4️⃣ Confirm attendance\n\n✅ Secure, lightning-fast, and you'll get all event updates plus networking opportunities.\n\nNeed help with a specific event registration?`,
-      
-      'colleges': `🏫 We currently partner with **10+ colleges** and expanding rapidly!\n\n**Filter by:**\n🏛️ Your specific college campus\n📚 Academic departments\n🎯 Interest categories\n📍 Location preferences\n🎨 Activity types\n\nWhich college are you from? I can show you exactly what's happening there!`,
-      
-      'help': `🌟 I'm here to help with everything Soclique!\n\n**I can assist with:**\n✨ Finding perfect events for your interests\n🏛️ Discovering college societies\n📝 Registration guidance & support\n💡 Platform features & navigation\n🤝 Networking opportunities\n📊 Personalized event recommendations\n\nJust ask me anything - from "What events are this weekend?" to "How do I join the robotics club?" I'm here 24/7!`,
-      
-      'contact': `📞 Multiple ways to reach our amazing team:\n\n💬 **This chat** (I'm available 24/7!)\n📧 **Contact form** on our website\n📱 **Social media** @Soclique\n🎫 **Support tickets** for technical issues\n\nFor immediate help, keep chatting with me. For complex technical issues, our human team responds within 24 hours!`,
-      
-      'networking': `🤝 Networking is the heart of Soclique!\n\n**Our platform helps you:**\n• Meet like-minded peers at events\n• Join collaborative projects & teams\n• Connect with industry professionals\n• Build lasting friendships\n• Grow your professional network\n• Find mentorship opportunities\n\nEvery single event is designed for meaningful connections. Ready to expand your circle and build your community?`,
-      
-      'filter': `🔍 **Smart Filtering Options:**\n\n📅 **By Date**: This week, month, upcoming\n🏷️ **By Category**: Tech, Cultural, Sports, Academic\n🏛️ **By College**: Your campus or nearby\n👥 **By Size**: Intimate workshops to large events\n💰 **By Cost**: Free, paid, premium\n⏰ **By Duration**: Quick sessions to multi-day\n\nWhat type of events interest you most?`,
-      
-      'search': `🔍 **Enhanced Search Features:**\n\n🎯 **Smart matching** based on your interests\n📍 **Location-based** recommendations\n⏰ **Time-sensitive** results\n🏷️ **Tag-based** filtering\n👥 **Popularity** insights\n\nTry searching for specific topics, skills, or activities you're passionate about!`,
-      
-      'default': `🤔 Interesting question! I'm your dedicated Soclique assistant.\n\n**I specialize in:**\n🎪 Event discovery & detailed information\n🏛️ Society connections & recommendations\n📝 Registration support & guidance\n💡 Platform navigation & tips\n🤝 Networking advice & strategies\n\nTry asking about specific events, your college, or what activities spark your interest. I love helping students find their perfect community! What would you like to explore?`
-    };
-
-    const lowercaseMessage = message.toLowerCase();
-    
-    // Enhanced matching with multiple keywords
-    for (const [key, response] of Object.entries(responses)) {
-      if (lowercaseMessage.includes(key) || 
-          (key === 'tech workshop' && (lowercaseMessage.includes('workshop') || lowercaseMessage.includes('react'))) ||
-          (key === 'ai bootcamp' && (lowercaseMessage.includes('bootcamp') || lowercaseMessage.includes('machine learning') || lowercaseMessage.includes('ml'))) ||
-          (key === 'filter' && (lowercaseMessage.includes('filter') || lowercaseMessage.includes('category'))) ||
-          (key === 'search' && (lowercaseMessage.includes('search') || lowercaseMessage.includes('find')))) {
-        return response;
-      }
-    }
-    
-    return responses.default;
-  }, []);
 
   // Enhanced events data with your exact color palette
   const events = [
@@ -200,7 +127,7 @@ const HomePage = () => {
     }
   ];
 
-  // Enhanced reasons data with your exact color palette - REMOVED "Build Lasting Connections"
+  // Enhanced reasons data with your exact color palette
   const reasons = [
     {
       icon: "🌟",
@@ -262,59 +189,10 @@ const HomePage = () => {
     }
   };
 
-  // Enhanced chat functionality
-  const handleChatToggle = () => {
-    setChatOpen(!chatOpen);
-    if (!chatOpen && chatInputRef.current) {
-      setTimeout(() => chatInputRef.current?.focus(), 300);
-    }
-  };
-
-  const handlePromptClick = (prompt) => {
-    setCurrentMessage(prompt);
-    setShowPrompts(false);
-    setTimeout(() => {
-      handleSendMessage();
-    }, 100);
-  };
-
-  const handleSendMessage = async () => {
-    if (!currentMessage.trim()) return;
-    
-    const userMessage = currentMessage;
-    setCurrentMessage('');
-    setShowPrompts(false);
-    
-    setChatMessages(prev => [...prev, { type: 'user', text: userMessage }]);
-    setIsTyping(true);
-    
-    setTimeout(() => {
-      const aiResponse = getAIResponse(userMessage);
-      setChatMessages(prev => [...prev, { type: 'ai', text: aiResponse }]);
-      setIsTyping(false);
-    }, 1200 + Math.random() * 1000);
-  };
-
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSendMessage();
-    }
-  };
-
-  const handleInputChange = (e) => {
-    setCurrentMessage(e.target.value);
-    e.target.style.height = 'auto';
-    e.target.style.height = Math.min(e.target.scrollHeight, 120) + 'px';
-  };
-
   // Enhanced event filtering
   const filteredEvents = events.filter(event => {
     const matchesCategory = currentFilter === 'all' || event.category === currentFilter;
-    const matchesSearch = event.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         event.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         event.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
-    return matchesCategory && matchesSearch;
+    return matchesCategory;
   });
 
   // Enhanced scroll animations with intersection observer
@@ -347,41 +225,6 @@ const HomePage = () => {
     };
   }, []);
 
-  // Click outside to close chat
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (chatContainerRef.current && !chatContainerRef.current.contains(event.target)) {
-        setChatOpen(false);
-      }
-    };
-
-    if (chatOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [chatOpen]);
-
-  // Auto-scroll chat messages
-  useEffect(() => {
-    if (chatMessagesRef.current) {
-      const scrollHeight = chatMessagesRef.current.scrollHeight;
-      const height = chatMessagesRef.current.clientHeight;
-      const maxScrollTop = scrollHeight - height;
-      chatMessagesRef.current.scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
-    }
-  }, [chatMessages, isTyping]);
-
-  // Enhanced event registration handler
-  const handleEventRegistration = (eventTitle) => {
-    setChatMessages(prev => [...prev, 
-      { type: 'ai', text: `Excellent choice! ${eventTitle} is going to be amazing!\n\nI can help you with the registration process. Would you like me to:\n\n1. Guide you through registration steps\n2. Send you event details\n3. Add it to your calendar\n4. Connect you with other participants\n\nWhat would be most helpful?` }
-    ]);
-    setChatOpen(true);
-  };
-
   // Initialize hero stats animation
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -402,12 +245,13 @@ const HomePage = () => {
     <div className="homepage">
       {/* Enhanced Hero Section */}
       <section className="hero" data-section="hero">
+        <div className="hero-background">
+          <div className="floating-shapes"></div>
+          <div className="gradient-orbs"></div>
+          <div className="mesh-gradient"></div>
+        </div>
+        
         <div className="hero-content">
-          <div className="hero-badge">
-            <div className="badge-icon">✨</div>
-            <span>Connect. Discover. Grow Together.</span>
-          </div>
-          
           <h1 className="hero-headline">
             <span className="gradient-text">Discover Events.</span>
             <span className="gradient-text">Join Societies.</span>
@@ -420,9 +264,8 @@ const HomePage = () => {
           
           <div className="hero-buttons">
             <button className="hero-btn btn-primary" onClick={handleBrowseCollege}>
-              <i className="fas fa-university"></i>
               <span>Explore by College</span>
-              <i className="fas fa-arrow-right"></i>
+              <div className="btn-shine"></div>
             </button>
           </div>
           
@@ -441,8 +284,6 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-        
-        <div className="floating-elements"></div>
       </section>
 
       {/* Enhanced Upcoming Events Section */}
@@ -456,34 +297,13 @@ const HomePage = () => {
           </p>
           
           {/* Enhanced Filter and Search */}
-          <div className="event-controls" style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            gap: '2rem',
-            marginTop: '2rem',
-            flexWrap: 'wrap'
-          }}>
-            <div className="category-filters" style={{
-              display: 'flex',
-              gap: '1rem',
-              flexWrap: 'wrap'
-            }}>
+          <div className="event-controls">
+            <div className="category-filters">
               {eventCategories.map(category => (
                 <button
                   key={category.id}
                   onClick={() => setCurrentFilter(category.id)}
-                  style={{
-                    padding: '0.8rem 1.5rem',
-                    background: currentFilter === category.id ? 'var(--accent-gradient)' : 'rgba(179, 207, 229, 0.12)',
-                    border: '2px solid rgba(179, 207, 229, 0.3)',
-                    borderRadius: 'var(--radius-full)',
-                    color: 'var(--text-primary)',
-                    fontWeight: '600',
-                    cursor: 'pointer',
-                    transition: 'var(--transition-normal)',
-                    fontSize: '0.9rem'
-                  }}
+                  className={`filter-btn ${currentFilter === category.id ? 'active' : ''}`}
                 >
                   {category.icon} {category.label}
                 </button>
@@ -551,10 +371,7 @@ const HomePage = () => {
                 ))}
               </div>
               
-              <button 
-                className="register-btn"
-                onClick={() => handleEventRegistration(event.title)}
-              >
+              <button className="register-btn">
                 <span className="btn-text">Register Now</span>
                 <span className="btn-arrow">→</span>
               </button>
@@ -665,8 +482,6 @@ const HomePage = () => {
           ))}
         </div>
       </section>
-      
-      <AIChat />
     </div>
   );
 };
