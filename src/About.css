@@ -1,0 +1,46 @@
+
+
+.about-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.about-title {
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+}
+
+/* Grid */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* Photo cards */
+.item {
+  border-radius: 20px;
+  overflow: hidden;         /* ensures the cut-off effect */
+  position: relative;
+  height: 350px;            /* fixed height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.item img {
+  width: 100%;
+  height: 120%;             /* zoom slightly more */
+  object-fit: cover;
+  transform: translateY(-20px); /* pushes image up so it looks “cut off” */
+}
+
+/* Colors */
+.orange { background: #FF6B35; }
+.green  { background: #4CAF50; }
+.yellow { background: #FFEB3B; }
+.blue   { background: #2196F3; }
+.red    { background: #E91E63; }
+.teal   { background: #009688; }

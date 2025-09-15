@@ -1,7 +1,12 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import './HomePage.css';
+import AIChat from './AIChat';
+import GetStarted from './Get-started.jsx';
 
 const HomePage = () => {
+  const [showGetStarted, setShowGetStarted] = useState(false);
+
+  
   const [hoveredEvent, setHoveredEvent] = useState(null);
   const [hoveredReason, setHoveredReason] = useState(null);
   const [hoveredHighlight, setHoveredHighlight] = useState(null);
@@ -14,6 +19,9 @@ const HomePage = () => {
   });
   
   const observerRef = useRef(null);
+  if (showGetStarted) {
+    return <GetStarted />;
+  }
 
   // Enhanced events data with your exact color palette
   const events = [
@@ -181,13 +189,7 @@ const HomePage = () => {
     }, 20);
   }, []);
 
-  // Enhanced button interaction handler
-  const handleBrowseCollege = () => {
-    const eventsSection = document.querySelector('.upcoming-events');
-    if (eventsSection) {
-      eventsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
+
 
   // Enhanced event filtering
   const filteredEvents = events.filter(event => {
@@ -263,7 +265,10 @@ const HomePage = () => {
           </p>
           
           <div className="hero-buttons">
-            <button className="hero-btn btn-primary" onClick={handleBrowseCollege}>
+            <button 
+              className="hero-btn btn-primary" 
+              onClick={() => setShowGetStarted(true)}
+            >
               <span>Explore by College</span>
               <div className="btn-shine"></div>
             </button>
@@ -482,6 +487,9 @@ const HomePage = () => {
           ))}
         </div>
       </section>
+
+      {/* AI Chat Component */}
+      <AIChat />
     </div>
   );
 };

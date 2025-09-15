@@ -81,11 +81,7 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: 
-    radial-gradient(ellipse at 20% 80%, rgba(74, 127, 167, 0.15) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 20%, rgba(26, 61, 99, 0.2) 0%, transparent 60%),
-    radial-gradient(ellipse at 40% 40%, rgba(179, 207, 229, 0.08) 0%, transparent 50%),
-    linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+  background: var(--bg-primary);
   pointer-events: none;
   z-index: -2;
 }
@@ -98,13 +94,14 @@ body::before {
 
 /* ===== ENHANCED HERO SECTION ===== */
 .hero {
+  margin-top: 25px;
   position: relative;
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: var(--hero-gradient);
+  background: var(--bg-primary);
 }
 
 /* Enhanced Hero Background Animations */
@@ -238,7 +235,7 @@ body::before {
 
 .gradient-text {
   display: block;
-  background: var(--primary-gradient);
+  background: linear-gradient(135deg, #F6FAFD 0%, #F6FAFD 25%, #F6FAFD 50%, #B3CFE5 75%, #B3CFE5 100%);
   background-size: 400% 400%;
   background-clip: text;
   -webkit-background-clip: text;
@@ -287,6 +284,7 @@ body::before {
   gap: 0.75rem;
   padding: 1.4rem 3rem;
   border: none;
+  color: var(--bg-primary);
   border-radius: var(--radius-full);
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 700;
@@ -301,7 +299,7 @@ body::before {
 
 .btn-primary {
   background: var(--primary-gradient);
-  color: var(--text-primary);
+  color: var(--text-inverse) !important;
   border: 2px solid rgba(179, 207, 229, 0.3);
 }
 
@@ -333,6 +331,7 @@ body::before {
   opacity: 0;
   transform: translateY(30px);
   animation: slideUp 0.8s ease-out 1.1s both;
+  margin-bottom: 5rem; /* Added gap after stats */
 }
 
 .stat-item {
@@ -415,7 +414,7 @@ body::before {
 
 /* ===== SECTIONS STYLING ===== */
 .content-section {
-  padding: 4rem 2rem;
+  padding: 3rem 2rem; /* Reduced from 4rem to 3rem for less gap */
   max-width: 1400px;
   margin: 0 auto;
   position: relative;
@@ -648,6 +647,7 @@ body::before {
   flex-grow: 1;
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -1219,7 +1219,7 @@ body::before {
   }
   
   .content-section {
-    padding: 3rem 1.5rem;
+    padding: 2.5rem 1.5rem; /* Adjusted for responsiveness */
   }
   
   .events-grid,
@@ -1252,6 +1252,11 @@ body::before {
   
   .hero-stats {
     gap: 2.5rem;
+    margin-bottom: 4rem; /* Reduced for mobile */
+  }
+  
+  .content-section {
+    padding: 2rem 1.5rem; /* Further reduced for mobile */
   }
   
   .events-grid,
@@ -1307,7 +1312,7 @@ body::before {
 
 @media (max-width: 480px) {
   .content-section {
-    padding: 2.5rem 1rem;
+    padding: 2rem 1rem; /* Minimal padding for very small screens */
   }
   
   .section-title {
@@ -1327,6 +1332,10 @@ body::before {
   
   .hero-btn {
     padding: 1.2rem 2.5rem;
+  }
+  
+  .hero-stats {
+    margin-bottom: 3rem; /* Even more reduced for smallest screens */
   }
   
   .floating-shapes::before {

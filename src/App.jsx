@@ -9,6 +9,7 @@ import ExplorerPage from './Explorer-page.jsx'
 import HomePage from './HomePage.jsx'
 import SocietyHead from './Society-Member.jsx'
 import SocietyMember from './Society-Member.jsx'
+import About from './About.jsx'
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home')
@@ -27,9 +28,7 @@ function App() {
       case 'about':
         return (
           <div className="page-content">
-            <h1>About Us</h1>
-            <p>Learn more about us here. Soclique is a platform designed to connect communities and foster meaningful social interactions. We believe in the power of bringing people together through innovative technology solutions.</p>
-            <p>Our mission is to create spaces where societies can thrive, members can connect, and explorers can discover new communities that match their interests and values.</p>
+            <About />
           </div>
         );
       case 'get-started':
