@@ -92,7 +92,7 @@
   font-weight: 400;
 }
 
-/* Social Links - Updated Colors */
+/* Social Links  */
 .footer-social {
   display: flex;
   gap: 16px;
@@ -154,7 +154,7 @@
   transform: scale(1.1);
 }
 
-/* Quick Links Section - Updated Colors */
+/* Quick Links Section  */
 .footer-links {
   display: flex;
   flex-direction: column;
@@ -228,7 +228,7 @@
   width: 8px;
 }
 
-/* Newsletter Section - Updated Colors */
+/* Newsletter Section  */
 .footer-newsletter {
   display: flex;
   flex-direction: column;
@@ -334,7 +334,7 @@
   box-shadow: 0 8px 25px rgba(184, 194, 165, 0.4);
 }
 
-/* Footer Bottom - Updated Colors */
+/* Footer Bottom */
 .footer-bottom {
   border-top: 1px solid rgba(216, 220, 232, 0.15);
   padding: 32px 0;

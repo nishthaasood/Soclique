@@ -1,6 +1,6 @@
 /* Get-started.css */
 
-/* Base Variables (Inline since you don't want root colors) */
+/* Base Variables */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -767,7 +767,7 @@ body {
   }
 }
 
-/* High contrast mode support */
+/* High contrast  */
 @media (prefers-contrast: high) {
   .card {
     border: 2px solid #0A1931;

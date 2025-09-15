@@ -3,20 +3,20 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 :root {
-  /* New color palette from your image */
-  --deep-navy: #0A1931;      /* Darkest navy from your palette */
-  --light-blue-gray: #B3CFE5; /* Light blue-gray */
-  --medium-blue: #4A7FA7;     /* Medium blue tone */
-  --dark-blue: #1A3D63;       /* Dark blue */
-  --pale-gray: #F6FAFD;       /* Lightest gray/white */
+  /* New color palette f*/
+  --deep-navy: #0A1931;      
+  --light-blue-gray: #B3CFE5; 
+  --medium-blue: #4A7FA7;     
+  --dark-blue: #1A3D63;       
+  --pale-gray: #F6FAFD;       
 
-  /* Enhanced gradients using new palette */
+  
   --primary-gradient: linear-gradient(135deg, #4A7FA7 0%, #B3CFE5 50%, #1A3D63 100%);
   --dark-gradient: linear-gradient(135deg, #0A1931 0%, #1A3D63 100%);
   --light-gradient: linear-gradient(135deg, #B3CFE5 0%, #F6FAFD 100%);
   --accent-gradient: linear-gradient(45deg, #1A3D63, #4A7FA7, #B3CFE5);
 
-  /* Enhanced color system */
+  
   --bg-primary: #0A1931;
   --bg-secondary: #1A3D63;
   --bg-tertiary: #4A7FA7;
@@ -27,7 +27,7 @@
   --text-muted: #B3CFE5;
   --text-inverse: #0A1931;
 
-  /* Enhanced shadows */
+  /* shadows */
   --shadow-sm: 0 2px 15px rgba(10, 25, 49, 0.5);
   --shadow-md: 0 8px 35px rgba(10, 25, 49, 0.6);
   --shadow-lg: 0 20px 70px rgba(10, 25, 49, 0.8);
@@ -49,7 +49,7 @@
   --transition-bounce: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
-/* ===== BASE CONTAINER ===== */
+/*  BASE CONTAINER */
 .soc-society-head-container {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   background: var(--bg-primary);
@@ -77,7 +77,7 @@
   z-index: -2;
 }
 
-/* ===== SOCIETY HEADER ===== */
+/* SOCIETY HEADER */
 .soc-society-header {
   position: sticky;
   top: 0;
@@ -273,7 +273,7 @@
   box-shadow: var(--shadow-md);
 }
 
-/* ===== NAVIGATION ===== */
+
 .society-nav {
   background: rgba(179, 207, 229, 0.1);
   backdrop-filter: blur(15px);
@@ -337,7 +337,7 @@
   display: none;
 }
 
-/* ===== MAIN CONTENT ===== */
+
 .society-main {
   padding: 2rem;
   position: relative;
@@ -356,7 +356,7 @@
   }
 }
 
-/* ===== DASHBOARD CONTENT ===== */
+/* DASHBOARD CONTENT  */
 .soc-dashboard-content {
   max-width: 1400px;
   margin: 0 auto;
@@ -511,7 +511,7 @@
   color: var(--text-primary);
 }
 
-/* ===== ACTIVITIES LIST ===== */
+/* ACTIVITIES LIST */
 .soc-activities-list {
   padding: 2rem;
 }
@@ -578,7 +578,7 @@
   color: var(--text-muted);
 }
 
-/* ===== EVENTS LIST ===== */
+/* EVENTS LIST  */
 .soc-events-list {
   padding: 2rem;
 }
@@ -647,7 +647,7 @@
   font-weight: 600;
 }
 
-/* ===== BUTTONS ===== */
+/*  BUTTONS */
 .soc-btn-primary {
   display: inline-flex;
   align-items: center;
@@ -752,7 +752,7 @@
   box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
 }
 
-/* ===== CONTENT SECTIONS ===== */
+
 .soc-content-header {
   margin-bottom: 2rem;
   display: flex;
@@ -780,7 +780,7 @@
   font-weight: 500;
 }
 
-/* ===== MEMBERS SECTION ===== */
+/*  MEMBERS SECTION  */
 .soc-filters-bar {
   display: flex;
   gap: 1rem;
@@ -852,7 +852,7 @@
   box-shadow: 0 0 0 3px rgba(74, 127, 167, 0.15);
 }
 
-/* ===== MEMBERS TABLE ===== */
+
 .soc-table-container {
   background: var(--surface-glass);
   backdrop-filter: blur(25px);
@@ -1120,7 +1120,7 @@
   margin-top: auto;
 }
 
-/* ===== TIMELINE ===== */
+
 .soc-activities-timeline {
   display: flex;
   flex-direction: column;
@@ -1256,7 +1256,7 @@
   border-color: rgba(46, 213, 115, 0.3);
 }
 
-/* ===== MODAL STYLES ===== */
+
 .soc-modal-backdrop {
   position: fixed;
   top: 0;
@@ -1396,7 +1396,7 @@
   border-top: 1px solid rgba(179, 207, 229, 0.1);
 }
 
-/* ===== SETTINGS STYLES ===== */
+
 .soc-settings-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -1490,7 +1490,7 @@
   color: var(--text-primary);
 }
 
-/* Member Details */
+
 .soc-member-details {
   display: flex;
   flex-direction: column;
@@ -1544,7 +1544,7 @@
   flex-shrink: 0;
 }
 
-/* Additional Content Containers */
+
 .soc-members-content,
 .soc-events-content,
 .soc-activities-content,

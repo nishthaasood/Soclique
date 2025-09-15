@@ -3,21 +3,21 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 :root {
-  /* New Color Palette from Image */
+  /*  Color Palette from Image */
   --navy-dark: #0A1931;
   --steel-blue: #B3CFE5;
   --ocean-blue: #4A7FA7;
   --slate-blue: #1A3D63;
   --frost-white: #F6FAFD;
   
-  /* Enhanced gradients with new palette */
+  /* gradients with new palette */
   --primary-gradient: linear-gradient(135deg, #0A1931 0%, #1A3D63 30%, #4A7FA7 70%, #B3CFE5 100%);
   --hero-gradient: linear-gradient(135deg, #0A1931 0%, rgba(26, 61, 99, 0.9) 50%, rgba(74, 127, 167, 0.8) 100%);
   --card-gradient: linear-gradient(135deg, rgba(179, 207, 229, 0.15) 0%, rgba(74, 127, 167, 0.12) 100%);
   --accent-gradient: linear-gradient(45deg, #1A3D63, #4A7FA7, #B3CFE5);
   --glass-gradient: linear-gradient(135deg, rgba(246, 250, 253, 0.1) 0%, rgba(179, 207, 229, 0.05) 100%);
   
-  /* Enhanced color system */
+  /*  color system */
   --bg-primary: #0A1931;
   --bg-secondary: #1A3D63;
   --bg-tertiary: rgba(74, 127, 167, 0.1);
@@ -31,7 +31,7 @@
   --accent-primary: #4A7FA7;
   --accent-secondary: #B3CFE5;
   
-  /* Enhanced shadows with new palette */
+  /* shadows with new palette */
   --shadow-soft: 0 4px 20px rgba(10, 25, 49, 0.3);
   --shadow-medium: 0 8px 40px rgba(10, 25, 49, 0.4);
   --shadow-strong: 0 20px 60px rgba(10, 25, 49, 0.5);
@@ -39,7 +39,7 @@
   --shadow-glow-strong: 0 0 60px rgba(179, 207, 229, 0.3);
   --shadow-inset: inset 0 1px 0 rgba(246, 250, 253, 0.1);
   
-  /* Enhanced spacing and sizing */
+  /*  spacing and sizing */
   --radius-xs: 6px;
   --radius-sm: 12px;
   --radius-md: 18px;
@@ -92,7 +92,7 @@ body::before {
   width: 100lvw;
 }
 
-/* ===== ENHANCED HERO SECTION ===== */
+/*  ENHANCED HERO SECTION  */
 .hero {
   margin-top: 25px;
   position: relative;
@@ -104,7 +104,7 @@ body::before {
   background: var(--bg-primary);
 }
 
-/* Enhanced Hero Background Animations */
+/*  Hero Background Animations */
 .hero-background {
   position: absolute;
   top: 0;
@@ -412,7 +412,7 @@ body::before {
   z-index: 2;
 }
 
-/* ===== SECTIONS STYLING ===== */
+/* SECTIONS STYLING */
 .content-section {
   padding: 3rem 2rem; /* Reduced from 4rem to 3rem for less gap */
   max-width: 1400px;
@@ -475,7 +475,7 @@ body::before {
   animation: slideUp 0.8s ease-out 0.2s both;
 }
 
-/* ===== EVENT CONTROLS ===== */
+/* EVENT CONTROLS */
 .event-controls {
   display: flex;
   justify-content: center;
@@ -514,7 +514,7 @@ body::before {
   box-shadow: var(--shadow-soft);
 }
 
-/* ===== EVENTS GRID ===== */
+/* EVENTS GRID */
 .events-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -774,7 +774,7 @@ body::before {
   transform: translateX(5px);
 }
 
-/* ===== HIGHLIGHTS SECTION ===== */
+/* HIGHLIGHTS SECTION  */
 .highlights-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -941,7 +941,7 @@ body::before {
   box-shadow: var(--shadow-inset);
 }
 
-/* ===== REASONS SECTION ===== */
+/* REASONS SECTION*/
 .reasons-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
@@ -1126,7 +1126,7 @@ body::before {
   border-color: rgba(26, 61, 99, 0.5);
 }
 
-/* ===== UTILITY CLASSES ===== */
+/*  UTILITY CLASSES */
 .view-more-btn {
   padding: 1.6rem 3.2rem;
   background: transparent;
@@ -1178,7 +1178,7 @@ body::before {
   transform: translateX(8px);
 }
 
-/* ===== CORE ANIMATIONS ===== */
+/*  CORE ANIMATIONS */
 @keyframes slideUp {
   from {
     opacity: 0;
@@ -1212,7 +1212,7 @@ body::before {
   }
 }
 
-/* ===== RESPONSIVE DESIGN ===== */
+/* RESPONSIVE DESIGN */
 @media (max-width: 1200px) {
   .hero-content {
     padding: 0 1.5rem;
@@ -1368,7 +1368,7 @@ body::before {
   }
 }
 
-/* ===== ACCESSIBILITY ===== */
+/* ACCESSIBILITY */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -1400,7 +1400,7 @@ body::before {
   }
 }
 
-/* ===== FOCUS STATES ===== */
+/* FOCUS STATES */
 .hero-btn:focus,
 .register-btn:focus,
 .view-more-btn:focus,
@@ -1409,7 +1409,7 @@ body::before {
   outline-offset: 3px;
 }
 
-/* ===== PRINT STYLES ===== */
+/*  PRINT STYLES  */
 @media print {
   .hero-background {
     display: none !important;

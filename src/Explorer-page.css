@@ -1,6 +1,6 @@
-/* Explorer-page.css (themed to match HomePage.css) */
+/* Explorer-page.css  */
 
-/* --- IMPORTS & THEME TOKENS (from HomePage.css) --- */
+/* --- IMPORTS & THEME TOKENS  --- */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
@@ -49,7 +49,7 @@ body {
   color: var(--text-primary);
 }
 
-/* Explorer page container uses hero-like gradient + soft orbs */
+/* Explorer page  */
 .explorer-page {
   min-height: 100vh;
   padding: 4rem;
