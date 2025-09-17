@@ -57,8 +57,8 @@ function About() {
       role: "Documentation Head",
       description: "Guardian of clarity. Documenting, organizing, and polishing until perfection shines through.",
       img: "./src/assets/upasna.jpeg",
-      github: "https://github.com",
-      linkedin: "https://linkedin.com",
+      github: "https://github.com/Upasna1830",
+      linkedin: "https://linkedin.comhttps://www.linkedin.com/in/upasna-saxena-120720273?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
       color: "#B3CFE5"
     },
   ];
