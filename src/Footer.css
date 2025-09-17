@@ -24,7 +24,7 @@
 
 .footer-container {
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 0px;
   position: relative;
 }
 
@@ -239,6 +239,7 @@
   border: 1px solid rgba(216, 220, 232, 0.15);
   position: relative;
   overflow: hidden;
+  margin-right: 60px;
 }
 
 .footer-newsletter::before {
@@ -336,11 +337,14 @@
 
 /* Footer Bottom */
 .footer-bottom {
+  width: 100vw;    /* full screen width */
+  margin: 0;       /* remove any left gap */
+  padding: 32px;
   border-top: 1px solid rgba(216, 220, 232, 0.15);
-  padding: 32px 0;
   background: rgba(10, 17, 37, 0.8);
   backdrop-filter: blur(10px);
 }
+
 
 .footer-bottom-content {
   display: flex;

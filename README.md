@@ -34,34 +34,34 @@ Soclique connects colleges, societies, and students — automates event manageme
 <table>
   <tr>
     <td align="center">
-      <img src="./src/assets/arshia.jpeg" width="150" height="150" style="object-fit: cover; border-radius: 50%;" /><br>
+      <img src="/assets/arshia.jpeg" width="150" height="150" style="object-fit: cover; border-radius: 50%;" /><br>
       <b>Arshia Gupta</b><br>
       Contri
     </td>
     <td align="center">
-      <img src="./src/assets/nishtha.jpeg" width="150" height="150" style="object-fit: cover; border-radius: 50%;" /><br>
+      <img src="/assets/nishtha.jpeg" width="150" height="150" style="object-fit: cover; border-radius: 50%;" /><br>
       <b>Nishtha Sood</b><br>
       Contri
     </td>
     <td align="center">
-      <img src="./src/assets/mansi.jpeg" width="150" height="150" style="object-fit: cover; border-radius: 50%;" /><br>
+      <img src="/assets/mansi.jpeg" width="150" height="150" style="object-fit: cover; border-radius: 50%;" /><br>
       <b>Mansi Bhandari</b><br>
       Contri
     </td>
   </tr>
   <tr>
     <td align="center">
-      <img src="./src/assets/aadhya.jpeg" width="150" height="150" style="object-fit: cover; border-radius: 50%;" /><br>
+      <img src="/assets/aadhya.jpeg" width="150" height="150" style="object-fit: cover; border-radius: 50%;" /><br>
       <b>Aadhya Sharma</b><br>
       Contri
     </td>
     <td align="center">
-      <img src="./src/assets/janvi.jpeg" width="150" height="150" style="object-fit: cover; border-radius: 50%;" /><br>
+      <img src="/assets/janvi.jpeg" width="150" height="150" style="object-fit: cover; border-radius: 50%;" /><br>
       <b>Janvi Mathur</b><br>
       Contri
     </td>
     <td align="center">
-      <img src="./src/assets/upasna.jpeg" width="150" height="150" style="object-fit: cover; border-radius: 50%;" /><br>
+      <img src="/assets/upasna.jpeg" width="150" height="150" style="object-fit: cover; border-radius: 50%;" /><br>
       <b>Upasna Saxena</b><br>
       Contri
     </td>
