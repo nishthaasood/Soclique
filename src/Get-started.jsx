@@ -70,14 +70,14 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
       icon: Search,
       title: 'Visit as an Explorer',
       description: 'Explore the platform and its features without registration.',
-      color: '#4A90E2'
+      color: '#271e4dff'
     },
     {
       type: 'member',
       icon: Users,
       title: 'Visit as Society Member',
       description: 'Stay updated with your society\'s events and announcements.',
-      color: '#7B68EE'
+      color: '#140f2bff'
     },
     {
       type: 'head',
@@ -313,12 +313,36 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
   }, []);
 
   // College selection handler
-  const handleCollegeSelect = useCallback(() => {
-    if (selectedCollegeLocal) {
-      setSelectedCollege?.(selectedCollegeLocal);
+  const handleCollegeSelect = useCallback((e) => {
+    e.preventDefault();
+    
+    console.log('Continue button clicked');
+    console.log('Selected college value:', selectedCollegeLocal);
+    
+    if (!selectedCollegeLocal || selectedCollegeLocal === '') {
+      console.warn('No college selected');
+      alert('Please select a college before continuing.');
+      return;
+    }
+    
+    try {
+      // Call setSelectedCollege if it exists and is a function
+      if (setSelectedCollege && typeof setSelectedCollege === 'function') {
+        console.log('Calling setSelectedCollege with:', selectedCollegeLocal);
+        setSelectedCollege(selectedCollegeLocal);
+      } else {
+        console.warn('setSelectedCollege prop not provided or not a function');
+      }
+      
+      console.log('Navigating to main page');
+      setShowLanding(false);
+      
+    } catch (error) {
+      console.error('Error in handleCollegeSelect:', error);
       setShowLanding(false);
     }
   }, [selectedCollegeLocal, setSelectedCollege]);
+
 
   // Modal handlers
   const openModal = useCallback((type) => {
@@ -466,7 +490,7 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
           </p>
           
           <p style={{ fontSize: '0.9rem', color: '#888', marginBottom: '32px' }}>
-            ⏱️ Approval typically takes 2-3 business days
+            ⏱️ Approval usually takes 1-2 business days.
           </p>
           
           <button
@@ -474,7 +498,7 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
             className="button"
             style={{ maxWidth: '200px' }}
           >
-            Got it! ✨
+            Got it!
           </button>
         </div>
       );
@@ -486,7 +510,7 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
           <div>
             <div className="form-group">
               <label htmlFor="society-name" style={{ display: 'block', color: 'blue' , marginBottom: '8px', fontWeight: '500' }}>
-                What's your society name? ✨
+                What's your society name?
               </label>
               <input
                 id="society-name"
@@ -509,7 +533,7 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
           <div>
             <div className="form-group">
               <label htmlFor="society-category" style={{ display: 'block',color: 'blue' , marginBottom: '16px', fontWeight: '500' }}>
-                Choose your society's category 📂
+                Choose your society's category.
               </label>
               <select
                 id="society-category"
@@ -535,7 +559,7 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
             </div>
             
             <div style={{ marginTop: '16px', padding: '16px', backgroundColor: '#46474970', borderRadius: '8px', fontSize: '0.9rem', color: '#3a5379ff' }}>
-              💡 <strong>Quick Guide:</strong><br/>
+               <strong>Quick Guide:</strong><br/>
               • <strong>Technical:</strong> Programming, robotics, AI clubs<br/>
               • <strong>Cultural:</strong> Dance, music, drama societies<br/>
               • <strong>Literary:</strong> Writing, debate, literature clubs<br/>
@@ -551,7 +575,7 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
           <div>
             <div className="form-group">
               <label htmlFor="college-email" style={{ display: 'block',color: 'blue' , marginBottom: '8px', fontWeight: '500' }}>
-                Your college email address 📧
+                Your college email address
               </label>
               <input
                 id="college-email"
@@ -565,7 +589,7 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
                 <span className="error-message">{societyFormErrors.collegeEmail}</span>
               )}
               <p style={{ fontSize: '0.85rem', color: '#666', marginTop: '8px' }}>
-                🔒 This will be used for verification and approval notifications
+                This will be used for verification and approval notifications
               </p>
             </div>
           </div>
@@ -576,7 +600,7 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
           <div>
             <div className="form-group">
               <label htmlFor="proposed-email" style={{ display: 'block', color: 'blue' , marginBottom: '8px', fontWeight: '500' }}>
-                Proposed society email 💌
+               Society email
               </label>
               <input
                 id="proposed-email"
@@ -590,7 +614,7 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
                 <span className="error-message">{societyFormErrors.proposedEmail}</span>
               )}
               <p style={{ fontSize: '0.85rem', color: '#615f5f80', marginTop: '8px' }}>
-                📬 This will be your society's official contact email
+                This will be your society's official contact email
               </p>
             </div>
           </div>
@@ -601,7 +625,7 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
           <div>
             <div className="form-group" style={{ marginBottom: '24px' }}>
               <label htmlFor="society-description" style={{ display: 'block',color: 'blue' , marginBottom: '8px', fontWeight: '500' }}>
-                Society Description 📝
+                Society Description
               </label>
               <textarea
                 id="society-description"
@@ -633,7 +657,7 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
                 onChange={(e) => handleSocietyFormChange('facultyMentor', e.target.value)}
               />
               <p style={{ fontSize: '0.85rem', color: '#666', marginTop: '8px' }}>
-                🎓 Having a faculty mentor strengthens your application
+                Having a faculty mentor strengthens your application
               </p>
             </div>
           </div>
@@ -683,7 +707,7 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
             </div>
 
             <div style={{ backgroundColor: '#e3f2fd', padding: '16px', borderRadius: '8px', marginBottom: '24px', fontSize: '0.9rem' }}>
-              <strong style={{ color: '#1976d2' }}>📌 What happens next?</strong>
+              <strong style={{ color: '#1976d2' }}>What happens next?</strong>
               <ul style={{ marginTop: '8px', marginLeft: '16px', lineHeight: '1.6' }}>
                 <li>Our team will review your application (2-3 business days)</li>
                 <li>Email verification will be sent to your college email</li>
@@ -712,7 +736,7 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
                 style={{ minWidth: '180px' }}
                 disabled={isSubmitting}
               >
-                {isSubmitting ? 'Submitting...' : '🚀 Submit for Approval'}
+                {isSubmitting ? 'Submitting...' : 'Submit for Approval'}
               </button>
             </div>
           </div>
@@ -733,7 +757,7 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
             type="button"
             className="button"
           >
-            🚀 Start Exploring
+            Start Exploring
           </button>
         );
 
@@ -789,8 +813,8 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
               {isSubmitting 
                 ? 'Processing...' 
                 : modalType === 'member' 
-                  ? '👥 Find Your Society' 
-                  : '👑 Access Dashboard'
+                  ? 'Find Your Society' 
+                  : 'Access Dashboard'
               }
             </button>
 
@@ -897,7 +921,7 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
         ) : (
           // Main User Type Selection Page
           <div role="main" aria-labelledby="college-heading">
-            {/* Create Society button - prominently placed */}
+            {/* Create Society button*/}
             <div style={{
               display: 'flex',
               justifyContent: 'center',
@@ -1015,7 +1039,7 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
         )}
       </div>
 
-      {/* Enhanced Modal with Multi-Step Society Creation */}
+      {/*Multi-Step Society Creation */}
       {isModalOpen && (
         <div 
           className="modal-backdrop" 
@@ -1081,10 +1105,10 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
             )}
 
             <h2 id="modal-title" className="modal-title">
-              {modalType === 'explorer' && '🔍 Continue as Explorer'}
-              {modalType === 'member' && '👥 Society Member Login'}
-              {modalType === 'head' && '👑 Society Head Dashboard'}
-              {modalType === 'createSociety' && (showConfirmation ? '🎉 Success!' : '🏗️ Create New Society')}
+              {modalType === 'explorer' && 'Continue as Explorer'}
+              {modalType === 'member' && 'Society Member Login'}
+              {modalType === 'head' && 'Society Head Dashboard'}
+              {modalType === 'createSociety' && (showConfirmation ? '🎉 Success!' : 'Create New Society')}
             </h2>
 
             <form 
