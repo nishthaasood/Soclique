@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { Search, Users, Crown, GraduationCap, Plus, ArrowLeft, X, Send, ChevronRight, ChevronLeft, Check, Building2 } from 'lucide-react';
 import './Get-started.css';
+import AIChat from './AIChat';
 
 const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
   // State management
@@ -97,34 +98,7 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
     6: 'Review & Submit'
   }), []);
 
-  // Enhanced AI responses
-  const getAIResponse = useCallback((message) => {
-    const responses = {
-      explorer: 'Great choice! 🚀 As an Explorer, you can browse all societies and events without needing to log in. Perfect for discovering amazing opportunities across your college!',
-      'society member': 'Awesome! 🎯 Society members get personalized updates, event notifications, and can connect with fellow members. You\'ll need to log in for the full experience.',
-      'society head': 'Excellent choice! 👑 Society Heads get powerful management tools - create events, post announcements, manage members, and track engagement analytics!',
-      'create society': 'Creating a new society is exciting! 🌟 The process involves 6 simple steps: Society name, category, your college email, proposed society email, description with mentor details, and finally review. It typically takes 2-3 business days for approval!',
-      college: `We support ${colleges.length - 1} amazing colleges including MAIT, BPIT, VIPS, BVCOE, MSIT, and ADGIPS! 🏫 More colleges are added regularly. Which one\'s your home campus?`,
-      registration: 'Registration is quick and secure! 🔒 Just basic details and college verification. Society members and heads get email verification for extra security.',
-      features: '✨ Soclique offers event discovery, society management, member networking, event creation tools, announcement systems, and real-time updates! What interests you most?',
-      categories: 'We have 6 main society categories: 💻 Technical, 🎭 Cultural, 📚 Literary, ⚽ Sports, 🤝 Social, and 🌈 Others. Each category has unique features and templates!',
-      approval: 'Society approval usually takes 2-3 business days! 📋 Our team reviews the application, verifies college email, and checks for duplicate names. You\'ll get updates via email!',
-      help: 'I can help with:\n🎯 Choosing user types\n🏫 College selection\n📝 Society creation process\n✨ Platform features\n🚀 Getting started tips\nWhat would you like to explore?',
-      difference: 'Here\'s the breakdown: 🔍 Explorers browse freely, 👥 Society Members get personalized updates, 👑 Society Heads manage everything! Choose what fits your goals!',
-      default: 'Great question! 💭 I\'m here to make your Soclique journey smooth. Ask about user types, colleges, society creation, or any features - I\'ve got you covered!'
-    };
-
-    const lowercaseMessage = message.toLowerCase();
-    
-    for (const [key, response] of Object.entries(responses)) {
-      if (lowercaseMessage.includes(key)) {
-        return response;
-      }
-    }
-    
-    return responses.default;
-  }, [colleges.length]);
-
+  
   // Society form validation
   const validateSocietyStep = useCallback((step, data) => {
     const errors = {};
@@ -258,60 +232,10 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
     }
   }, [modalType, formData, validateForm]);
 
-  // Chat functionality
-  const handleChatToggle = useCallback(() => {
-    setChatOpen(prev => {
-      if (!prev && chatInputRef.current) {
-        setTimeout(() => chatInputRef.current?.focus(), 300);
-      }
-      return !prev;
-    });
-  }, []);
+  
 
-  const addMessage = useCallback((type, text) => {
-    const newMessage = {
-      id: messageIdCounter.current++,
-      type,
-      text,
-      timestamp: Date.now()
-    };
-    setChatMessages(prev => [...prev, newMessage]);
-    return newMessage;
-  }, []);
-
-  const handleSendMessage = useCallback(async () => {
-    const message = currentMessage.trim();
-    if (!message || isTyping) return;
-    
-    setCurrentMessage('');
-    addMessage('user', message);
-    setIsTyping(true);
-    
-    try {
-      await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 1500));
-      const aiResponse = getAIResponse(message);
-      addMessage('ai', aiResponse);
-    } catch (error) {
-      addMessage('ai', 'Sorry, I encountered an error. Please try again!');
-    } finally {
-      setIsTyping(false);
-    }
-  }, [currentMessage, isTyping, addMessage, getAIResponse]);
-
-  const handleKeyPress = useCallback((e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSendMessage();
-    }
-  }, [handleSendMessage]);
-
-  const handleInputChange = useCallback((e) => {
-    const value = e.target.value;
-    setCurrentMessage(value);
-    e.target.style.height = 'auto';
-    e.target.style.height = Math.min(e.target.scrollHeight, 100) + 'px';
-  }, []);
-
+  
+  
   // College selection handler
   const handleCollegeSelect = useCallback((e) => {
     e.preventDefault();
@@ -1149,108 +1073,10 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
           </div>
         </div>
       )}
+      <AIChat />
 
-      {/* Enhanced AI Chat */}
-      <div className="ai-chat-container" ref={chatContainerRef}>
-        <button 
-          className={`chat-toggle ${chatOpen ? 'active' : ''}`}
-          onClick={handleChatToggle}
-          title="AI Chat Assistant"
-          aria-label="Toggle AI Chat Assistant"
-          aria-expanded={chatOpen}
-          style={{
-            background: chatOpen ? '#667eea' : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-            transition: 'all 0.3s ease'
-          }}
-        >
-          {chatOpen ? <X size={20} /> : '🤖'}
-        </button>
-        
-        <div 
-          className={`chat-box ${chatOpen ? 'open' : ''}`}
-          role="dialog"
-          aria-label="AI Chat Assistant"
-          aria-hidden={!chatOpen}
-        >
-          <div className="chat-header">
-            <div className="ai-icon" aria-hidden="true">🤖</div>
-            <div>
-              <div className="chat-title">AI Assistant</div>
-              <div className="chat-subtitle">Need help getting started? ✨</div>
-            </div>
-          </div>
-          
-          <div 
-            className="chat-messages" 
-            ref={chatMessagesRef}
-            role="log"
-            aria-live="polite"
-            aria-label="Chat messages"
-          >
-            {chatMessages.map((message) => (
-              <div key={message.id} className={`message ${message.type}`}>
-                <div className="message-content">
-                  {message.text.split('\n').map((line, lineIndex) => (
-                    <div key={lineIndex}>
-                      {line}
-                      {lineIndex < message.text.split('\n').length - 1 && <br />}
-                    </div>
-                  ))}
-                </div>
-                <div className="message-time" aria-hidden="true">
-                  {new Date(message.timestamp).toLocaleTimeString([], { 
-                    hour: '2-digit', 
-                    minute: '2-digit' 
-                  })}
-                </div>
-              </div>
-            ))}
-            
-            {isTyping && (
-              <div className="typing-indicator" aria-live="polite">
-                <span>AI is typing</span>
-                <div className="typing-dots" aria-hidden="true">
-                  <div className="typing-dot"></div>
-                  <div className="typing-dot"></div>
-                </div>
-              </div>
-            )}
-          </div>
-          
-          <div className="chat-input-container">
-            <div className="chat-input-wrapper">
-              <label htmlFor="chat-input" className="sr-only">
-                Type your message
-              </label>
-              <textarea
-                id="chat-input"
-                ref={chatInputRef}
-                className="chat-input"
-                placeholder="Ask about user types, society creation, or features... 💬"
-                value={currentMessage}
-                onChange={handleInputChange}
-                onKeyPress={handleKeyPress}
-                rows={1}
-                disabled={isTyping}
-                aria-describedby="chat-input-help"
-              />
-              <span id="chat-input-help" className="sr-only">
-                Press Enter to send, Shift+Enter for new line
-              </span>
-              <button 
-                className="chat-send-btn"
-                onClick={handleSendMessage}
-                disabled={!currentMessage.trim() || isTyping}
-                title="Send message"
-                aria-label="Send message"
-              >
-                <Send size={16} />
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
+      
   );
 };
 
