@@ -11,7 +11,7 @@ function About() {
       name: "Arshia Gupta",
       role: "Product Lead",
       description: "Turns wild ideas into structured plans, keeping the product vision sharp and user-first.",
-      img: "./src/assets/arshia.jpeg",
+      img: "/assets/arshia.jpeg",
       github: "https://github.com/arshiagupta0807",
       linkedin: "https://www.linkedin.com/in/arshia-gupta-ba4672284?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
       color: "#4A7FA7"
@@ -20,7 +20,7 @@ function About() {
       name: "Nishtha Sood",
       role: "Tech Lead",
       description: "Brains behind the build. Turning caffeine and code into seamless, scalable systems.",
-      img: "./src/assets/nishtha.jpeg",
+      img: "/assets/nishtha.jpeg",
       github: "https://github.com/nishthaasood",
       linkedin: "https://www.linkedin.com/in/nishtha-sood-53a75a306",
       color: "#1A3D63"
@@ -29,7 +29,7 @@ function About() {
       name: "Mansi Bhandari",
       role: "Head Of Operations",
       description: "Keeps the chaos in check, ensuring everything runs smoother than butter on hot toast.",
-      img: "./src/assets/mansi.jpeg",
+      img: "/assets/mansi.jpeg",
       github: "https://github.com/mansibhandarilab",
       linkedin: "https://www.linkedin.com/in/mansibhandari94872a326?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
       color: "#B3CFE5"
@@ -38,7 +38,7 @@ function About() {
       name: "Aadhya Sharma",
       role: "UI Designer",
       description: "Designs with heart, making every pixel feel like it belongs in the user’s story.",
-      img: "./src/assets/aadhya.jpeg",
+      img: "/assets/aadhya.jpeg",
       github: "https://github.com/4adhya",
       linkedin: "https://www.linkedin.com/in/aadhya-sharma-225778326",
       color: "#4A7FA7"
@@ -47,7 +47,7 @@ function About() {
       name: "Janvi Mathur",
       role: "Innovation Lead",
       description: "Data whisperer who mixes numbers with creativity to unlock smarter solutions.",
-      img: "./src/assets/janvi.jpeg",
+      img: "/assets/janvi.jpeg",
       github: "https://github.com",
       linkedin: "http://linkedin.com/in/janvi-mathur-74012a370",
       color: "#1A3D63"
@@ -56,7 +56,7 @@ function About() {
       name: "Upasna Saxena",
       role: "Documentation Head",
       description: "Guardian of clarity. Documenting, organizing, and polishing until perfection shines through.",
-      img: "./src/assets/upasna.jpeg",
+      img: "/assets/upasna.jpeg",
       github: "https://github.com/Upasna1830",
       linkedin: "https://linkedin.comhttps://www.linkedin.com/in/upasna-saxena-120720273?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
       color: "#B3CFE5"
