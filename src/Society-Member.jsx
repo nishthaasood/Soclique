@@ -21,7 +21,17 @@ import {
   TrendingUp,
   BarChart3,
   PieChart,
-  Activity
+  Activity,
+  Brain,
+  FileText,
+  Target,
+  Clock,
+  ThumbsUp,
+  UserCheck,
+  Zap,
+  Award,
+  ChevronRight,
+  TrendingDown
 } from 'lucide-react';
 import './Society-Member.css';
 
@@ -65,6 +75,52 @@ const SocietyHead = ({ setCurrentPage }) => {
     { id: 3, title: "Achievement: Best Society Award", date: "2024-01-05", type: "Achievement", description: "Our society won the Best Technical Society award" }
   ]);
 
+  // AI Insights Data
+  const [aiInsights] = useState({
+    memberEngagement: {
+      activeMembers: 89,
+      inactiveMembers: 53,
+      engagementRate: 73,
+      trend: "up"
+    },
+    eventAnalytics: {
+      avgAttendance: 85,
+      popularEventTypes: ["Workshops", "Tech Talks", "Hackathons"],
+      bestPerformingEvent: "AI Workshop 2024",
+      worstPerformingEvent: "Study Session #3"
+    },
+    insights: [
+      "Member engagement has increased by 15% this month",
+      "Workshop events show 40% higher attendance than lectures",
+      "New members are 60% more likely to attend hands-on events",
+      "Evening events (6-8 PM) have optimal attendance rates"
+    ],
+    reports: {
+      lastEventReport: {
+        eventName: "AI & ML Workshop",
+        date: "2024-01-15",
+        attendance: 89,
+        feedback: 4.6,
+        highlights: [
+          "95% attendee satisfaction rate",
+          "Strong networking opportunities created",
+          "3 follow-up project collaborations initiated",
+          "Requested more advanced sessions"
+        ],
+        improvements: [
+          "Extend session duration by 30 minutes",
+          "Provide more hands-on coding time",
+          "Include Q&A session at the end"
+        ]
+      }
+    },
+    predictions: [
+      "Next hackathon event likely to have 120+ registrations",
+      "Core member retention rate expected to be 92%",
+      "Technical workshops show highest growth potential"
+    ]
+  });
+
   // Filter members based on search and status
   const filteredMembers = members.filter(member => {
     const matchesSearch = member.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -104,14 +160,12 @@ const SocietyHead = ({ setCurrentPage }) => {
   // Handle form submissions
   const handleMemberSubmit = (e) => {
     e.preventDefault();
-    // Handle member add/edit logic here
     console.log('Member form submitted');
     closeModal();
   };
 
   const handleEventSubmit = (e) => {
     e.preventDefault();
-    // Handle event add/edit logic here
     console.log('Event form submitted');
     closeModal();
   };
@@ -506,6 +560,218 @@ const SocietyHead = ({ setCurrentPage }) => {
     </div>
   );
 
+  const renderAIInsights = () => (
+    <div className="soc-insights-content">
+      <div className="soc-content-header">
+        <div className="soc-header-left">
+          <h2>AI-Powered Insights</h2>
+          <p>Data-driven insights to optimize your society's performance</p>
+        </div>
+        <button className="soc-btn-primary" onClick={() => window.print()}>
+          <FileText size={16} />
+          Generate Report
+        </button>
+      </div>
+
+      {/* Key Metrics Overview */}
+      <div className="soc-insights-overview">
+        <div className="soc-insight-card primary">
+          <div className="soc-insight-icon">
+            <UserCheck size={24} />
+          </div>
+          <div className="soc-insight-content">
+            <h3>{aiInsights.memberEngagement.engagementRate}%</h3>
+            <p>Member Engagement Rate</p>
+            <div className="soc-insight-trend positive">
+              <TrendingUp size={14} />
+              <span>+15% from last month</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="soc-insight-card">
+          <div className="soc-insight-icon">
+            <Target size={24} />
+          </div>
+          <div className="soc-insight-content">
+            <h3>{aiInsights.eventAnalytics.avgAttendance}%</h3>
+            <p>Average Event Attendance</p>
+            <div className="soc-insight-trend positive">
+              <TrendingUp size={14} />
+              <span>Above target by 10%</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="soc-insight-card">
+          <div className="soc-insight-icon">
+            <Users size={24} />
+          </div>
+          <div className="soc-insight-content">
+            <h3>{aiInsights.memberEngagement.activeMembers}</h3>
+            <p>Active Members</p>
+            <div className="soc-insight-trend neutral">
+              <span>{aiInsights.memberEngagement.inactiveMembers} inactive</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="soc-insight-card">
+          <div className="soc-insight-icon">
+            <Award size={24} />
+          </div>
+          <div className="soc-insight-content">
+            <h3>4.6/5</h3>
+            <p>Event Satisfaction</p>
+            <div className="soc-insight-trend positive">
+              <Star size={14} />
+              <span>Excellent rating</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Insights Grid */}
+      <div className="soc-insights-grid">
+        {/* AI Recommendations */}
+        <div className="soc-insight-panel">
+          <div className="soc-panel-header">
+            <div className="soc-panel-title">
+              <Zap size={20} />
+              <h3>AI Recommendations</h3>
+            </div>
+          </div>
+          <div className="soc-panel-content">
+            {aiInsights.insights.map((insight, index) => (
+              <div key={index} className="soc-recommendation-item">
+                <div className="soc-rec-icon">
+                  <Brain size={16} />
+                </div>
+                <p>{insight}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Popular Event Types */}
+        <div className="soc-insight-panel">
+          <div className="soc-panel-header">
+            <div className="soc-panel-title">
+              <Trophy size={20} />
+              <h3>Popular Event Categories</h3>
+            </div>
+          </div>
+          <div className="soc-panel-content">
+            {aiInsights.eventAnalytics.popularEventTypes.map((type, index) => (
+              <div key={index} className="soc-popular-event">
+                <div className="soc-event-type-bar">
+                  <div className="soc-event-type-name">{type}</div>
+                  <div className="soc-event-type-progress">
+                    <div 
+                      className="soc-progress-fill" 
+                      style={{ width: `${90 - (index * 20)}%` }}
+                    ></div>
+                  </div>
+                  <span className="soc-event-percentage">{90 - (index * 20)}%</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Predictions */}
+        <div className="soc-insight-panel">
+          <div className="soc-panel-header">
+            <div className="soc-panel-title">
+              <TrendingUp size={20} />
+              <h3>Future Predictions</h3>
+            </div>
+          </div>
+          <div className="soc-panel-content">
+            {aiInsights.predictions.map((prediction, index) => (
+              <div key={index} className="soc-prediction-item">
+                <div className="soc-pred-icon">
+                  <ChevronRight size={16} />
+                </div>
+                <p>{prediction}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Event Report Section */}
+      <div className="soc-event-report-section">
+        <div className="soc-report-header">
+          <h3>Last Event Report - Ready for Dean Submission</h3>
+          <button className="soc-btn-primary">
+            <Download size={16} />
+            Download PDF Report
+          </button>
+        </div>
+
+        <div className="soc-event-report-card">
+          <div className="soc-report-overview">
+            <div className="soc-report-basic-info">
+              <h4>{aiInsights.reports.lastEventReport.eventName}</h4>
+              <div className="soc-report-meta">
+                <span className="soc-report-date">
+                  <Calendar size={14} />
+                  {new Date(aiInsights.reports.lastEventReport.date).toLocaleDateString()}
+                </span>
+                <span className="soc-report-attendance">
+                  <Users size={14} />
+                  {aiInsights.reports.lastEventReport.attendance} attendees
+                </span>
+                <span className="soc-report-rating">
+                  <Star size={14} />
+                  {aiInsights.reports.lastEventReport.feedback}/5.0 rating
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div className="soc-report-details">
+            <div className="soc-report-section">
+              <h5>Event Highlights</h5>
+              <ul className="soc-highlight-list">
+                {aiInsights.reports.lastEventReport.highlights.map((highlight, index) => (
+                  <li key={index}>
+                    <ThumbsUp size={14} />
+                    {highlight}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="soc-report-section">
+              <h5>Areas for Improvement</h5>
+              <ul className="soc-improvement-list">
+                {aiInsights.reports.lastEventReport.improvements.map((improvement, index) => (
+                  <li key={index}>
+                    <Clock size={14} />
+                    {improvement}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div className="soc-report-actions">
+            <button className="soc-btn-primary">
+              <FileText size={16} />
+              Submit to Dean
+            </button>
+            <button className="soc-btn-secondary">
+              <Edit3 size={16} />
+              Edit Report
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <div className="soc-society-head-container">
       {/* Header */}
@@ -570,6 +836,13 @@ const SocietyHead = ({ setCurrentPage }) => {
           <Settings size={16} />
           Settings
         </button>
+        <button 
+          className={`soc-nav-item ${activeTab === 'insights' ? 'active' : ''}`}
+          onClick={() => setActiveTab('insights')}
+        >
+          <Brain size={16} />
+          AI Insights
+        </button>
       </nav>
 
       {/* Main Content */}
@@ -579,6 +852,7 @@ const SocietyHead = ({ setCurrentPage }) => {
         {activeTab === 'events' && renderEvents()}
         {activeTab === 'activities' && renderActivities()}
         {activeTab === 'settings' && renderSettings()}
+        {activeTab === 'insights' && renderAIInsights()}
       </main>
 
       {/* Modal */}
