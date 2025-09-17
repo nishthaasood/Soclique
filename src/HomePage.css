@@ -89,7 +89,7 @@ body::before {
 .homepage {
   position: relative;
   z-index: 1;
-  width: 100lvw;
+  width: 99lvw;
 }
 
 /*  ENHANCED HERO SECTION  */

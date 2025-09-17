@@ -27,7 +27,7 @@ function App() {
       
       case 'about':
         return (
-          <div className="page-content">
+          <div >
             <About />
           </div>
         );

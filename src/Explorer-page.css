@@ -81,6 +81,7 @@ body {
   text-shadow: 0 4px 20px rgba(10,25,49,0.45);
   background: var(--primary-gradient);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
