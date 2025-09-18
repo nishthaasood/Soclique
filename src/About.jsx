@@ -37,7 +37,7 @@ function About() {
     {
       name: "Aadhya Sharma",
       role: "UI Designer",
-      description: "Designs with heart, making every pixel feel like it belongs in the user’s story.",
+      description: "Designs with heart, making every pixel feel like it belongs in the userâ€™s story.",
       img: "/assets/aadhya.jpeg",
       github: "https://github.com/4adhya",
       linkedin: "https://www.linkedin.com/in/aadhya-sharma-225778326",
@@ -104,36 +104,36 @@ function About() {
   };
 
   return (
-    <section className="about-container" aria-label="Meet the Soclique team">
+    <section className="about-about-container" aria-label="Meet the Soclique team">
       {/* Hero Section */}
-      <div className="team-section">
-        <h1 className="section-title">Meet the Soclique Team</h1>
+      <div className="about-team-section">
+        <h1 className="about-section-title">Meet the Soclique Team</h1>
 
-        <p className="team-intro">
+        <p className="about-team-intro">
           We're a passionate team of innovators building the future of campus connections. 
           Our mission is to unite college communities through smart automation, meaningful 
           interactions, and cutting-edge technology that brings students together across the globe.
         </p>
 
         {/* Enhanced Team Grid */}
-        <div className="team-grid">
+        <div className="about-team-grid">
           {teamMembers.map((member, index) => (
             <article 
               key={index} 
-              className={`team-card card-${index + 1}`}
+              className={`about-team-card about-card-${index + 1}`}
               data-card-id={`card-${index}`}
               tabIndex="0"
               role="article"
               aria-labelledby={`member-name-${index}`}
               aria-describedby={`member-desc-${index}`}
             >
-              <div className="card-inner">
+              <div className="about-card-inner">
                 {/* Enhanced Image Container */}
-                <div className="member-image-container">
+                <div className="about-member-image-container">
                   <img 
                     src={member.img} 
                     alt={`Portrait of ${member.name}, ${member.role} at Soclique`} 
-                    className="member-image" 
+                    className="about-member-image" 
                     loading="lazy"
                     onError={handleImageError}
                     width="320"
@@ -141,11 +141,11 @@ function About() {
                   />
                   
                   {/* Enhanced Overlay with Social Links */}
-                  <div className="image-overlay" aria-label="Social media links">
-                    <div className="social-links">
+                  <div className="about-image-overlay" aria-label="Social media links">
+                    <div className="about-social-links">
                       <a 
                         href={member.github} 
-                        className="social-link github" 
+                        className="about-social-link github" 
                         target="_blank" 
                         rel="noopener noreferrer" 
                         aria-label={`View ${member.name}'s GitHub profile`}
@@ -158,7 +158,7 @@ function About() {
                       
                       <a 
                         href={member.linkedin} 
-                        className="social-link linkedin" 
+                        className="about-social-link linkedin" 
                         target="_blank" 
                         rel="noopener noreferrer" 
                         aria-label={`View ${member.name}'s LinkedIn profile`}
@@ -173,19 +173,19 @@ function About() {
                 </div>
 
                 {/* Enhanced Member Information */}
-                <div className="member-info">
+                <div className="about-member-info">
                   <h3 
                     id={`member-name-${index}`} 
-                    className="member-name"
+                    className="about-member-name"
                   >
                     {member.name}
                   </h3>
                   
-                  <p className="member-role">{member.role}</p>
+                  <p className="about-member-role">{member.role}</p>
                   
                   <p 
                     id={`member-desc-${index}`} 
-                    className="member-description"
+                    className="about-member-description"
                   >
                     {member.description}
                   </p>

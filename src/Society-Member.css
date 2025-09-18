@@ -11,7 +11,7 @@
   --pale-gray: #F6FAFD;       
 
   
-  --primary-gradient: linear-gradient(135deg, #4A7FA7 0%, #B3CFE5 50%, #1A3D63 100%);
+  --primary-gradient: linear-gradient(135deg, #4A7FA7 0%, #B3CFE5 100%);
   --dark-gradient: linear-gradient(135deg, #0A1931 0%, #1A3D63 100%);
   --light-gradient: linear-gradient(135deg, #B3CFE5 0%, #F6FAFD 100%);
   --accent-gradient: linear-gradient(45deg, #1A3D63, #4A7FA7, #B3CFE5);
@@ -153,7 +153,8 @@
   font-weight: 800;
   color: var(--text-primary);
   margin-bottom: 0.2rem;
-  background: var(--primary-gradient);
+  background: linear-gradient(135deg, #4A7FA7 0%, #B3CFE5 100%);
+
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -545,7 +546,7 @@
 }
 
 .soc-activity-icon.achievement {
-  background: linear-gradient(45deg, #feca57, #ff9ff3);
+  background: linear-gradient(45deg, #feca57, #4A7FA7);
   color: var(--text-inverse);
 }
 
@@ -643,7 +644,7 @@
 .soc-attendees {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.8rem;
-  color: var(--medium-blue);
+  color: #4A7FA7;
   font-weight: 600;
 }
 
@@ -933,7 +934,7 @@
 
 .soc-role-badge.junior-council {
   background: rgba(26, 61, 99, 0.3);
-  color: var(--dark-blue);
+  color: #1A3D63;
   border-color: rgba(26, 61, 99, 0.5);
 }
 
@@ -945,7 +946,7 @@
 
 .soc-role-badge.volunteer {
   background: rgba(74, 127, 167, 0.3);
-  color: var(--medium-blue);
+  color: #4A7FA7;
   border-color: rgba(74, 127, 167, 0.5);
 }
 
@@ -1075,13 +1076,13 @@
 
 .soc-event-status.upcoming {
   background: rgba(74, 127, 167, 0.3);
-  color: var(--medium-blue);
+  color: #4A7FA7;
   border-color: rgba(74, 127, 167, 0.5);
 }
 
 .soc-event-status.planning {
   background: rgba(26, 61, 99, 0.3);
-  color: var(--dark-blue);
+  color: #1A3D63;
   border-color: rgba(26, 61, 99, 0.5);
 }
 
@@ -1110,7 +1111,7 @@
 }
 
 .soc-event-detail svg {
-  color: var(--medium-blue);
+  color: #4A7FA7;
   flex-shrink: 0;
 }
 
@@ -1164,7 +1165,7 @@
 }
 
 .soc-timeline-icon.achievement {
-  background: linear-gradient(45deg, #feca57, #ff9ff3);
+  background: linear-gradient(45deg, #feca57, #4A7FA7);
   color: var(--text-inverse);
 }
 
@@ -1246,7 +1247,7 @@
 
 .soc-activity-type.event {
   background: rgba(74, 127, 167, 0.2);
-  color: var(--medium-blue);
+  color: #4A7FA7;
   border-color: rgba(74, 127, 167, 0.3);
 }
 
@@ -1515,7 +1516,7 @@
   font-weight: 700;
   color: var(--text-primary);
   margin: 0 0 0.5rem 0;
-  background: var(--primary-gradient);
+  background: linear-gradient(135deg, #4A7FA7 0%, #B3CFE5 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -1540,7 +1541,7 @@
 }
 
 .soc-info-item svg {
-  color: var(--medium-blue);
+  color: #4A7FA7;
   flex-shrink: 0;
 }
 
