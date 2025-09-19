@@ -14,7 +14,7 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
     { 
       id: 1,
       type: 'ai', 
-      text: 'Hi! I\'m your Soclique assistant. I can help you choose the right option or answer any questions about our platform! 🎉',
+      text: 'Hi! I\'m your Soclique assistant. I can help you choose the right option or answer any questions about our platform!',
       timestamp: Date.now()
     }
   ]);
@@ -98,7 +98,37 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
     6: 'Review & Submit'
   }), []);
 
-  
+  // IMPROVED COLLEGE SELECTION HANDLER
+  const handleCollegeSelect = useCallback(() => {
+    console.log('Continue button clicked');
+    console.log('Selected college value:', selectedCollegeLocal);
+    
+    // Validate selection
+    if (!selectedCollegeLocal || selectedCollegeLocal === '') {
+      console.warn('No college selected');
+      alert('Please select a college before continuing.');
+      return;
+    }
+    
+    try {
+      // Update parent component with selected college
+      if (setSelectedCollege && typeof setSelectedCollege === 'function') {
+        console.log('Calling setSelectedCollege with:', selectedCollegeLocal);
+        setSelectedCollege(selectedCollegeLocal);
+      } else {
+        console.warn('setSelectedCollege prop not provided or not a function');
+      }
+      
+      console.log('Navigating to main page');
+      setShowLanding(false);
+      
+    } catch (error) {
+      console.error('Error in handleCollegeSelect:', error);
+      // Still proceed to avoid blocking user
+      setShowLanding(false);
+    }
+  }, [selectedCollegeLocal, setSelectedCollege]);
+
   // Society form validation
   const validateSocietyStep = useCallback((step, data) => {
     const errors = {};
@@ -231,42 +261,6 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
       setIsSubmitting(false);
     }
   }, [modalType, formData, validateForm]);
-
-  
-
-  
-  
-  // College selection handler
-  const handleCollegeSelect = useCallback((e) => {
-    e.preventDefault();
-    
-    console.log('Continue button clicked');
-    console.log('Selected college value:', selectedCollegeLocal);
-    
-    if (!selectedCollegeLocal || selectedCollegeLocal === '') {
-      console.warn('No college selected');
-      alert('Please select a college before continuing.');
-      return;
-    }
-    
-    try {
-      // Call setSelectedCollege if it exists and is a function
-      if (setSelectedCollege && typeof setSelectedCollege === 'function') {
-        console.log('Calling setSelectedCollege with:', selectedCollegeLocal);
-        setSelectedCollege(selectedCollegeLocal);
-      } else {
-        console.warn('setSelectedCollege prop not provided or not a function');
-      }
-      
-      console.log('Navigating to main page');
-      setShowLanding(false);
-      
-    } catch (error) {
-      console.error('Error in handleCollegeSelect:', error);
-      setShowLanding(false);
-    }
-  }, [selectedCollegeLocal, setSelectedCollege]);
-
 
   // Modal handlers
   const openModal = useCallback((type) => {
@@ -405,7 +399,7 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
           </div>
           
           <h3 style={{ color: '#2E7D32', marginBottom: '16px', fontSize: '1.5rem' }}>
-            🎉 Society Submitted Successfully!
+            Society Submitted Successfully!
           </h3>
           
           <p style={{ marginBottom: '24px', lineHeight: '1.6', color: '#666' }}>
@@ -414,7 +408,7 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
           </p>
           
           <p style={{ fontSize: '0.9rem', color: '#888', marginBottom: '32px' }}>
-            ⏱️ Approval usually takes 1-2 business days.
+            Approval usually takes 1-2 business days.
           </p>
           
           <button
@@ -482,7 +476,7 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
               )}
             </div>
             
-            <div style={{ marginTop: '16px', padding: '16px', backgroundColor: '#46474970', borderRadius: '8px', fontSize: '0.9rem', color: '#3a5379ff' }}>
+            <div style={{ marginTop: '16px', padding: '16px', backgroundColor: '#46474970', borderRadius: '8px', fontSize: '0.9rem', color: '#0e1a2cff' }}>
                <strong>Quick Guide:</strong><br/>
               • <strong>Technical:</strong> Programming, robotics, AI clubs<br/>
               • <strong>Cultural:</strong> Dance, music, drama societies<br/>
@@ -512,7 +506,7 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
               {societyFormErrors.collegeEmail && (
                 <span className="error-message">{societyFormErrors.collegeEmail}</span>
               )}
-              <p style={{ fontSize: '0.85rem', color: '#666', marginTop: '8px' }}>
+              <p style={{ fontSize: '0.85rem',color: '#000000ff', marginTop: '8px' }}>
                 This will be used for verification and approval notifications
               </p>
             </div>
@@ -570,17 +564,17 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
 
             <div className="form-group">
               <label htmlFor="faculty-mentor" style={{ display: 'block',color: 'blue' , marginBottom: '8px', fontWeight: '500' }}>
-                Faculty Mentor <span style={{ color: '#888', fontWeight: 'normal' }}>(Optional)</span> 👨‍🏫
+                Faculty Mentor <span style={{ color: '#888', fontWeight: 'normal' }}>(Optional)</span>
               </label>
               <input
                 id="faculty-mentor"
                 type="text"
-                placeholder="Dr. John Smith, Department of Computer Science"
+                placeholder="Abhijeet Nayak, Department of Physics"
                 className="form-input"
                 value={societyFormData.facultyMentor}
                 onChange={(e) => handleSocietyFormChange('facultyMentor', e.target.value)}
               />
-              <p style={{ fontSize: '0.85rem', color: '#666', marginTop: '8px' }}>
+              <p style={{ fontSize: '0.85rem', color: '#000000ff', marginTop: '8px' }}>
                 Having a faculty mentor strengthens your application
               </p>
             </div>
@@ -590,7 +584,7 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
       case 6:
         return (
           <div>
-            <h4 style={{ marginBottom: '24px', color: '#333' }}>📋 Review Your Society Details</h4>
+            <h4 style={{ marginBottom: '24px', color: '#333' }}>Review Your Society Details</h4>
             
             <div style={{ backgroundColor: '#f8f9fa', padding: '24px', borderRadius: '12px', marginBottom: '24px' }}>
               <div style={{ display: 'grid', gap: '16px' }}>
@@ -652,7 +646,7 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
                 }}
                 disabled={isSubmitting}
               >
-                ← Back
+                Back
               </button>
               <button
                 onClick={handleSocietySubmit}
@@ -765,9 +759,10 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
     <div className="page-container">
       <div className="main-content">
         {showLanding ? (
-          // Landing Page - College Selection
+          //College Selection
           <div role="main" aria-labelledby="main-heading">
             <h1 id="main-heading" className="main-heading">Welcome to Soclique</h1>
+            
             <div style={{ 
               display: 'flex', 
               flexDirection: 'column', 
@@ -779,66 +774,142 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
               <div className="card" style={{ 
                 maxWidth: '500px', 
                 width: '100%',
-                minHeight: '350px',
+                minHeight: '400px',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                gap: '32px'
+                gap: '32px',
+                padding: '40px'
               }}>
                 <div className="card-icon" aria-hidden="true">
                   <GraduationCap size={64} strokeWidth={1.5} />
                 </div>
+                
                 <h2 className="card-title">Choose Your College</h2>
-                <p className="card-text" style={{ marginBottom: '24px' }}>
-                  Select your college to connect with your campus community
+                
+                <p className="card-text" style={{ 
+                  marginBottom: '24px', 
+                  textAlign: 'center',
+                  lineHeight: '1.6' 
+                }}>
+                  Select your college to connect with your campus community and explore societies
                 </p>
                 
-                <div className="form-group" style={{ width: '100%', maxWidth: '400px' }}>
-                  <label htmlFor="college-select" className="sr-only">
-                    Select your college
-                  </label>
-                  <select 
-                    id="college-select"
-                    value={selectedCollegeLocal}
-                    onChange={(e) => setSelectedCollegeLocal(e.target.value)}
-                    className="form-input"
+                {/*FORM SECTION */}
+                <div style={{ width: '100%', maxWidth: '400px' }}>
+                  <div className="form-group" style={{ marginBottom: '24px' }}>
+                    <label htmlFor="college-select" className="sr-only">
+                      Select your college
+                    </label>
+                    <select 
+                      id="college-select"
+                      value={selectedCollegeLocal}
+                      onChange={(e) => setSelectedCollegeLocal(e.target.value)}
+                      className="form-input"
+                      style={{
+                        width: '100%',
+                        appearance: 'none',
+                        backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234a6b35' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e")`,
+                        backgroundRepeat: 'no-repeat',
+                        backgroundPosition: 'right 16px center',
+                        backgroundSize: '20px',
+                        paddingRight: '48px'
+                      }}
+                    >
+                      {colleges.map((college) => (
+                        <option key={college.value} value={college.value}>
+                          {college.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* SUPER RELIABLE CONTINUE BUTTON */}
+                  <button
+                    type="button"
+                    onClick={handleCollegeSelect}
+                    disabled={!selectedCollegeLocal || selectedCollegeLocal === ''}
+                    className="button"
                     style={{
                       width: '100%',
-                      appearance: 'none',
-                      backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234a6b35' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e")`,
-                      backgroundRepeat: 'no-repeat',
-                      backgroundPosition: 'right 16px center',
-                      backgroundSize: '20px',
-                      paddingRight: '48px'
+                      minHeight: '48px',
+                      fontSize: '1.1rem',
+                      fontWeight: '600',
+                      borderRadius: '12px',
+                      background: (!selectedCollegeLocal || selectedCollegeLocal === '') 
+                        ? '#e0e0e0' 
+                        : 'linear-gradient(135deg, #667eea 0%, #41416fff 100%)',
+                      color: (!selectedCollegeLocal || selectedCollegeLocal === '') 
+                        ? '#999' 
+                        : 'white',
+                      border: 'none',
+                      cursor: (!selectedCollegeLocal || selectedCollegeLocal === '') 
+                        ? 'not-allowed' 
+                        : 'pointer',
+                      transition: 'all 0.3s ease',
+                      transform: 'translateY(0)',
+                      boxShadow: (!selectedCollegeLocal || selectedCollegeLocal === '') 
+                        ? 'none' 
+                        : '0 4px 15px rgba(102, 126, 234, 0.3)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '8px',
+                      outline: 'none',
+                      position: 'relative'
                     }}
+                    onMouseEnter={(e) => {
+                      if (selectedCollegeLocal && selectedCollegeLocal !== '') {
+                        e.target.style.transform = 'translateY(-2px)';
+                        e.target.style.boxShadow = '0 6px 25px rgba(102, 126, 234, 0.4)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (selectedCollegeLocal && selectedCollegeLocal !== '') {
+                        e.target.style.transform = 'translateY(0)';
+                        e.target.style.boxShadow = '0 4px 15px rgba(102, 126, 234, 0.3)';
+                      }
+                    }}
+                    onFocus={(e) => {
+                      e.target.style.outline = '2px solid #667eea';
+                      e.target.style.outlineOffset = '2px';
+                    }}
+                    onBlur={(e) => {
+                      e.target.style.outline = 'none';
+                    }}
+                    aria-describedby={!selectedCollegeLocal ? 'college-requirement' : undefined}
                   >
-                    {colleges.map((college) => (
-                      <option key={college.value} value={college.value}>
-                        {college.label}
-                      </option>
-                    ))}
-                  </select>
+                    <span>Continue to Platform</span>
+                    {selectedCollegeLocal && selectedCollegeLocal !== '' && (
+                      <ChevronRight size={20} />
+                    )}
+                  </button>
+                  
+                  {/* Helpful status message */}
+                  {!selectedCollegeLocal || selectedCollegeLocal === '' ? (
+                    <p id="college-requirement" style={{
+                      fontSize: '0.85rem',
+                      color: '#666',
+                      textAlign: 'center',
+                      marginTop: '12px',
+                      lineHeight: '1.4'
+                    }}>
+                      Please select your college from the dropdown above
+                    </p>
+                  ) : (
+                    <p style={{
+                      fontSize: '0.85rem',
+                      color: '#4CAF50',
+                      textAlign: 'center',
+                      marginTop: '12px',
+                      lineHeight: '1.4',
+                      fontWeight: '500'
+                    }}>
+                      Ready to explore {colleges.find(c => c.value === selectedCollegeLocal)?.label.split('(')[0].trim()}!
+                    </p>
+                  )}
                 </div>
-
-                <button
-                  onClick={handleCollegeSelect}
-                  disabled={!selectedCollegeLocal}
-                  className="button"
-                  style={{
-                    maxWidth: '400px',
-                    width: '100%'
-                  }}
-                  aria-describedby={!selectedCollegeLocal ? 'college-requirement' : undefined}
-                >
-                  Continue
-                </button>
-                
-                {!selectedCollegeLocal && (
-                  <span id="college-requirement" className="sr-only">
-                    Please select a college to continue
-                  </span>
-                )}
               </div>
             </div>
           </div>
@@ -859,8 +930,8 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
                 onClick={() => openModal('createSociety')}
                 className="create-society-btn"
                 style={{
-                  background: 'linear-gradient(135deg, #667eea 0%, #2d2d49ff 100%)',
-                  color: 'bluewhite',
+                  background: 'linear-gradient(135deg, #363e64ff 0%, #2d2d49ff 100%)',
+                  color: 'white',
                   border: 'none',
                   padding: '16px 32px',
                   borderRadius: '12px',
@@ -963,7 +1034,7 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
         )}
       </div>
 
-      {/*Multi-Step Society Creation */}
+      {/* Multi-Step Society Creation Modal */}
       {isModalOpen && (
         <div 
           className="modal-backdrop" 
@@ -980,7 +1051,7 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                   <span style={{ 
                     background: '#8f95afff', 
-                    color: 'blue', 
+                    color: 'white', 
                     borderRadius: '50%', 
                     width: '32px', 
                     height: '32px', 
@@ -1032,7 +1103,7 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
               {modalType === 'explorer' && 'Continue as Explorer'}
               {modalType === 'member' && 'Society Member Login'}
               {modalType === 'head' && 'Society Head Dashboard'}
-              {modalType === 'createSociety' && (showConfirmation ? '🎉 Success!' : 'Create New Society')}
+              {modalType === 'createSociety' && (showConfirmation ? 'Success!' : 'Create New Society')}
             </h2>
 
             <form 
@@ -1052,7 +1123,7 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
                     className="button"
                     style={{ 
                       backgroundColor: currentStep === 1 ? '#f5f5f5' : '#f5f5f5', 
-                      color: currentStep === 1 ? '#ccc' : '#666',
+                      color: currentStep === 1 ? '#090808ff' : '#000000ff',
                       border: '1px solid #ddd',
                       minWidth: '100px'
                     }}
@@ -1073,10 +1144,9 @@ const GetStarted = ({ setCurrentPage, setSelectedCollege }) => {
           </div>
         </div>
       )}
-      <AIChat />
-
-    </div>
       
+      <AIChat />
+    </div>
   );
 };
 
