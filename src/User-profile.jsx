@@ -26,7 +26,7 @@ import {
   Download,
   ArrowLeft
 } from 'lucide-react';
-import './User-Profile.css';
+import './User-profile.css';
 
 const UserProfile = ({ 
   userProfile, 
