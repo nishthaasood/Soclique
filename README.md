@@ -36,34 +36,34 @@ Soclique connects colleges, societies, and students — automates event manageme
     <td align="center">
       <img src="public/assets/arshia.jpeg" width="150" height="150" style="object-fit: cover; border-radius: 50%;" /><br>
       <b>Arshia Gupta</b><br>
-      Contri
+      Project Head
     </td>
     <td align="center">
       <img src="public/assets/nishtha.jpeg" width="150" height="150" style="object-fit: cover; border-radius: 50%;" /><br>
       <b>Nishtha Sood</b><br>
-      Contri
+      Tech Head
     </td>
     <td align="center">
       <img src="public/assets/mansi.jpeg" width="150" height="150" style="object-fit: cover; border-radius: 50%;" /><br>
       <b>Mansi Bhandari</b><br>
-      Contri
+      Head Of Operations
     </td>
   </tr>
   <tr>
     <td align="center">
       <img src="public/assets/aadhya.jpeg" width="150" height="150" style="object-fit: cover; border-radius: 50%;" /><br>
       <b>Aadhya Sharma</b><br>
-      Contri
+      Ui Head
     </td>
     <td align="center">
       <img src="public/assets/janvi.jpeg" width="150" height="150" style="object-fit: cover; border-radius: 50%;" /><br>
       <b>Janvi Mathur</b><br>
-      Contri
+      Innovations Lead
     </td>
     <td align="center">
       <img src="public/assets/upasna.jpeg" width="150" height="150" style="object-fit: cover; border-radius: 50%;" /><br>
       <b>Upasna Saxena</b><br>
-      Contri
+      Documentations Head
     </td>
   </tr>
 </table>
