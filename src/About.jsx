@@ -48,7 +48,7 @@ function About() {
       role: "Innovation Lead",
       description: "Data whisperer who mixes numbers with creativity to unlock smarter solutions.",
       img: "/assets/janvi.jpeg",
-      github: "https://github.com",
+      github: "https://github.com/JanviMathur2006",
       linkedin: "http://linkedin.com/in/janvi-mathur-74012a370",
       color: "#1A3D63"
     },
