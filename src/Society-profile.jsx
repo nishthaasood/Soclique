@@ -144,28 +144,28 @@ const SocietyProfile = ({
   if (!society) return null;
 
   return (
-    <div className="society-profile">
+    <div className="sprof-society-profile">
       {/* Header Section */}
-      <div className="society-header">
+      <div className="sprof-society-header">
         {society.images && society.images[0] && !imageLoadErrors[society.images[0]] && (
           <div 
-            className="header-background" 
+            className="sprof-header-background" 
             style={{ backgroundImage: `url(${society.images[0]})` }}
             onError={() => handleImageError(society.images[0], 0)}
           />
         )}
-        <div className="header-overlay" />
+        <div className="sprof-header-overlay" />
         
-        <div className="header-content">
-          <div className="header-top">
-            <button className="back-button" onClick={onBack}>
+        <div className="sprof-header-content">
+          <div className="sprof-header-top">
+            <button className="sprof-back-button" onClick={onBack}>
               <ArrowLeft size={20} />
               Back to Explorer
             </button>
             
-            <div className="header-actions">
+            <div className="sprof-header-actions">
               <button 
-                className={`favorite-button ${isFavorited ? 'favorited' : ''}`}
+                className={`sprof-favorite-button ${isFavorited ? 'favorited' : ''}`}
                 onClick={() => onFavorite(society.id)}
                 title={isFavorited ? 'Remove from favorites' : 'Add to favorites'}
               >
@@ -176,13 +176,13 @@ const SocietyProfile = ({
                 {isFavorited ? 'Favorited' : 'Add to Favorites'}
               </button>
 
-              <div className="share-container" style={{ position: 'relative' }}>
-                <button className="share-button" onClick={handleShare}>
+              <div className="sprof-share-container" style={{ position: 'relative' }}>
+                <button className="sprof-share-button" onClick={handleShare}>
                   <Share2 size={18} />
                   Share
                 </button>
                 {showShareMenu && (
-                  <div className="share-menu">
+                  <div className="sprof-share-menu">
                     <button onClick={() => copyToClipboard(window.location.href)}>
                       Copy Link
                     </button>
@@ -191,7 +191,7 @@ const SocietyProfile = ({
               </div>
               
               <button 
-                className="join-button" 
+                className="sprof-join-button" 
                 onClick={handleJoinClick}
                 disabled={isJoining}
               >
@@ -201,43 +201,43 @@ const SocietyProfile = ({
             </div>
           </div>
 
-          <div className="society-info">
-            <div className="society-logo">
+          <div className="sprof-society-info">
+            <div className="sprof-society-logo">
               {society.name.charAt(0).toUpperCase()}
             </div>
             
-            <div className="society-details">
-              <h1 className="society-name">{society.name}</h1>
-              <div className="society-category">{society.category}</div>
-              <p className="society-description">{society.fullDescription || society.description}</p>
+            <div className="sprof-society-details">
+              <h1 className="sprof-society-name">{society.name}</h1>
+              <div className="sprof-society-category">{society.category}</div>
+              <p className="sprof-society-description">{society.fullDescription || society.description}</p>
               
-              <div className="society-stats">
-                <div className="stat-item">
-                  <span className="stat-number">{society.memberCount}</span>
-                  <span className="stat-label">Members</span>
+              <div className="sprof-society-stats">
+                <div className="sprof-stat-item">
+                  <span className="sprof-stat-number">{society.memberCount}</span>
+                  <span className="sprof-stat-label">Members</span>
                 </div>
-                <div className="stat-item">
-                  <span className="stat-number">{society.eventsCount}</span>
-                  <span className="stat-label">Events</span>
+                <div className="sprof-stat-item">
+                  <span className="sprof-stat-number">{society.eventsCount}</span>
+                  <span className="sprof-stat-label">Events</span>
                 </div>
-                <div className="stat-item">
-                  <span className="stat-number">{society.rating}</span>
-                  <span className="stat-label">Rating</span>
+                <div className="sprof-stat-item">
+                  <span className="sprof-stat-number">{society.rating}</span>
+                  <span className="sprof-stat-label">Rating</span>
                 </div>
-                <div className="stat-item">
-                  <span className="stat-number">{society.founded}</span>
-                  <span className="stat-label">Founded</span>
+                <div className="sprof-stat-item">
+                  <span className="sprof-stat-number">{society.founded}</span>
+                  <span className="sprof-stat-label">Founded</span>
                 </div>
               </div>
 
               {aiMatchScore && aiMatchScore > 0 && (
-                <div className="ai-match-section">
+                <div className="sprof-ai-match-section">
                   <Zap size={28} />
                   <div>
-                    <div className="match-score">{aiMatchScore}%</div>
-                    <div className="match-description">AI Match Score</div>
+                    <div className="sprof-match-score">{aiMatchScore}%</div>
+                    <div className="sprof-match-description">AI Match Score</div>
                   </div>
-                  <div className="match-description">
+                  <div className="sprof-match-description">
                     Based on your interests and skills, this society is a {aiMatchScore >= 80 ? 'perfect' : aiMatchScore >= 60 ? 'great' : 'good'} match for you!
                   </div>
                 </div>
@@ -248,21 +248,21 @@ const SocietyProfile = ({
       </div>
 
       {/* Content Section */}
-      <div className="society-content">
-        <div className="main-content">
+      <div className="sprof-society-content">
+        <div className="sprof-main-content">
           {/* About Section */}
-          <div className="content-card">
-            <h2 className="card-title">
+          <div className="sprof-content-card">
+            <h2 className="sprof-card-title">
               <Users size={24} />
               About {society.name}
             </h2>
-            <div className="card-content">
+            <div className="sprof-card-content">
               <p>{society.fullDescription || society.description}</p>
               
               {society.tags && society.tags.length > 0 && (
-                <div className="tags-container">
+                <div className="sprof-tags-container">
                   {society.tags.map((tag, index) => (
-                    <span key={index} className="tag">{tag}</span>
+                    <span key={index} className="sprof-tag">{tag}</span>
                   ))}
                 </div>
               )}
@@ -271,16 +271,16 @@ const SocietyProfile = ({
 
           {/* Gallery Section */}
           {society.images && society.images.length > 0 && (
-            <div className="content-card">
-              <h2 className="card-title">
+            <div className="sprof-content-card">
+              <h2 className="sprof-card-title">
                 <ImageIcon size={24} />
                 Gallery
               </h2>
-              <div className="gallery-grid">
+              <div className="sprof-gallery-grid">
                 {society.images.map((image, index) => (
                   <div 
                     key={index} 
-                    className="gallery-item"
+                    className="sprof-gallery-item"
                     onClick={() => setSelectedImage(image)}
                   >
                     <img 
@@ -297,23 +297,23 @@ const SocietyProfile = ({
 
           {/* Upcoming Events */}
           {society.upcomingEvents && society.upcomingEvents.length > 0 && (
-            <div className="content-card">
-              <h2 className="card-title">
+            <div className="sprof-content-card">
+              <h2 className="sprof-card-title">
                 <Calendar size={24} />
                 Upcoming Events
               </h2>
-              <div className="events-list">
+              <div className="sprof-events-list">
                 {society.upcomingEvents.map((event, index) => {
                   const eventDate = formatDate(event.date);
                   return (
-                    <div key={index} className="event-item">
-                      <div className="event-date">
-                        <span className="event-day">{eventDate.day}</span>
-                        <span className="event-month">{eventDate.month}</span>
+                    <div key={index} className="sprof-event-item">
+                      <div className="sprof-event-date">
+                        <span className="sprof-event-day">{eventDate.day}</span>
+                        <span className="sprof-event-month">{eventDate.month}</span>
                       </div>
-                      <div className="event-info">
+                      <div className="sprof-event-info">
                         <h3>{event.name}</h3>
-                        <div className="event-type">{event.type}</div>
+                        <div className="sprof-event-type">{event.type}</div>
                       </div>
                     </div>
                   );
@@ -324,16 +324,16 @@ const SocietyProfile = ({
 
           {/* Achievements */}
           {society.achievements && society.achievements.length > 0 && (
-            <div className="content-card">
-              <h2 className="card-title">
+            <div className="sprof-content-card">
+              <h2 className="sprof-card-title">
                 <Award size={24} />
                 Achievements & Recognition
               </h2>
-              <div className="achievements-list">
+              <div className="sprof-achievements-list">
                 {society.achievements.map((achievement, index) => (
-                  <div key={index} className="achievement-item">
-                    <Award className="achievement-icon" size={20} />
-                    <span className="achievement-text">{achievement}</span>
+                  <div key={index} className="sprof-achievement-item">
+                    <Award className="sprof-achievement-icon" size={20} />
+                    <span className="sprof-achievement-text">{achievement}</span>
                   </div>
                 ))}
               </div>
@@ -342,30 +342,30 @@ const SocietyProfile = ({
         </div>
 
         {/* Sidebar */}
-        <div className="sidebar">
+        <div className="sprof-sidebar">
           {/* Contact Information */}
           {society.president && (
-            <div className="sidebar-card">
-              <h3 className="sidebar-title">
+            <div className="sprof-sidebar-card">
+              <h3 className="sprof-sidebar-title">
                 <Mail size={20} />
                 Contact Information
               </h3>
-              <div className="contact-list">
-                <div className="contact-item">
-                  <Users className="contact-icon" size={18} />
+              <div className="sprof-contact-list">
+                <div className="sprof-contact-item">
+                  <Users className="sprof-contact-icon" size={18} />
                   <span>{society.president.name} (President)</span>
                 </div>
                 {society.president.email && (
-                  <div className="contact-item">
-                    <Mail className="contact-icon" size={18} />
+                  <div className="sprof-contact-item">
+                    <Mail className="sprof-contact-icon" size={18} />
                     <a href={`mailto:${society.president.email}`} style={{ color: 'inherit', textDecoration: 'none' }}>
                       {society.president.email}
                     </a>
                   </div>
                 )}
                 {society.president.phone && (
-                  <div className="contact-item">
-                    <Phone className="contact-icon" size={18} />
+                  <div className="sprof-contact-item">
+                    <Phone className="sprof-contact-icon" size={18} />
                     <a href={`tel:${society.president.phone}`} style={{ color: 'inherit', textDecoration: 'none' }}>
                       {society.president.phone}
                     </a>
@@ -377,21 +377,21 @@ const SocietyProfile = ({
 
           {/* Social Media Links */}
           {society.socialLinks && Object.keys(society.socialLinks).length > 0 && (
-            <div className="sidebar-card">
-              <h3 className="sidebar-title">
+            <div className="sprof-sidebar-card">
+              <h3 className="sprof-sidebar-title">
                 <Instagram size={20} />
                 Follow Us
               </h3>
-              <div className="social-links">
+              <div className="sprof-social-links">
                 {Object.entries(society.socialLinks).map(([platform, handle]) => (
                   <a 
                     key={platform} 
                     href="#" 
-                    className="social-link"
+                    className="sprof-social-link"
                     onClick={(e) => e.preventDefault()}
                     title={`Follow us on ${platform}`}
                   >
-                    <div className="social-icon">
+                    <div className="sprof-social-icon">
                       {getSocialIcon(platform)}
                     </div>
                     <span>{handle}</span>
@@ -402,65 +402,65 @@ const SocietyProfile = ({
           )}
 
           {/* Quick Stats */}
-          <div className="sidebar-card">
-            <h3 className="sidebar-title">
+          <div className="sprof-sidebar-card">
+            <h3 className="sprof-sidebar-title">
               <TrendingUp size={20} />
               Quick Stats
             </h3>
-            <div className="quick-stats">
-              <div className="quick-stat">
-                <span className="quick-stat-label">Active Members</span>
-                <span className="quick-stat-value">{society.memberCount}</span>
+            <div className="sprof-quick-stats">
+              <div className="sprof-quick-stat">
+                <span className="sprof-quick-stat-label">Active Members</span>
+                <span className="sprof-quick-stat-value">{society.memberCount}</span>
               </div>
-              <div className="quick-stat">
-                <span className="quick-stat-label">Events This Year</span>
-                <span className="quick-stat-value">{society.eventsCount}</span>
+              <div className="sprof-quick-stat">
+                <span className="sprof-quick-stat-label">Events This Year</span>
+                <span className="sprof-quick-stat-value">{society.eventsCount}</span>
               </div>
-              <div className="quick-stat">
-                <span className="quick-stat-label">Rating</span>
-                <span className="quick-stat-value">{society.rating}/5.0</span>
+              <div className="sprof-quick-stat">
+                <span className="sprof-quick-stat-label">Rating</span>
+                <span className="sprof-quick-stat-value">{society.rating}/5.0</span>
               </div>
-              <div className="quick-stat">
-                <span className="quick-stat-label">Category</span>
-                <span className="quick-stat-value">{society.category}</span>
+              <div className="sprof-quick-stat">
+                <span className="sprof-quick-stat-label">Category</span>
+                <span className="sprof-quick-stat-value">{society.category}</span>
               </div>
               {society.founded && (
-                <div className="quick-stat">
-                  <span className="quick-stat-label">Established</span>
-                  <span className="quick-stat-value">{society.founded}</span>
+                <div className="sprof-quick-stat">
+                  <span className="sprof-quick-stat-label">Established</span>
+                  <span className="sprof-quick-stat-value">{society.founded}</span>
                 </div>
               )}
             </div>
           </div>
 
           {/* How to Join */}
-          <div className="sidebar-card">
-            <h3 className="sidebar-title">
+          <div className="sprof-sidebar-card">
+            <h3 className="sprof-sidebar-title">
               <Target size={20} />
               How to Join
             </h3>
-            <div className="join-steps">
-              <div className="join-step">
-                <div className="step-number">1</div>
-                <div className="step-text">
+            <div className="sprof-join-steps">
+              <div className="sprof-join-step">
+                <div className="sprof-step-number">1</div>
+                <div className="sprof-step-text">
                   Click the "Join Society" button above
                 </div>
               </div>
-              <div className="join-step">
-                <div className="step-number">2</div>
-                <div className="step-text">
+              <div className="sprof-join-step">
+                <div className="sprof-step-number">2</div>
+                <div className="sprof-step-text">
                   Fill out the membership application form
                 </div>
               </div>
-              <div className="join-step">
-                <div className="step-number">3</div>
-                <div className="step-text">
+              <div className="sprof-join-step">
+                <div className="sprof-step-number">3</div>
+                <div className="sprof-step-text">
                   Attend the orientation session
                 </div>
               </div>
-              <div className="join-step">
-                <div className="step-number">4</div>
-                <div className="step-text">
+              <div className="sprof-join-step">
+                <div className="sprof-step-number">4</div>
+                <div className="sprof-step-text">
                   Start participating in events and activities!
                 </div>
               </div>
@@ -471,10 +471,10 @@ const SocietyProfile = ({
 
       {/* Image Modal */}
       {selectedImage && (
-        <div className="modal-overlay" onClick={() => setSelectedImage(null)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <div className="sprof-modal-overlay" onClick={() => setSelectedImage(null)}>
+          <div className="sprof-modal-content" onClick={(e) => e.stopPropagation()}>
             <button 
-              className="modal-close" 
+              className="sprof-modal-close" 
               onClick={() => setSelectedImage(null)}
               aria-label="Close image modal"
             >
@@ -483,7 +483,7 @@ const SocietyProfile = ({
             <img 
               src={imageLoadErrors[selectedImage] ? getFallbackImage() : selectedImage} 
               alt="Gallery item" 
-              className="modal-image"
+              className="sprof-modal-image"
               onError={() => handleImageError(selectedImage, -1)}
             />
           </div>
@@ -492,11 +492,11 @@ const SocietyProfile = ({
 
       {/* Share Menu Styles (inline for simplicity) */}
       <style jsx>{`
-        .share-container {
+        .sprof-share-container {
           position: relative;
         }
         
-        .share-button {
+        .sprof-share-button {
           display: flex;
           align-items: center;
           gap: 0.75rem;
@@ -513,14 +513,14 @@ const SocietyProfile = ({
           box-shadow: var(--shadow-soft);
         }
         
-        .share-button:hover {
+        .sprof-share-button:hover {
           background: rgba(0, 212, 170, 0.25);
           transform: translateY(-3px);
           box-shadow: var(--shadow-medium);
           border-color: rgba(0, 212, 170, 0.4);
         }
         
-        .share-menu {
+        .sprof-share-menu {
           position: absolute;
           top: 100%;
           right: 0;
@@ -534,7 +534,7 @@ const SocietyProfile = ({
           min-width: 120px;
         }
         
-        .share-menu button {
+        .sprof-share-menu button {
           display: block;
           width: 100%;
           padding: 0.75rem 1rem;
@@ -547,7 +547,7 @@ const SocietyProfile = ({
           transition: background var(--transition-normal);
         }
         
-        .share-menu button:hover {
+        .sprof-share-menu button:hover {
           background: rgba(179, 207, 229, 0.15);
         }
       `}</style>
